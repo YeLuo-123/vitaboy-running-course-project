@@ -1,0 +1,5 @@
+{
+  "source": "/home/robotit/honor_ws/honor_rl_mjlab/deploy/checkpoints/tracking.onnx",
+  "max_abs_action_error": 0.0017087459564208984,
+  "note": "MLP and normalizer imported from official ONNX; critic and optimizer initialized fresh."
+}

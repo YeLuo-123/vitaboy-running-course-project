@@ -1,0 +1,16 @@
+{
+  "source": "Actual dynamics states of validated retargeted-running Tracking policy",
+  "tracking_checkpoint": "/home/robotit/honor_ws/motion_pipeline/artifacts/model_500.pt",
+  "tracking_checkpoint_sha256": "9bc05a66270eb05f18f97dea54b9647c728535880271ac15257b04bf3de829eb",
+  "retargeted_reference": "/home/robotit/honor_ws/motion_pipeline/data/retargeted/lafan_run2_s4_geometry/run.npz",
+  "source_seed": 20261020,
+  "num_rollouts": 32,
+  "simulated_duration_each_s": 3.92,
+  "transitions": 5440,
+  "mean_forward_speed_mps": 1.8563508489552667,
+  "feature_dim": 74,
+  "wraps": 0,
+  "terminated": 0,
+  "sha256": "bbe92fd632723a8e8076689e2066d4b1db848d1fb7e85eec4b0db02b554f5975",
+  "note": "Reference-state initialization is used ONLY for collecting the teacher clip. Command-driven students always start stationary."
+}

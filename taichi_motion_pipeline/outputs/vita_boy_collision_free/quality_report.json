@@ -1,0 +1,131 @@
+{
+  "anatomical_direction_error_to_GVHMR": {
+    "left_upper_arm": {
+      "mean_deg": 7.110813854701706,
+      "p95_deg": 12.68483859242202,
+      "max_deg": 18.19214989600016
+    },
+    "left_forearm": {
+      "mean_deg": 5.711448098500374,
+      "p95_deg": 11.947748695467702,
+      "max_deg": 33.75084058667256
+    },
+    "right_upper_arm": {
+      "mean_deg": 10.522620966707361,
+      "p95_deg": 14.502825336000317,
+      "max_deg": 39.78384227447684
+    },
+    "right_forearm": {
+      "mean_deg": 4.571836887108416,
+      "p95_deg": 10.353180049966728,
+      "max_deg": 36.266036995891184
+    }
+  },
+  "kinematic_manifest": {
+    "source": "GVHMR smpl_params_global",
+    "source_skeleton_sha256": "cd3a354be72abcafc5fe3e6ec145df2c402eef0736db201f7c305ae13cd769ce",
+    "source_frames": 1284,
+    "source_fps": 30.0,
+    "output_frames": 2139,
+    "output_fps": 50,
+    "duration_s": 42.76,
+    "calibration": "SMPL-X neutral T-pose to actual VitaBoy T-pose; per-link constant orientation offsets",
+    "arm_branch_continuity_cost": 0.005,
+    "temporal_filter_source_frames": {
+      "arms": 15,
+      "other_joints": 7
+    },
+    "ground_contact_prior": "At least one foot supports at all times in this Tai Chi video; root Z corrected, no joint or timing changes.",
+    "residual_penetration_cleanup_max_m": 0.00014667692873608553,
+    "outside_model_limits_before_margin": 195,
+    "maximum_limit_overshoot_before_clip_rad": 0.010425494177452532,
+    "global_ground_shift_m": 0.036538861592449436,
+    "contact_correction_range_m": [
+      -0.1445662781805837,
+      0.016520592729888088
+    ],
+    "root_height_range_m": [
+      0.6084185133569701,
+      0.8190103259052991
+    ],
+    "minimum_sole_clearance_m": 0.001,
+    "clipped_values": 1232,
+    "max_joint_velocity_rads": 4.608843138222338,
+    "joint_velocity_p99_rads": 1.5667477301951878,
+    "joint_names": [
+      "left_hip_pitch_joint",
+      "left_hip_roll_joint",
+      "left_hip_yaw_joint",
+      "left_knee_joint",
+      "left_ankle_pitch_joint",
+      "left_ankle_roll_joint",
+      "right_hip_pitch_joint",
+      "right_hip_roll_joint",
+      "right_hip_yaw_joint",
+      "right_knee_joint",
+      "right_ankle_pitch_joint",
+      "right_ankle_roll_joint",
+      "waist_yaw_joint",
+      "waist_roll_joint",
+      "waist_pitch_joint",
+      "left_shoulder_pitch_joint",
+      "left_shoulder_roll_joint",
+      "left_shoulder_yaw_joint",
+      "left_elbow_joint",
+      "left_wrist_roll_joint",
+      "left_wrist_pitch_joint",
+      "left_wrist_yaw_joint",
+      "right_shoulder_pitch_joint",
+      "right_shoulder_roll_joint",
+      "right_shoulder_yaw_joint",
+      "right_elbow_joint",
+      "right_wrist_roll_joint",
+      "right_wrist_pitch_joint",
+      "right_wrist_yaw_joint"
+    ],
+    "scope": "Kinematic reference only; dynamic Tracking is a separate validation.",
+    "self_collision_repair": {
+      "method": "Sequential arm-only SLSQP with exact mesh signed-distance Jacobians",
+      "input_folder": "vita_boy",
+      "margin_m": 0.012,
+      "frame_step_limit_rad": 0.05,
+      "temporal_correction_weight": 0.6,
+      "iterations_max": 56,
+      "arm_correction_max_rad": 0.5923169716154932,
+      "arm_correction_rms_rad": 0.02958168257075828,
+      "frozen_non_arm_qpos": true,
+      "source_timing_preserved": true
+    },
+    "interpolation_repair": {
+      "margin_m": 0.008,
+      "fixes": [
+        {
+          "interval": 1406,
+          "time_s": 28.12,
+          "iterations": 5,
+          "maximum_extra_joint_change_rad": 0.01113706610994225
+        },
+        {
+          "interval": 1713,
+          "time_s": 34.26,
+          "iterations": 4,
+          "maximum_extra_joint_change_rad": 0.010924943155165845
+        },
+        {
+          "interval": 1735,
+          "time_s": 34.7,
+          "iterations": 8,
+          "maximum_extra_joint_change_rad": 0.014551160820863718
+        },
+        {
+          "interval": 1843,
+          "time_s": 36.86,
+          "iterations": 5,
+          "maximum_extra_joint_change_rad": 0.01608617284792091
+        }
+      ],
+      "subdivisions": 4
+    }
+  },
+  "note": "Reconstruction has no 3D ground truth; these errors measure GMR fidelity to estimated human joints, not true human pose accuracy."
+}

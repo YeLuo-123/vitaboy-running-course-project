@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "path": "../running_sim_pipeline/logs/rough_stability_seed42/model_4400.pt",
+      "sha256": "e29b3de99394e50a2652fb5ffbe99698a6365305d987371d26018eda3821b6c7"
+    },
+    {
+      "path": "../running_sim_pipeline/logs/rough_precision_seed42/model_4600.pt",
+      "sha256": "6714a4221051033c6fb2900d554c213b66aca1e3152cef83333fc40a44922053"
+    }
+  ],
+  "second_weight": 0.6,
+  "warning": "Critic/optimizer are from second source and are NOT a valid continuation state for averaged actor. Evaluate actor only."
+}

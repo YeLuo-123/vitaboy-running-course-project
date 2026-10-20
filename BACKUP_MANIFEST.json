@@ -1,0 +1,1014 @@
+{
+  "schema_version": 1,
+  "snapshot_scope": "Selected local project files; remote-only checkpoints and logs excluded",
+  "hash_algorithm": "SHA-256 over original file bytes; manifest does not hash itself",
+  "total_bytes": 15394904,
+  "file_count_excluding_manifest": 201,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 124,
+      "sha256": "53ba849d3631265de94b55dd4fc5cb9bf913242dbf8d66102fb978a579ab3c93"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 13603,
+      "sha256": "028bc1c6fdd4f262682d5324de45c3a236331077b0f06fc54611d606d21affd3"
+    },
+    {
+      "path": "README.md",
+      "bytes": 11936,
+      "sha256": "9b9535f2a78c70d00c12f8af68409420f6487d86c90f6cbf7a84d0ec814dd79b"
+    },
+    {
+      "path": "backup_policy.json",
+      "bytes": 4981,
+      "sha256": "0aa5a83a9b49d645b09b258fc653bc3c851ac26eee0854c64c68296668a4c077"
+    },
+    {
+      "path": "honor_diagnostics/evaluate_locomotion.py",
+      "bytes": 10079,
+      "sha256": "9949ee08b44a9907759e31117679ff816a422e1099a385a592abda01a7b16632"
+    },
+    {
+      "path": "honor_diagnostics/evaluate_python_deploy.py",
+      "bytes": 3087,
+      "sha256": "f9bddc419270db133325b2ac741ca858ffda2df11b2baa2ed729f133672c1f82"
+    },
+    {
+      "path": "honor_diagnostics/play_official_policy.py",
+      "bytes": 3942,
+      "sha256": "68fda8ab0ff42f5f3f4e7913c47caa57f3eb46b034bd3bbcf0235138de1a3a4d"
+    },
+    {
+      "path": "honor_diagnostics/play_walk_baseline.py",
+      "bytes": 1238,
+      "sha256": "0f8e4f2cb0a8f4aa66894dd758635cbffb8438908c24bfcec58eae66c6ec1c03"
+    },
+    {
+      "path": "honor_diagnostics/results/baseline_training_summary.json",
+      "bytes": 14853,
+      "sha256": "9456b54abfe8a0178e204e7b2ca4ec52a5eed338eed2fc7e7ae9da53d5cbad3c"
+    },
+    {
+      "path": "honor_diagnostics/results/eval_9999_clean.json",
+      "bytes": 2531,
+      "sha256": "64478a8f8dd71a81f8ce818fa985b3d79128c85264914f2bed25d57999764e1d"
+    },
+    {
+      "path": "honor_diagnostics/results/eval_official_clean.json",
+      "bytes": 1634,
+      "sha256": "cdcfbd6d474d6730160d6ae1f41fdab58c901447d74ec096630346edf36064d6"
+    },
+    {
+      "path": "honor_diagnostics/results/eval_python_deploy_official.json",
+      "bytes": 540,
+      "sha256": "268437d98e1c6b4a2cdfc0d132e752247274a5e4f4441bee5e899f7d27c996e1"
+    },
+    {
+      "path": "honor_diagnostics/summarize_training.py",
+      "bytes": 1991,
+      "sha256": "5bff809f2528584d7f5029f3ac97a9c54af14b77544ebf32454a14325d3abe2c"
+    },
+    {
+      "path": "honor_diagnostics/train_walk_baseline.py",
+      "bytes": 4048,
+      "sha256": "3644129256db3879a368b40f99e3352aa1a7ab843e48f5ad066f5c870f3b6023"
+    },
+    {
+      "path": "honor_diagnostics/诊断与修复说明.md",
+      "bytes": 11255,
+      "sha256": "c31e9fd56fc2606ab31a2c4340fb3f45809a6aed3ab4077918bb3f563ab6d711"
+    },
+    {
+      "path": "motion_pipeline/README.md",
+      "bytes": 8708,
+      "sha256": "7be61c4d5a6830d5986d1657e79428e4436ceff66da96cbf6ce7397fe104ef48"
+    },
+    {
+      "path": "motion_pipeline/artifacts/eval_clean.json",
+      "bytes": 1796,
+      "sha256": "b2e789cc6777bc4bc555f6ff836921d3efcddff9d457f45c2e6b15687f7fb8c8"
+    },
+    {
+      "path": "motion_pipeline/artifacts/eval_cpu_deploy.json",
+      "bytes": 744,
+      "sha256": "c486c996af0f69bd9a41738e998be7f56311a6423fc9a602c3fa29a3410703b8"
+    },
+    {
+      "path": "motion_pipeline/artifacts/eval_jitter_123.json",
+      "bytes": 1778,
+      "sha256": "7a8af20e6e2d7d95d468e557c26523d085d2eaa25405e7b7a8f2dce8e9e4a873"
+    },
+    {
+      "path": "motion_pipeline/artifacts/eval_jitter_456.json",
+      "bytes": 1781,
+      "sha256": "dd7c70f4360074a4134ace74a35a4d9916a3793855ea663980d2539d31e404ac"
+    },
+    {
+      "path": "motion_pipeline/artifacts/eval_jitter_789.json",
+      "bytes": 1783,
+      "sha256": "62f09089e7a7a39af57942c9c1b063a9aaae028901c29f2f0552c67b990df7f2"
+    },
+    {
+      "path": "motion_pipeline/artifacts/eval_official_geometry.json",
+      "bytes": 1051,
+      "sha256": "fbae9403a4b05d812ee2cdd1b3dc8663736fba7c83159b59d99484078e56b043"
+    },
+    {
+      "path": "motion_pipeline/artifacts/eval_reference_pd_geometry.json",
+      "bytes": 1438,
+      "sha256": "7c3a514847bca80476863e6569c03b644e6acbcbee97e737c6f107b22dacf003"
+    },
+    {
+      "path": "motion_pipeline/artifacts/eval_zero_geometry.json",
+      "bytes": 1425,
+      "sha256": "ceb252acd2610e4b6240cb683f21ebfdd55983c83ebff2ce11236b2f2d2a2a4a"
+    },
+    {
+      "path": "motion_pipeline/artifacts/motion/bvh_lafan1_to_vita_boy.json",
+      "bytes": 6135,
+      "sha256": "d597434046a1ff58aca5c3d4e8d70f62b1739517f98650f3405ab8de33ae0447"
+    },
+    {
+      "path": "motion_pipeline/artifacts/motion/manifest.json",
+      "bytes": 2135,
+      "sha256": "611c8d4cf14aa589623daf4dbbf4a3ac29cc871eed01189423ffe5610e393839"
+    },
+    {
+      "path": "motion_pipeline/artifacts/motion/retargeted_qpos.npz",
+      "bytes": 64534,
+      "sha256": "783ef90df2c5297c9d2f8bdb9e220167f556836db3f614bf39da67f1c44a3fe8"
+    },
+    {
+      "path": "motion_pipeline/artifacts/motion/run.csv",
+      "bytes": 88595,
+      "sha256": "9127118c33457919385b541c6aee1e71ff2db04f5fa9ff365002e6ecf5bc15a9"
+    },
+    {
+      "path": "motion_pipeline/artifacts/motion/run.npz",
+      "bytes": 356610,
+      "sha256": "e082825d57832d2715770ac2ec7f99fa32e6c5f00f82929edb00715467a603d1"
+    },
+    {
+      "path": "motion_pipeline/artifacts/params/agent.yaml",
+      "bytes": 1064,
+      "sha256": "3572202dbbff83347ae14dc2483244c22399b08c52379114ab40985db23af048"
+    },
+    {
+      "path": "motion_pipeline/artifacts/params/env.yaml",
+      "bytes": 23824,
+      "sha256": "806dd2f5e6c723e52a71cfbadf98d065a8152d268fa8adb527f7a0f55e86a769"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_LICENSE",
+      "bytes": 1055,
+      "sha256": "c5a85c0b0012230739a0ab8f30eafba7f8ee7a1b29e025d01e27fa330298e522"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/LICENSE",
+      "bytes": 1055,
+      "sha256": "c5a85c0b0012230739a0ab8f30eafba7f8ee7a1b29e025d01e27fa330298e522"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/README.md",
+      "bytes": 30555,
+      "sha256": "06c2752de4f7c0436998e83bb40b54bdc0f6ff3d50c1e73659c65f0278d640a9"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/general_motion_retargeting/ik_configs/bvh_lafan1_to_g1.json",
+      "bytes": 9252,
+      "sha256": "cb4ef4bc38bf8c59aabddd4baeb261fb5d23e8628ac3793fc06a9ebf699aa320"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/general_motion_retargeting/motion_retarget.py",
+      "bytes": 12876,
+      "sha256": "3a4f9fb0d13b204c8dcbb2ab62db59bce9de81b1f5911167aa73f079e0c90663"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/general_motion_retargeting/params.py",
+      "bytes": 4790,
+      "sha256": "3506cdd277375139770b0ced7108719145620a389a8dee85bc6c94c6bf135bef"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/general_motion_retargeting/utils/lafan1.py",
+      "bytes": 1834,
+      "sha256": "3f07179414a54f8821cbdb52307f987228e7955d27f95aee0e3941b1d5ec2f4c"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/general_motion_retargeting/utils/lafan_vendor/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/general_motion_retargeting/utils/lafan_vendor/extract.py",
+      "bytes": 8297,
+      "sha256": "4c374bbcb7d1026b940862b130ada9da45850d6dca2c60d6ee6b4024d0a06f22"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/general_motion_retargeting/utils/lafan_vendor/license.txt",
+      "bytes": 13135,
+      "sha256": "e11244310739afea404794c9405967a13abdbe7e2492052e94d7c81fe27c8b66"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/general_motion_retargeting/utils/lafan_vendor/utils.py",
+      "bytes": 10594,
+      "sha256": "1181093a4641a7981e3e83589d32755b8b17301862d043f40c9fcbcb3926ac5e"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/setup.py",
+      "bytes": 772,
+      "sha256": "7a6651e05767525ae1339082f896e0162f191b51a240a5dd4e17e6f6c42f02fe"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/GMR_source/source_manifest.json",
+      "bytes": 644,
+      "sha256": "fee3dc76aeb527e065c518e3aaf2fee850723c0b6777df17020daab46e91d2f7"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/LAFAN1_README.md",
+      "bytes": 7025,
+      "sha256": "17624fbd1c334b26f19c8f301da07197fe4f0cfc947c7921694200878f0e4a33"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/LAFAN1_license.txt",
+      "bytes": 13135,
+      "sha256": "e11244310739afea404794c9405967a13abdbe7e2492052e94d7c81fe27c8b66"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/environment_versions.json",
+      "bytes": 384,
+      "sha256": "983fa2a49794e1f1b733694e46281f40a60776e583b3e2a6be42dc92697b987f"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/gmr_source_manifest.json",
+      "bytes": 644,
+      "sha256": "fee3dc76aeb527e065c518e3aaf2fee850723c0b6777df17020daab46e91d2f7"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/honor_training_commit.txt",
+      "bytes": 41,
+      "sha256": "a2116cfb868cd95c523daf2a5db5aa5977ee085d1522a747587fa640bdf219f3"
+    },
+    {
+      "path": "motion_pipeline/artifacts/provenance/source_manifest.json",
+      "bytes": 1250,
+      "sha256": "6a476064c5ee7a2853f23c6fb554c7345590a69958083ba7a446fc656d7f87c2"
+    },
+    {
+      "path": "motion_pipeline/artifacts/tracking_run.onnx",
+      "bytes": 994158,
+      "sha256": "d009b722156a58500ce2e70992c789869505f240ada1e83b5bbc45d7a0b684eb"
+    },
+    {
+      "path": "motion_pipeline/artifacts/validation_summary.json",
+      "bytes": 11458,
+      "sha256": "85fdc75388689ff59fd9f221696de34b298cdff9cfd8773656d9981204798de3"
+    },
+    {
+      "path": "motion_pipeline/artifacts/warm_start_validation.json",
+      "bytes": 238,
+      "sha256": "4ee77118737713b32bb7d9ed9d1d0e8413dcaa31bed5ebc1c05340193fa0b85c"
+    },
+    {
+      "path": "motion_pipeline/build_results.py",
+      "bytes": 6976,
+      "sha256": "2f567fbd3c2c6b3d5d1414fe6e89524938acfb0527878f30b9a79c2ab92b9671"
+    },
+    {
+      "path": "motion_pipeline/evaluate_tracking.py",
+      "bytes": 10004,
+      "sha256": "07e7a78546cb51e36fc3ea05f4bc89a615df7044637b3f10a8d3c87e81fab6a4"
+    },
+    {
+      "path": "motion_pipeline/evaluate_tracking_deploy.py",
+      "bytes": 7033,
+      "sha256": "6731d736101aca11cf5394471664cd9317ef398910e5f26a793f8b7a95bdb074"
+    },
+    {
+      "path": "motion_pipeline/fetch_gmr_source.py",
+      "bytes": 1237,
+      "sha256": "ec3dde3ff93dcf61ce149e61668f3e8d7b9c35ece8399af2be8e05ec66acde3c"
+    },
+    {
+      "path": "motion_pipeline/fetch_lafan_runs.py",
+      "bytes": 2885,
+      "sha256": "de20e85d37eafba8495868347a41d15c3d886a2ed1d00acd90983141ccee03d4"
+    },
+    {
+      "path": "motion_pipeline/play_tracking_run.py",
+      "bytes": 2793,
+      "sha256": "deffbfccfe764a845e810102b78d76cea9fd0ff2d814c9de109825621e0596c1"
+    },
+    {
+      "path": "motion_pipeline/render_reference.py",
+      "bytes": 1720,
+      "sha256": "0441e36fc3e7905b4f0c66e4182eab8e5501efb39892db046c90eccb9c32b37b"
+    },
+    {
+      "path": "motion_pipeline/render_retarget_comparison.py",
+      "bytes": 3648,
+      "sha256": "21165615e2cd7802796dabeb01fbf632078557b78000b5e537e78d49d55b6044"
+    },
+    {
+      "path": "motion_pipeline/requirements_retarget.txt",
+      "bytes": 43,
+      "sha256": "f844632addf36f6353fa46ab69b246286d9a387519e1457fe8d414223b9419bd"
+    },
+    {
+      "path": "motion_pipeline/retarget_run.py",
+      "bytes": 9944,
+      "sha256": "eaaed5707b33f7d469546fcb596b72968be6e2285440fdb81e13dd4d23d94b2e"
+    },
+    {
+      "path": "motion_pipeline/tracking_common.py",
+      "bytes": 1571,
+      "sha256": "bfd5d42a4b81fea740389e360d44f6846c2cf02da5811e1a8847938a720eb1cc"
+    },
+    {
+      "path": "motion_pipeline/train_tracking_run.py",
+      "bytes": 4959,
+      "sha256": "45c317dc6560dab4acf12e6abe4dad206b176891df8832bfe8bcc7ad509c5ff1"
+    },
+    {
+      "path": "running_sim_pipeline/README.md",
+      "bytes": 15100,
+      "sha256": "6b31fe11268593e8445eaf73d443a527e7d9cff20ecbac50f9149b21a709ec58"
+    },
+    {
+      "path": "running_sim_pipeline/advance_stages.py",
+      "bytes": 2280,
+      "sha256": "5eb480b6308ca76a982b9f6c01a47e2e5cef78934daa071e3b5611ab540a6666"
+    },
+    {
+      "path": "running_sim_pipeline/amp.py",
+      "bytes": 7646,
+      "sha256": "859e0a86843adf2d404a87c952ea540955a00d41f7d4679aa6ec070a118814b3"
+    },
+    {
+      "path": "running_sim_pipeline/artifacts/averaged_4400_4600.provenance.json",
+      "bytes": 539,
+      "sha256": "8e75a7e18f836c981b842a47d090cea18bf5a462a5335c6b377a473bf7ad4f11"
+    },
+    {
+      "path": "running_sim_pipeline/artifacts/environment_and_source.json",
+      "bytes": 10523,
+      "sha256": "4b124273e2220e0525831d6243b773f39215b140f1554d40a47b9abcc86fbdf4"
+    },
+    {
+      "path": "running_sim_pipeline/artifacts/running_endurance.png",
+      "bytes": 157562,
+      "sha256": "128904a04acde6f3df67e37eadbf3213acfd2ca5dcc6294283bbca899463fc14"
+    },
+    {
+      "path": "running_sim_pipeline/artifacts/running_policy.onnx",
+      "bytes": 2642943,
+      "sha256": "044b5247ed35e15ad6b343ea537d70b809914c1f5ea6e659ea581a7b7f6dbb2b"
+    },
+    {
+      "path": "running_sim_pipeline/artifacts/simulation_acceptance.json",
+      "bytes": 3733,
+      "sha256": "d3d6cd5af8d91d51f8129de18036d9e20d7562e00bd01d617ed1a77afc1fd5db"
+    },
+    {
+      "path": "running_sim_pipeline/artifacts/training_evidence.png",
+      "bytes": 288792,
+      "sha256": "22b22fa8423546afcfd709a6c9fc5554ee0395825b895ed893ef60272808f72b"
+    },
+    {
+      "path": "running_sim_pipeline/assets/deployment_contract_template.json",
+      "bytes": 15240,
+      "sha256": "12b13eba4eb440144d114db125a2a0f00e6f942a9a90973100a532ff26e39ae6"
+    },
+    {
+      "path": "running_sim_pipeline/assets/dynamic_amp_expert.json",
+      "bytes": 823,
+      "sha256": "9fe63841e726e08daf156b84a47ac308b0d9ac0ea6c796dbe290a5fac4454b00"
+    },
+    {
+      "path": "running_sim_pipeline/assets/dynamic_amp_expert.npz",
+      "bytes": 3221002,
+      "sha256": "bbe92fd632723a8e8076689e2066d4b1db848d1fb7e85eec4b0db02b554f5975"
+    },
+    {
+      "path": "running_sim_pipeline/assets/hardware_audit_unconnected.json",
+      "bytes": 5245,
+      "sha256": "bcb62878088f01cacd4e1fe5df2d896e6df9e2473e3ed28866f8968b2d0c0093"
+    },
+    {
+      "path": "running_sim_pipeline/assets/stability_4400_deployment_contract.json",
+      "bytes": 15240,
+      "sha256": "711b77720ff1b8ed0091a0c4bd13ba3c4ba68ada33f9fcc7c42a4580a996e2f5"
+    },
+    {
+      "path": "running_sim_pipeline/assets/stability_4400_hardware_unconnected_audit.json",
+      "bytes": 5245,
+      "sha256": "bcb62878088f01cacd4e1fe5df2d896e6df9e2473e3ed28866f8968b2d0c0093"
+    },
+    {
+      "path": "running_sim_pipeline/average_actor.py",
+      "bytes": 1473,
+      "sha256": "4d960c58d379e75744532f182c1c1e7a5f165c01c31f28fc48f20448f8460f1a"
+    },
+    {
+      "path": "running_sim_pipeline/build_figures.py",
+      "bytes": 3159,
+      "sha256": "3e6ab037710b52326479d0b82900d095cfd9b6a7756dadef3964c5a9c1205b1e"
+    },
+    {
+      "path": "running_sim_pipeline/capture_provenance.py",
+      "bytes": 1570,
+      "sha256": "55ac95dc89866a05603e59667f42219a2ccfacc7592fba529389eebaae019b98"
+    },
+    {
+      "path": "running_sim_pipeline/collect_dynamic_expert.py",
+      "bytes": 2751,
+      "sha256": "aa6ccea83cf6f30b86202f36bedb67ee74869319fd039114cd330886dbb553b3"
+    },
+    {
+      "path": "running_sim_pipeline/configs/flat_v2_seed42/agent.yaml",
+      "bytes": 1298,
+      "sha256": "12ba59c70c5301b334fd8c1abc3d1b653c5514df66b1be97723f5bb4905030fd"
+    },
+    {
+      "path": "running_sim_pipeline/configs/flat_v2_seed42/env.yaml",
+      "bytes": 32266,
+      "sha256": "36d32a62e327e6986fbb442aebc6e6d3c216bfd027d6392e0ff9058c5ff1f8fe"
+    },
+    {
+      "path": "running_sim_pipeline/configs/flat_v2_seed42/manifest.json",
+      "bytes": 754,
+      "sha256": "daed824708198da1cd481d96f1ffb4c73a2c77b15c1384ceb5d90963997f3f3e"
+    },
+    {
+      "path": "running_sim_pipeline/configs/flat_v2_seed42/warm_start_validation.json",
+      "bytes": 188,
+      "sha256": "4aca468f3d25430ac06b5ba54ea063eff1aadf97e8d5dbe43ed9a1e475370724"
+    },
+    {
+      "path": "running_sim_pipeline/configs/index.json",
+      "bytes": 966,
+      "sha256": "b9218f892263bdc8b239d9c877e7b0a56d0699be8bbfd8acc234a35e19bad93d"
+    },
+    {
+      "path": "running_sim_pipeline/configs/robust_seed42/agent.yaml",
+      "bytes": 1298,
+      "sha256": "12ba59c70c5301b334fd8c1abc3d1b653c5514df66b1be97723f5bb4905030fd"
+    },
+    {
+      "path": "running_sim_pipeline/configs/robust_seed42/env.yaml",
+      "bytes": 36487,
+      "sha256": "854e170e580ff873ffe0118aa2013a0001979eeb428f99a73d019473d4d6922f"
+    },
+    {
+      "path": "running_sim_pipeline/configs/robust_seed42/manifest.json",
+      "bytes": 830,
+      "sha256": "6dc320edcb97304d21c615c05266865048effc00c9a259411aff56e31da97a93"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_focus_seed42/agent.yaml",
+      "bytes": 1298,
+      "sha256": "12ba59c70c5301b334fd8c1abc3d1b653c5514df66b1be97723f5bb4905030fd"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_focus_seed42/code/amp.py",
+      "bytes": 7646,
+      "sha256": "859e0a86843adf2d404a87c952ea540955a00d41f7d4679aa6ec070a118814b3"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_focus_seed42/code/run_config.py",
+      "bytes": 7938,
+      "sha256": "5a07612abdf7eec1f28db8727f9ab4ece17f4322993e6a8f3432928b091440a4"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_focus_seed42/code/train.py",
+      "bytes": 5506,
+      "sha256": "bf1e7f87821491b8ed48332714d8d5c8bceef568d784d2e52f65badc0ec12414"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_focus_seed42/env.yaml",
+      "bytes": 37645,
+      "sha256": "8dcae28d8632d732e5558b2d6cc816f58b3ff6bd356d274b863ce350f9c59986"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_focus_seed42/manifest.json",
+      "bytes": 852,
+      "sha256": "d2b95ad96fdf2b30e6668d88456333955f28444541ae5790a799039b79d4e697"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_precision_seed42/agent.yaml",
+      "bytes": 1298,
+      "sha256": "12ba59c70c5301b334fd8c1abc3d1b653c5514df66b1be97723f5bb4905030fd"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_precision_seed42/code/amp.py",
+      "bytes": 7646,
+      "sha256": "859e0a86843adf2d404a87c952ea540955a00d41f7d4679aa6ec070a118814b3"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_precision_seed42/code/run_config.py",
+      "bytes": 10735,
+      "sha256": "4b3c5356799c423a1af4f0702f2ddf0c97299ac18a2ea3aeb95a6271879cc7aa"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_precision_seed42/code/train.py",
+      "bytes": 5961,
+      "sha256": "493795d9857719f0450d7091d792e27184d443b41986daedc213ecdef00d4afa"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_precision_seed42/env.yaml",
+      "bytes": 40830,
+      "sha256": "83cfc083e28610f76dfe48236a0b20027e13b2cbb2ce263ad9898ad6bd62e882"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_precision_seed42/manifest.json",
+      "bytes": 919,
+      "sha256": "578d3035a61aaae3a3728dba84e841c1650dff7cc892a7f1c3c9a51036d22dfa"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_precision_seed42/stop_record.json",
+      "bytes": 350,
+      "sha256": "d3dda269a28759ae2ce564fe75f9a8a6de89627e3c3ded8f6986eeb4af819b5c"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_seed42/agent.yaml",
+      "bytes": 1299,
+      "sha256": "60a2a0e66b5b237301b0d624ba8f76d8caf31ddf0b3af4f4b7a19b1f64779623"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_seed42/env.yaml",
+      "bytes": 37620,
+      "sha256": "d7a6663b28862f4ea940be394ac40bd2352ea223b2bf97c989cb7ce1f31e5f20"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_seed42/manifest.json",
+      "bytes": 812,
+      "sha256": "8c676d65b8e1d3952b00860fba3f684948622ef8bf6fe9d07b15ef4874cb340f"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_stability_seed42/agent.yaml",
+      "bytes": 1298,
+      "sha256": "12ba59c70c5301b334fd8c1abc3d1b653c5514df66b1be97723f5bb4905030fd"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_stability_seed42/code/amp.py",
+      "bytes": 7646,
+      "sha256": "859e0a86843adf2d404a87c952ea540955a00d41f7d4679aa6ec070a118814b3"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_stability_seed42/code/run_config.py",
+      "bytes": 9460,
+      "sha256": "2461da2cd9d9c830a74cb081574c5a396c6cdb9585905a24e46ba0192d7b8799"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_stability_seed42/code/train.py",
+      "bytes": 5734,
+      "sha256": "2862c70e70f665123a1ae916a80a5c2155b91c0755d9079066d4a8edee982d81"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_stability_seed42/env.yaml",
+      "bytes": 40696,
+      "sha256": "4681ce42f690a8457b4b946b05ef1c428ff826d604b790760f49a71525846c58"
+    },
+    {
+      "path": "running_sim_pipeline/configs/rough_stability_seed42/manifest.json",
+      "bytes": 886,
+      "sha256": "1d473b0b924e46430ce8b96d379a7145baf320a6ecc6719d1b447587b354593c"
+    },
+    {
+      "path": "running_sim_pipeline/deployment_audit.py",
+      "bytes": 7892,
+      "sha256": "04e1963a2e411b194f1709ac0e2a6801622a653a8948a505d086c8013ab4f32e"
+    },
+    {
+      "path": "running_sim_pipeline/evaluate.py",
+      "bytes": 15878,
+      "sha256": "bb1b9fae86552cefb5095670c5e1e43ab8bb203fa5b1a46516b1732f5e4bca75"
+    },
+    {
+      "path": "running_sim_pipeline/evaluate_cpu.py",
+      "bytes": 4503,
+      "sha256": "115d551327ff5fd4cda15f70f16ef44d1a760e4b94dde1bad194475806c95a83"
+    },
+    {
+      "path": "running_sim_pipeline/release_report.py",
+      "bytes": 4350,
+      "sha256": "8800d8e198d86619352271b1a8d717b7dfd47a6765d2a1ce93d62af1c9a312cc"
+    },
+    {
+      "path": "running_sim_pipeline/results/averaged_nominal_release.json",
+      "bytes": 22064,
+      "sha256": "63b3075e84ebea4813aafe223a9f178e10e7e46d8e730bc6642e2f6c31ce42d7"
+    },
+    {
+      "path": "running_sim_pipeline/results/averaged_robust_transitions.json",
+      "bytes": 45832,
+      "sha256": "2ef1d76b5df3caa7fedb33b1429b0dc8c38df805bbc366bb658c0b1d165a928c"
+    },
+    {
+      "path": "running_sim_pipeline/results/averaged_rough_heldout128_718281.json",
+      "bytes": 165980,
+      "sha256": "a369dbee780ea0be8c88dc150998fe2ad6f84b93f58e1a00daa7ae94cd566a47"
+    },
+    {
+      "path": "running_sim_pipeline/results/averaged_rough_heldout128_828182.json",
+      "bytes": 165404,
+      "sha256": "25da2e427dd1ec997cd9a86486cd8eea072e266b197213ecc3087e3baba10772"
+    },
+    {
+      "path": "running_sim_pipeline/results/averaged_rough_heldout128_938293.json",
+      "bytes": 165640,
+      "sha256": "f73fb3d5e7ea1b7d2e16108ee440635c8fc51ca17e0b9c6fe3a6f061fbfae687"
+    },
+    {
+      "path": "running_sim_pipeline/results/flat_799_cpu_endurance_600s.json",
+      "bytes": 1550,
+      "sha256": "d2e5619e910461cc93a9d0612fa404a9420c4c717d494cca3829cc42824886e0"
+    },
+    {
+      "path": "running_sim_pipeline/results/official_baseline.json",
+      "bytes": 2207,
+      "sha256": "9bfec8a70746754d19b3e9ada2886835e9abbf923a304b540dd15c2b9d67161f"
+    },
+    {
+      "path": "running_sim_pipeline/results/running_cpu_endurance_600s.json",
+      "bytes": 1764,
+      "sha256": "b4ca7dab3e96521a48ab73a5de4db9537cef8545bb597449a48fac9a441c014c"
+    },
+    {
+      "path": "running_sim_pipeline/results/running_cpu_endurance_600s.trajectory.json",
+      "bytes": 1175163,
+      "sha256": "7524ef110dbf55d4d1224523d8ecf94adea37aa83c59f2620191aeb026112f0a"
+    },
+    {
+      "path": "running_sim_pipeline/run_config.py",
+      "bytes": 10735,
+      "sha256": "4b3c5356799c423a1af4f0702f2ddf0c97299ac18a2ea3aeb95a6271879cc7aa"
+    },
+    {
+      "path": "running_sim_pipeline/summarize.py",
+      "bytes": 1433,
+      "sha256": "863d81065bd21cde16e0eb915f91bd95d9c659ab5f8deacd24f10e3b8fcfbb85"
+    },
+    {
+      "path": "running_sim_pipeline/train.py",
+      "bytes": 6135,
+      "sha256": "2e92f6fbcb437850f3f0cf0725da97ea8d0ce8728ad203f1cce5e2fe2d55f9ed"
+    },
+    {
+      "path": "taichi_motion_pipeline/README.md",
+      "bytes": 9849,
+      "sha256": "467d1fe76e0d3b9dabf046bfe8b39e80257587ee2483c37e07823fbfebf7329d"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/GMR_source/LICENSE",
+      "bytes": 1055,
+      "sha256": "c5a85c0b0012230739a0ab8f30eafba7f8ee7a1b29e025d01e27fa330298e522"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/GMR_source/general_motion_retargeting/motion_retarget.py",
+      "bytes": 12876,
+      "sha256": "3a4f9fb0d13b204c8dcbb2ab62db59bce9de81b1f5911167aa73f079e0c90663"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/GMR_source/general_motion_retargeting/params.py",
+      "bytes": 4790,
+      "sha256": "3506cdd277375139770b0ced7108719145620a389a8dee85bc6c94c6bf135bef"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/GMR_source/general_motion_retargeting/utils/lafan_vendor/utils.py",
+      "bytes": 10594,
+      "sha256": "1181093a4641a7981e3e83589d32755b8b17301862d043f40c9fcbcb3926ac5e"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/GMR_source/general_motion_retargeting/utils/smpl.py",
+      "bytes": 13806,
+      "sha256": "2f9fb3df35afb065b93b7bf9173114c1993e800a2407cdc8705df77afc105437"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/GMR_source_manifest.json",
+      "bytes": 836,
+      "sha256": "a3226f718f138743df775655facbbf535f37a69b800629440b0c38d7c76ace0e"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/GVHMR_LICENSE",
+      "bytes": 768,
+      "sha256": "57c994b3417515f2fa311937da8ff270f00ab2ddac7d3ae52c8a72d6794f09cc"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/GVHMR_commit.txt",
+      "bytes": 41,
+      "sha256": "5431b2b680959cca8cd375ef092338a53945a158f828bb896f01370811fba2c3"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/collision_environment.json",
+      "bytes": 317,
+      "sha256": "9b750b2f3cfa2c32a688458fad5bafb7c7e864d3c16e2a30416094c45b18c0b3"
+    },
+    {
+      "path": "taichi_motion_pipeline/assets/provenance.json",
+      "bytes": 451,
+      "sha256": "14a7a7e7974713172fad084273fae50efe09167f8a1ade99a4b216c85c9defc1"
+    },
+    {
+      "path": "taichi_motion_pipeline/check_motion_quality.py",
+      "bytes": 3425,
+      "sha256": "34a7a74137fcd2601f45ce4c6369e92e274a2a0ebc31b2293648bb5fab65f2b6"
+    },
+    {
+      "path": "taichi_motion_pipeline/collision_requirements.txt",
+      "bytes": 104,
+      "sha256": "33c32ff0a921770eaa189957c6ed828253b93d9314facd0835426b3f6f8f214b"
+    },
+    {
+      "path": "taichi_motion_pipeline/export_skeleton.py",
+      "bytes": 2149,
+      "sha256": "86dc59c90b5cd97b614b27aa0dfe26ab98485691a99ed079a757613d229ebecf"
+    },
+    {
+      "path": "taichi_motion_pipeline/outputs/vita_boy_collision_free/manifest.json",
+      "bytes": 3263,
+      "sha256": "af7a2f9ee7a4737d8af4171aa10abc4a5e6462c48e1a86e5601e054e45e25575"
+    },
+    {
+      "path": "taichi_motion_pipeline/outputs/vita_boy_collision_free/quality_report.json",
+      "bytes": 4250,
+      "sha256": "30731669147895ba775980d2714f1093d4b432e2df86622e1e899caf9a4ded22"
+    },
+    {
+      "path": "taichi_motion_pipeline/outputs/vita_boy_collision_free/retargeted_qpos.npz",
+      "bytes": 654294,
+      "sha256": "845a0b61878f600ae6bef3701a3862aa58bb62f99b8d7e2b54454318d1d3454e"
+    },
+    {
+      "path": "taichi_motion_pipeline/outputs/vita_boy_collision_free/self_collision_report.json",
+      "bytes": 235657,
+      "sha256": "00422d73e30bcffbd915b11e35ba6d66548424ecae0708104abf54061674d75b"
+    },
+    {
+      "path": "taichi_motion_pipeline/outputs/vita_boy_collision_free/smplx_to_vita_boy.json",
+      "bytes": 7394,
+      "sha256": "034ed9baf366ab8fe16c2a53b4945ee6851f7249fc451e32c750e32791a02ee1"
+    },
+    {
+      "path": "taichi_motion_pipeline/outputs/vita_boy_collision_free/taichi_motion.npz",
+      "bytes": 3833090,
+      "sha256": "75069cffbc5ca5c68e466f094220c1e066f5d38f80915e509e607647a57cd24c"
+    },
+    {
+      "path": "taichi_motion_pipeline/outputs/vita_boy_collision_free/validation.json",
+      "bytes": 920,
+      "sha256": "b62ce628a6a5730f2a7e47beeed72c7ce512a02b9c4f4535ddf2b0610cf71370"
+    },
+    {
+      "path": "taichi_motion_pipeline/render_collision_review.py",
+      "bytes": 1818,
+      "sha256": "ed6339f5ddc2feece23ab4eda75bb8c784db85abb67dc7b0a32eca8c925acf52"
+    },
+    {
+      "path": "taichi_motion_pipeline/render_comparison.py",
+      "bytes": 5184,
+      "sha256": "d01b9c053b6766527642b5a788bd8c3bfacf1ef8fe232985f0c368aaab29ebf1"
+    },
+    {
+      "path": "taichi_motion_pipeline/repair_interpolation.py",
+      "bytes": 5154,
+      "sha256": "c78d68d3f01dc68ae2743cb0c02d98b447b85e0676a0c4e38d7ddbcb702b2c2a"
+    },
+    {
+      "path": "taichi_motion_pipeline/repair_self_collision.py",
+      "bytes": 6796,
+      "sha256": "ab952190b3dcee83178b71558b1b5e683b0e6bda989437ba3bb0787b1a504441"
+    },
+    {
+      "path": "taichi_motion_pipeline/retarget_taichi.py",
+      "bytes": 11783,
+      "sha256": "4c00bea7cdcbbfe62074cb2bb7e482abc4a691f68b52ad1c48675fe956320d91"
+    },
+    {
+      "path": "taichi_motion_pipeline/run_pipeline.sh",
+      "bytes": 1520,
+      "sha256": "0f0bdea029516e4139d40c640d523db850afbc493f1b844fd4579a0269e7469b"
+    },
+    {
+      "path": "taichi_motion_pipeline/self_collision.py",
+      "bytes": 8214,
+      "sha256": "8fcd014e6b1218792ffa7cedb7288927d1166d0e5d5bbefa0ff19eaa7dc84a5a"
+    },
+    {
+      "path": "taichi_motion_pipeline/validate_artifacts.py",
+      "bytes": 2945,
+      "sha256": "ef027a5e904b7caafef90436f8f333515b622ad4d4ecaf1f82b47445177afac7"
+    },
+    {
+      "path": "tools/prepare_backup.mjs",
+      "bytes": 4833,
+      "sha256": "4fe11d732046493b5756f9f18b18ae9b69383d874722aeebac5f58edde65d832"
+    },
+    {
+      "path": "video_motion_pipeline/README.md",
+      "bytes": 7906,
+      "sha256": "627b947a33fe1b5b0ba67ec3fb93fdeb5ecb14d7a542d441fba9dc529b72635b"
+    },
+    {
+      "path": "video_motion_pipeline/artifacts/params/agent.yaml",
+      "bytes": 1062,
+      "sha256": "140a17a07a3257d46f21053494840a581afd3f6040c2fde0be68d778676cb2b9"
+    },
+    {
+      "path": "video_motion_pipeline/artifacts/params/env.yaml",
+      "bytes": 23816,
+      "sha256": "2fa71f91d75fb6bdf7421954934d2ae19e829489eb3035bc3be88de3edfd7fc0"
+    },
+    {
+      "path": "video_motion_pipeline/artifacts/warm_start_validation.json",
+      "bytes": 238,
+      "sha256": "4ee77118737713b32bb7d9ed9d1d0e8413dcaa31bed5ebc1c05340193fa0b85c"
+    },
+    {
+      "path": "video_motion_pipeline/assets/GMR_source_manifest.json",
+      "bytes": 836,
+      "sha256": "a3226f718f138743df775655facbbf535f37a69b800629440b0c38d7c76ace0e"
+    },
+    {
+      "path": "video_motion_pipeline/assets/GVHMR_commit.txt",
+      "bytes": 41,
+      "sha256": "5431b2b680959cca8cd375ef092338a53945a158f828bb896f01370811fba2c3"
+    },
+    {
+      "path": "video_motion_pipeline/assets/download_manifest.json",
+      "bytes": 1279,
+      "sha256": "e4dd0dd6ac3cf70a9ff1b649d9387e06a70e3b6e79ffc26bce66f27eda830fee"
+    },
+    {
+      "path": "video_motion_pipeline/assets/environment_freeze.txt",
+      "bytes": 3287,
+      "sha256": "3512f92bfd4a288033740bc0a5f6161680c9f6211f7955850b0e479cfedc4d54"
+    },
+    {
+      "path": "video_motion_pipeline/assets/fetch_cuda_wheels.py",
+      "bytes": 986,
+      "sha256": "19373d7a592d54809a0114991c00675a1ce8f5ba36ff82657f59667ba989bb69"
+    },
+    {
+      "path": "video_motion_pipeline/assets/requirements_fast.txt",
+      "bytes": 1136,
+      "sha256": "5fe703ac4d7cea1209625e5590c75405f74102ec004d7eff9dcf2a77bd381b9b"
+    },
+    {
+      "path": "video_motion_pipeline/assets/requirements_inference.txt",
+      "bytes": 708,
+      "sha256": "a145518549c6667ad6a9f0a9821aa107d34f670ff457860fda8b6e5c88fdbf12"
+    },
+    {
+      "path": "video_motion_pipeline/assets/requirements_local.txt",
+      "bytes": 1039,
+      "sha256": "bcc4b485259ee9144f125f5e50c38e7dfd6cda37c428fb74893b38d11f7135a2"
+    },
+    {
+      "path": "video_motion_pipeline/assets/sha256_models.json",
+      "bytes": 881,
+      "sha256": "65025d2180f641246caa7090820f2f48c77080c04ef02de259180a3f8b9c5e92"
+    },
+    {
+      "path": "video_motion_pipeline/assets/upstream_requirements.txt",
+      "bytes": 808,
+      "sha256": "2a5376ae69c309e83fe42823183ed4c950208763baf33b76caf76837e15ab671"
+    },
+    {
+      "path": "video_motion_pipeline/check_motion_quality.py",
+      "bytes": 3425,
+      "sha256": "34a7a74137fcd2601f45ce4c6369e92e274a2a0ebc31b2293648bb5fab65f2b6"
+    },
+    {
+      "path": "video_motion_pipeline/debug_start.py",
+      "bytes": 1547,
+      "sha256": "ef005ecd9962166d5a43f4013bd14c6bcf0d00503f20ee43b568ecddcf44c85d"
+    },
+    {
+      "path": "video_motion_pipeline/download_assets.py",
+      "bytes": 1839,
+      "sha256": "16218a602daf65e33eac56fecc6d6e5654ae0a1c83d3fe49f789e467600bb94d"
+    },
+    {
+      "path": "video_motion_pipeline/evaluate_video_tracking.py",
+      "bytes": 1440,
+      "sha256": "847cd8260f143ff9baaecbee4d467618c5db2d19e3cd108aa7b6a965499390de"
+    },
+    {
+      "path": "video_motion_pipeline/export_skeleton.py",
+      "bytes": 1898,
+      "sha256": "84a77c57e2fab6c161ab577fdf3f9da905b5a52148b1968b36942d50fb90e190"
+    },
+    {
+      "path": "video_motion_pipeline/outputs/eval_599.json",
+      "bytes": 2168,
+      "sha256": "9c9afe2131d475ee8665bd88dd2401eefa055d5710c465257ce55a24106595e3"
+    },
+    {
+      "path": "video_motion_pipeline/outputs/eval_599_jitter.json",
+      "bytes": 2205,
+      "sha256": "8959f687368d9fe68d68a50e9885c83e9956f6c5ba656284409fe2b4b0e0a446"
+    },
+    {
+      "path": "video_motion_pipeline/outputs/result_summary.json",
+      "bytes": 5812,
+      "sha256": "6a0b3a24bece9f53a4c6eaee14f97bb077488c306b4d22a3af077b35544f646c"
+    },
+    {
+      "path": "video_motion_pipeline/outputs/vita_boy/manifest.json",
+      "bytes": 1680,
+      "sha256": "c1ff1a3ddc248407efff9a1c34f6e560a921b7f18ef90f8f48b59d142649da14"
+    },
+    {
+      "path": "video_motion_pipeline/outputs/vita_boy/quality_report.json",
+      "bytes": 2564,
+      "sha256": "77efe3762ce98f2bf6652e8c304c5432d762d85edd7787eb712c52797a411251"
+    },
+    {
+      "path": "video_motion_pipeline/outputs/vita_boy/smplx_to_vita_boy.json",
+      "bytes": 7394,
+      "sha256": "18bbeaaf080485abae16caf3b8f05a32a00ed5a15ad8587b1b0ed53b8aec1a8d"
+    },
+    {
+      "path": "video_motion_pipeline/play_video_tracking.py",
+      "bytes": 2859,
+      "sha256": "8a71ecfdf99056632d2e0d3836be49325e45bca5a84a0626ee583d9b6f15f4df"
+    },
+    {
+      "path": "video_motion_pipeline/provenance/GMR/LICENSE",
+      "bytes": 1055,
+      "sha256": "c5a85c0b0012230739a0ab8f30eafba7f8ee7a1b29e025d01e27fa330298e522"
+    },
+    {
+      "path": "video_motion_pipeline/provenance/GMR/smpl.py",
+      "bytes": 13806,
+      "sha256": "2f9fb3df35afb065b93b7bf9173114c1993e800a2407cdc8705df77afc105437"
+    },
+    {
+      "path": "video_motion_pipeline/provenance/GMR_source/LICENSE",
+      "bytes": 1055,
+      "sha256": "c5a85c0b0012230739a0ab8f30eafba7f8ee7a1b29e025d01e27fa330298e522"
+    },
+    {
+      "path": "video_motion_pipeline/provenance/GMR_source/general_motion_retargeting/motion_retarget.py",
+      "bytes": 12876,
+      "sha256": "3a4f9fb0d13b204c8dcbb2ab62db59bce9de81b1f5911167aa73f079e0c90663"
+    },
+    {
+      "path": "video_motion_pipeline/provenance/GMR_source/general_motion_retargeting/params.py",
+      "bytes": 4790,
+      "sha256": "3506cdd277375139770b0ced7108719145620a389a8dee85bc6c94c6bf135bef"
+    },
+    {
+      "path": "video_motion_pipeline/provenance/GMR_source/general_motion_retargeting/utils/lafan_vendor/utils.py",
+      "bytes": 10594,
+      "sha256": "1181093a4641a7981e3e83589d32755b8b17301862d043f40c9fcbcb3926ac5e"
+    },
+    {
+      "path": "video_motion_pipeline/provenance/GMR_source/general_motion_retargeting/utils/smpl.py",
+      "bytes": 13806,
+      "sha256": "2f9fb3df35afb065b93b7bf9173114c1993e800a2407cdc8705df77afc105437"
+    },
+    {
+      "path": "video_motion_pipeline/provenance/GVHMR_LICENSE",
+      "bytes": 768,
+      "sha256": "57c994b3417515f2fa311937da8ff270f00ab2ddac7d3ae52c8a72d6794f09cc"
+    },
+    {
+      "path": "video_motion_pipeline/render_comparison.py",
+      "bytes": 4313,
+      "sha256": "d9bb51937e7e56b287e78cf73dcccb59116dffc3afd1dfd494b35c71f52b9ba2"
+    },
+    {
+      "path": "video_motion_pipeline/retarget_video.py",
+      "bytes": 10682,
+      "sha256": "d09e20de7aba449a47056100d3af72a67527fb1b41186cd51793f7db8763b2eb"
+    },
+    {
+      "path": "video_motion_pipeline/run_reconstruction.sh",
+      "bytes": 1313,
+      "sha256": "b675ff7fd8c162442e0c78ecdd4cd62919cc4f91389d72023bb95718eccbf894"
+    },
+    {
+      "path": "video_motion_pipeline/tracking_common.py",
+      "bytes": 594,
+      "sha256": "c6dc1953c6a3321fe7e035fb8b7efdf997513a2450b82aa4046691a87363a516"
+    },
+    {
+      "path": "video_motion_pipeline/train_tracking_video.py",
+      "bytes": 2437,
+      "sha256": "b87edbfff2ebb0b3f87f9b09c5ebed435c5a05fbd8ee899370d6aa6fc0bd0bcb"
+    },
+    {
+      "path": "另一台主机部署与开展步骤.md",
+      "bytes": 23584,
+      "sha256": "b5d568f752e3e38f0dd6720f385b3e9948944f37110516cb79390c7878950680"
+    },
+    {
+      "path": "荣耀元气仔跑步课设技术方案.md",
+      "bytes": 35395,
+      "sha256": "db939524a38f81129a8da6a4a200bf59b22f4f1d06ba7c4c50b8c5c929687048"
+    }
+  ]
+}

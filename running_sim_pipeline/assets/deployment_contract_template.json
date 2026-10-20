@@ -1,0 +1,571 @@
+{
+  "schema_version": 1,
+  "policy": "../running_sim_pipeline/artifacts/running_policy.onnx",
+  "policy_sha256": "044b5247ed35e15ad6b343ea537d70b809914c1f5ea6e659ea581a7b7f6dbb2b",
+  "policy_hz": 50,
+  "simulation_hz": 200,
+  "obs_dim": 960,
+  "history_frames": 10,
+  "action_scale": 0.25,
+  "quaternion_order": "wxyz in simulation; adapt documented hardware order",
+  "pose_mapping": "q_sim = encoder_direction * (q_hardware - encoder_zero_offset_rad)",
+  "measured_calibration_completed": false,
+  "trained_command_delay_range_ms": [
+    0.0,
+    20.0
+  ],
+  "note": "Simulation reference only. All unknown hardware mappings must be measured. No hardware execution authorized by this file.",
+  "joints": [
+    {
+      "name": "left_hip_pitch_joint",
+      "simulation_index": 0,
+      "sim_default_pose_rad": -0.312,
+      "sim_kp": 200.0,
+      "sim_kd": 5.0,
+      "sim_peak_effort_nm": 150.0,
+      "sim_joint_limits_rad": [
+        -2.69654,
+        2.69654
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_hip_roll_joint",
+      "simulation_index": 1,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 150.0,
+      "sim_kd": 4.0,
+      "sim_peak_effort_nm": 139.0,
+      "sim_joint_limits_rad": [
+        -0.5149,
+        2.6093
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_hip_yaw_joint",
+      "simulation_index": 2,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 100.0,
+      "sim_kd": 3.0,
+      "sim_peak_effort_nm": 88.0,
+      "sim_joint_limits_rad": [
+        -2.7489,
+        2.7489
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_knee_joint",
+      "simulation_index": 3,
+      "sim_default_pose_rad": 0.669,
+      "sim_kp": 150.0,
+      "sim_kd": 4.0,
+      "sim_peak_effort_nm": 139.0,
+      "sim_joint_limits_rad": [
+        -0.07854,
+        2.3475
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_ankle_pitch_joint",
+      "simulation_index": 4,
+      "sim_default_pose_rad": -0.363,
+      "sim_kp": 30.0,
+      "sim_kd": 2.0,
+      "sim_peak_effort_nm": 60.0,
+      "sim_joint_limits_rad": [
+        -0.864,
+        0.5149
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_ankle_roll_joint",
+      "simulation_index": 5,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 30.0,
+      "sim_kd": 2.0,
+      "sim_peak_effort_nm": 60.0,
+      "sim_joint_limits_rad": [
+        -0.3404,
+        0.3404
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_hip_pitch_joint",
+      "simulation_index": 6,
+      "sim_default_pose_rad": -0.312,
+      "sim_kp": 200.0,
+      "sim_kd": 5.0,
+      "sim_peak_effort_nm": 150.0,
+      "sim_joint_limits_rad": [
+        -2.69654,
+        2.69654
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_hip_roll_joint",
+      "simulation_index": 7,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 150.0,
+      "sim_kd": 4.0,
+      "sim_peak_effort_nm": 139.0,
+      "sim_joint_limits_rad": [
+        -2.6093,
+        0.5149
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_hip_yaw_joint",
+      "simulation_index": 8,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 100.0,
+      "sim_kd": 3.0,
+      "sim_peak_effort_nm": 88.0,
+      "sim_joint_limits_rad": [
+        -2.7489,
+        2.7489
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_knee_joint",
+      "simulation_index": 9,
+      "sim_default_pose_rad": 0.669,
+      "sim_kp": 150.0,
+      "sim_kd": 4.0,
+      "sim_peak_effort_nm": 139.0,
+      "sim_joint_limits_rad": [
+        -0.07854,
+        2.3475
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_ankle_pitch_joint",
+      "simulation_index": 10,
+      "sim_default_pose_rad": -0.363,
+      "sim_kp": 30.0,
+      "sim_kd": 2.0,
+      "sim_peak_effort_nm": 60.0,
+      "sim_joint_limits_rad": [
+        -0.864,
+        0.5149
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_ankle_roll_joint",
+      "simulation_index": 11,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 30.0,
+      "sim_kd": 2.0,
+      "sim_peak_effort_nm": 60.0,
+      "sim_joint_limits_rad": [
+        -0.3404,
+        0.3404
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "waist_yaw_joint",
+      "simulation_index": 12,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 200.0,
+      "sim_kd": 5.0,
+      "sim_peak_effort_nm": 150.0,
+      "sim_joint_limits_rad": [
+        -2.6093,
+        2.6093
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "waist_roll_joint",
+      "simulation_index": 13,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 30.0,
+      "sim_kd": 2.0,
+      "sim_peak_effort_nm": 60.0,
+      "sim_joint_limits_rad": [
+        -0.5149,
+        0.5149
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "waist_pitch_joint",
+      "simulation_index": 14,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 30.0,
+      "sim_kd": 2.0,
+      "sim_peak_effort_nm": 60.0,
+      "sim_joint_limits_rad": [
+        -0.5149,
+        0.5149
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_shoulder_pitch_joint",
+      "simulation_index": 15,
+      "sim_default_pose_rad": 0.2,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        -3.0456,
+        2.6617
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_shoulder_roll_joint",
+      "simulation_index": 16,
+      "sim_default_pose_rad": 0.2,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        0.0087,
+        2.2602
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_shoulder_yaw_joint",
+      "simulation_index": 17,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        -2.6093,
+        2.6093
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_elbow_joint",
+      "simulation_index": 18,
+      "sim_default_pose_rad": 0.6,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        -0.9163,
+        1.6493
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_wrist_roll_joint",
+      "simulation_index": 19,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        -2.0944,
+        2.0944
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_wrist_pitch_joint",
+      "simulation_index": 20,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 10.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 7.0,
+      "sim_joint_limits_rad": [
+        -1.213,
+        1.213
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "left_wrist_yaw_joint",
+      "simulation_index": 21,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 10.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 7.0,
+      "sim_joint_limits_rad": [
+        -1.213,
+        1.213
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_shoulder_pitch_joint",
+      "simulation_index": 22,
+      "sim_default_pose_rad": 0.2,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        -3.0456,
+        2.6617
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_shoulder_roll_joint",
+      "simulation_index": 23,
+      "sim_default_pose_rad": -0.2,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        -2.2602,
+        -0.0087
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_shoulder_yaw_joint",
+      "simulation_index": 24,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        -2.6093,
+        2.6093
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_elbow_joint",
+      "simulation_index": 25,
+      "sim_default_pose_rad": 0.6,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        -0.9163,
+        1.6493
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_wrist_roll_joint",
+      "simulation_index": 26,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 15.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 30.0,
+      "sim_joint_limits_rad": [
+        -2.0944,
+        2.0944
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_wrist_pitch_joint",
+      "simulation_index": 27,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 10.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 7.0,
+      "sim_joint_limits_rad": [
+        -1.213,
+        1.213
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    },
+    {
+      "name": "right_wrist_yaw_joint",
+      "simulation_index": 28,
+      "sim_default_pose_rad": 0.0,
+      "sim_kp": 10.0,
+      "sim_kd": 1.0,
+      "sim_peak_effort_nm": 7.0,
+      "sim_joint_limits_rad": [
+        -1.213,
+        1.213
+      ],
+      "sdk_index": null,
+      "encoder_direction": null,
+      "encoder_zero_offset_rad": null,
+      "measured_kp": null,
+      "measured_kd": null,
+      "hardware_peak_effort_nm": null,
+      "hardware_continuous_effort_nm": null
+    }
+  ]
+}

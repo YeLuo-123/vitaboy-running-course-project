@@ -1,0 +1,27 @@
+{
+  "stage": "flat",
+  "num_envs": 1024,
+  "seed": 42,
+  "additional_iterations": 800,
+  "resume": null,
+  "amp_weight": 0.4,
+  "expert": {
+    "source": "/home/robotit/honor_ws/motion_pipeline/artifacts/motion/run.npz",
+    "sha256": "e082825d57832d2715770ac2ec7f99fa32e6c5f00f82929edb00715467a603d1",
+    "feature_dim": 74,
+    "transition_dim": 148,
+    "expert_transitions": 3920,
+    "time_warp_factors": [
+      0.9,
+      1.0,
+      1.1,
+      1.2,
+      1.3
+    ],
+    "caveat": "Time-warped references are expert augmentation, not proven physically executable motions"
+  },
+  "algorithm": "PPO + least-squares AMP, expert + policy replay, expert-gradient penalty",
+  "actuator_control_hz": 200,
+  "policy_hz": 50,
+  "hardware_execution": false
+}

@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "source_frames": 1284,
+  "reference_frames": 2139,
+  "tracking_format_frames": 2138,
+  "joints": 29,
+  "finite_values": true,
+  "unit_root_quaternions": true,
+  "joint_limits_passed": true,
+  "sole_clearance_min_m": 0.001,
+  "media": {
+    "taichi_to_vita_comparison.mp4": {
+      "frames": 2139,
+      "fps": 50.0,
+      "size": [
+        1536,
+        544
+      ]
+    },
+    "taichi_vita_kinematic.mp4": {
+      "frames": 2139,
+      "fps": 50.0,
+      "size": [
+        512,
+        512
+      ]
+    }
+  },
+  "upper_body_collision_pairs": 89,
+  "collision_check_hz": 200,
+  "collision_check_samples": 8553,
+  "collision_minimum_m": 0.007917566039942528,
+  "penetrating_samples": 0,
+  "non_arm_qpos_unchanged": true,
+  "max_arm_frame_difference_rads": 2.500000000000002,
+  "tracking_joint_positions_match_reference": true,
+  "dynamic_tracking_evaluated": false,
+  "hardware_execution": false
+}

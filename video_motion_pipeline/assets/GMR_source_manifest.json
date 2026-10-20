@@ -1,0 +1,12 @@
+{
+  "repository": "https://github.com/YanjieZe/GMR",
+  "commit": "bb1bbe40774794fceb2a7c579a3464a28e68c844",
+  "module_sha256": {
+    "LICENSE": "c5a85c0b0012230739a0ab8f30eafba7f8ee7a1b29e025d01e27fa330298e522",
+    "general_motion_retargeting/params.py": "3506cdd277375139770b0ced7108719145620a389a8dee85bc6c94c6bf135bef",
+    "general_motion_retargeting/motion_retarget.py": "3a4f9fb0d13b204c8dcbb2ab62db59bce9de81b1f5911167aa73f079e0c90663",
+    "general_motion_retargeting/utils/smpl.py": "2f9fb3df35afb065b93b7bf9173114c1993e800a2407cdc8705df77afc105437",
+    "general_motion_retargeting/utils/lafan_vendor/utils.py": "1181093a4641a7981e3e83589d32755b8b17301862d043f40c9fcbcb3926ac5e"
+  },
+  "adapter": "export_skeleton.py constructs the body model using actual betas dimension, then calls official get_gvhmr_data_offline_fast."
+}

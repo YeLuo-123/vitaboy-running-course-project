@@ -1,0 +1,6 @@
+{
+  "source": "/home/robotit/honor_ws/honor_rl_mjlab/deploy/checkpoints/loco.onnx",
+  "max_absolute_action_error": 0.0007107257843017578,
+  "actor_input_dim": 960,
+  "critic_fresh": true
+}

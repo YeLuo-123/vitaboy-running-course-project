@@ -1,0 +1,8 @@
+{
+  "training_stopped": true,
+  "reason": "Preserve validated source checkpoints; further updates showed terrain regression. Candidate averaging is evaluated separately.",
+  "latest_saved_checkpoint": "logs/rough_precision_seed42/model_4800.pt",
+  "last_logged_iteration": 4819,
+  "planned_additional_iterations": 800,
+  "hardware_execution": false
+}

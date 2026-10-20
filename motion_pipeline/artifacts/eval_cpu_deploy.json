@@ -1,0 +1,17 @@
+{
+  "policy": "/home/robotit/honor_ws/motion_pipeline/artifacts/tracking_run.onnx",
+  "motion": "/home/robotit/honor_ws/motion_pipeline/data/retargeted/lafan_run2_s4_geometry/run.npz",
+  "deployment": "Official TrackingState + CPU MuJoCoRobot",
+  "completed": true,
+  "simulated_s": 3.92,
+  "reference_wraps": 0,
+  "virtual_support": false,
+  "joint_rmse_rad": 0.11280688696006314,
+  "relative_body_position_rmse_m": 0.03558190272497569,
+  "root_position_rmse_m": 0.089478268966257,
+  "forward_velocity_mean_mps": 1.8063008138557377,
+  "speed_abs_error_mean_mps": 0.1423512372532075,
+  "flight_fraction_after_half_second": 0.08771929824561403,
+  "flight_segments_after_half_second": 13,
+  "maximum_joint_actuator_torque_nm": 91.10559157949851
+}

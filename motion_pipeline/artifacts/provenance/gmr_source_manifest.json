@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/YanjieZe/GMR",
+  "commit": "bb1bbe40774794fceb2a7c579a3464a28e68c844",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "general_motion_retargeting/ik_configs/bvh_lafan1_to_g1.json",
+    "general_motion_retargeting/motion_retarget.py",
+    "general_motion_retargeting/params.py",
+    "general_motion_retargeting/utils/lafan1.py",
+    "general_motion_retargeting/utils/lafan_vendor/__init__.py",
+    "general_motion_retargeting/utils/lafan_vendor/extract.py",
+    "general_motion_retargeting/utils/lafan_vendor/license.txt",
+    "general_motion_retargeting/utils/lafan_vendor/utils.py",
+    "setup.py"
+  ]
+}

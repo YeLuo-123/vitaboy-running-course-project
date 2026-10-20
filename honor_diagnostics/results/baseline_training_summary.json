@@ -1,0 +1,535 @@
+[
+  {
+    "run": "logs/rsl_rl/vita_boy_walk_diagnostic/2026-10-19_19-32-48_plane_forward_seed42",
+    "envs": 1024,
+    "steps_per_env": 32,
+    "configured_iterations": 1000,
+    "policy_dt": 0.02,
+    "terrain": {
+      "init_state": {
+        "pos": [
+          "0.0",
+          "0.0",
+          "0.0"
+        ],
+        "rot": [
+          "1.0",
+          "0.0",
+          "0.0",
+          "0.0"
+        ],
+        "lin_vel": [
+          "0.0",
+          "0.0",
+          "0.0"
+        ],
+        "ang_vel": [
+          "0.0",
+          "0.0",
+          "0.0"
+        ],
+        "joint_pos": {
+          ".*": "0.0"
+        },
+        "joint_vel": {
+          ".*": "0.0"
+        }
+      },
+      "spec_fn": "",
+      "articulation": "null",
+      "sort_actuators": "false",
+      "lights": [
+        {
+          "name": "sun",
+          "body": "world",
+          "mode": "fixed",
+          "target": "null",
+          "type": "directional",
+          "castshadow": "true",
+          "pos": [
+            "0.0",
+            "0.0",
+            "1.5"
+          ],
+          "dir": [
+            "0.0",
+            "0.0",
+            "-1.0"
+          ],
+          "cutoff": "45.0",
+          "exponent": "10.0"
+        }
+      ],
+      "cameras": [],
+      "textures": [
+        {
+          "name": "groundplane",
+          "type": "2d",
+          "builtin": "checker",
+          "rgb1": [
+            "0.2",
+            "0.3",
+            "0.4"
+          ],
+          "rgb2": [
+            "0.1",
+            "0.2",
+            "0.3"
+          ],
+          "width": "300",
+          "height": "300",
+          "mark": "edge",
+          "markrgb": [
+            "0.8",
+            "0.8",
+            "0.8"
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "name": "groundplane",
+          "rgba": [
+            "1.0",
+            "1.0",
+            "1.0",
+            "1.0"
+          ],
+          "texuniform": "true",
+          "texrepeat": [
+            "4.0",
+            "4.0"
+          ],
+          "reflectance": "0.2",
+          "texture": "groundplane",
+          "geom_names_expr": [
+            "terrain$"
+          ]
+        }
+      ],
+      "meshes": [],
+      "collisions": [],
+      "terrain_type": "plane",
+      "terrain_generator": "null",
+      "env_spacing": "2.0",
+      "max_init_terrain_level": "5",
+      "num_envs": "1024",
+      "debug_vis": "false"
+    },
+    "command": {
+      "resampling_time_range": [
+        "5.0",
+        "8.0"
+      ],
+      "debug_vis": "false",
+      "entity_name": "robot",
+      "heading_command": "false",
+      "heading_control_stiffness": "0.5",
+      "rel_standing_envs": "0.05",
+      "rel_heading_envs": "1.0",
+      "init_velocity_prob": "0.0",
+      "ranges": {
+        "lin_vel_x": [
+          "0.25",
+          "0.65"
+        ],
+        "lin_vel_y": [
+          "0.0",
+          "0.0"
+        ],
+        "ang_vel_z": [
+          "0.0",
+          "0.0"
+        ],
+        "heading": "null"
+      },
+      "viz": {
+        "z_offset": "1.15",
+        "scale": "0.5"
+      }
+    },
+    "reward_weights": {
+      "track_lin_vel_xy_exp": 3.0,
+      "track_ang_vel_z_exp": 0.5,
+      "lin_vel_z_l2": -0.25,
+      "ang_vel_xy_l2": -0.05,
+      "energy": -0.0001,
+      "joint_acc_l2": -2.5e-07,
+      "action_rate_l2": -0.005,
+      "undesired_contacts": -1.0,
+      "fly": -0.3,
+      "body_orientation_l2": -1.0,
+      "flat_orientation_l2": -0.5,
+      "termination_penalty": -50.0,
+      "feet_air_time": 0.8,
+      "feet_slide": -0.25,
+      "feet_force": -0.003,
+      "feet_too_near": -2.0,
+      "feet_stumble": -2.0,
+      "joint_pos_limits": -2.0,
+      "joint_deviation_hip": -0.1,
+      "joint_deviation_arms": -0.15,
+      "joint_deviation_legs": -0.01
+    },
+    "action_config": {
+      "joint_pos": {
+        "entity_name": "robot",
+        "clip": "null",
+        "transmission_type": [
+          "joint"
+        ],
+        "actuator_names": [
+          ".*"
+        ],
+        "scale": "0.25",
+        "offset": "0.0",
+        "preserve_order": "false",
+        "use_default_offset": "true"
+      }
+    },
+    "scalar_summary": {
+      "Episode_Reward/joint_pos_limits": {
+        "last_step": 999,
+        "last": -0.0002818855282384902,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.0019847765075974165,
+          "500": -0.0009092033584602177,
+          "999": -0.00029523095698095857
+        }
+      },
+      "Episode_Reward/energy": {
+        "last_step": 999,
+        "last": -0.007509592920541763,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.000970530976774171,
+          "500": -0.007794388243928552,
+          "999": -0.007207212662324309
+        }
+      },
+      "Episode_Termination/nan_state": {
+        "last_step": 999,
+        "last": 0.0,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.0,
+          "500": 0.0,
+          "999": 0.0
+        }
+      },
+      "Episode_Reward/feet_stumble": {
+        "last_step": 999,
+        "last": 0.0,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.0,
+          "500": 0.0,
+          "999": 0.0
+        }
+      },
+      "Episode_Reward/ang_vel_xy_l2": {
+        "last_step": 999,
+        "last": -0.012563630007207394,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.018631936125457285,
+          "500": -0.05135913997888565,
+          "999": -0.012897654101252556
+        }
+      },
+      "Episode_Reward/joint_deviation_hip": {
+        "last_step": 999,
+        "last": -0.0295441672205925,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.006408969629555941,
+          "500": -0.048222480714321135,
+          "999": -0.029375039599835874
+        }
+      },
+      "Episode_Reward/action_rate_l2": {
+        "last_step": 999,
+        "last": -0.0664101094007492,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.0067035897541791204,
+          "500": -0.07174981206655502,
+          "999": -0.06571221768856049
+        }
+      },
+      "Episode_Reward/flat_orientation_l2": {
+        "last_step": 999,
+        "last": -0.003324176650494337,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.007669652160257101,
+          "500": -0.0074095206428319215,
+          "999": -0.003271147725172341
+        }
+      },
+      "Episode_Termination/time_out": {
+        "last_step": 999,
+        "last": 1.7647058963775635,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.0,
+          "500": 1.042906893491745,
+          "999": 1.574607629776001
+        }
+      },
+      "Episode_Termination/torso_contact": {
+        "last_step": 999,
+        "last": 0.05882352963089943,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 11.36125,
+          "500": 0.7077076344192028,
+          "999": 0.047178114503622054
+        }
+      },
+      "Episode_Reward/track_ang_vel_z_exp": {
+        "last_step": 999,
+        "last": 0.418786883354187,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.0126478954218328,
+          "500": 0.14542406305670738,
+          "999": 0.4114347213506699
+        }
+      },
+      "Episode_Reward/fly": {
+        "last_step": 999,
+        "last": -0.001000588177703321,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.002799125360324979,
+          "500": -0.0015151686337776483,
+          "999": -0.0009300189779605717
+        }
+      },
+      "Episode_Reward/joint_deviation_legs": {
+        "last_step": 999,
+        "last": -0.004469196777790785,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.0008755005814600736,
+          "500": -0.0063661516178399324,
+          "999": -0.004519606977701187
+        }
+      },
+      "Episode_Reward/joint_acc_l2": {
+        "last_step": 999,
+        "last": -0.059583425521850586,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.011399065107107163,
+          "500": -0.08674132555723191,
+          "999": -0.05933689534664154
+        }
+      },
+      "Episode_Reward/feet_air_time": {
+        "last_step": 999,
+        "last": 0.011690004728734493,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.00010283339666784741,
+          "500": 0.002114337149541825,
+          "999": 0.010976213309913874
+        }
+      },
+      "Episode_Reward/termination_penalty": {
+        "last_step": 999,
+        "last": -0.0009803922148421407,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.05000000074505806,
+          "500": -0.019805473894812166,
+          "999": -0.001300181387923658
+        }
+      },
+      "Metrics/base_velocity/error_vel_xy": {
+        "last_step": 999,
+        "last": 0.1577458381652832,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.12844097152352332,
+          "500": 0.5791213250160218,
+          "999": 0.15792040914297104
+        }
+      },
+      "Episode_Reward/feet_slide": {
+        "last_step": 999,
+        "last": -0.09802594780921936,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.00775689983740449,
+          "500": -0.09005458772182465,
+          "999": -0.09697686031460762
+        }
+      },
+      "Episode_Reward/feet_too_near": {
+        "last_step": 999,
+        "last": -0.0007270706119015813,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -6.336357408144977e-05,
+          "500": -0.00025237421185011046,
+          "999": -0.0009503230906557292
+        }
+      },
+      "Episode_Reward/undesired_contacts": {
+        "last_step": 999,
+        "last": -0.00011764706141548231,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.007473700852133333,
+          "500": -0.002415828292723745,
+          "999": -0.00017442973345168866
+        }
+      },
+      "Episode_Reward/body_orientation_l2": {
+        "last_step": 999,
+        "last": -0.006515104323625565,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.01903089113533497,
+          "500": -0.02399902034550905,
+          "999": -0.006732522062957286
+        }
+      },
+      "Episode_Reward/track_lin_vel_xy_exp": {
+        "last_step": 999,
+        "last": 2.9282546043395996,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.15330869525671006,
+          "500": 1.7554080414772033,
+          "999": 2.894292125701904
+        }
+      },
+      "Episode_Reward/feet_force": {
+        "last_step": 999,
+        "last": -0.009207725524902344,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.0019156239996664225,
+          "500": -0.018256107158958913,
+          "999": -0.008884298605844379
+        }
+      },
+      "Episode_Reward/lin_vel_z_l2": {
+        "last_step": 999,
+        "last": -0.0013677702518180013,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.0023461837973445653,
+          "500": -0.0022417926997877658,
+          "999": -0.0013195152324624359
+        }
+      },
+      "Metrics/base_velocity/error_vel_yaw": {
+        "last_step": 999,
+        "last": 0.5445226430892944,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.24973819851875306,
+          "500": 1.6822069931030272,
+          "999": 0.5496801292896271
+        }
+      },
+      "Episode_Reward/joint_deviation_arms": {
+        "last_step": 999,
+        "last": -0.07516895979642868,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.010815064813941717,
+          "500": -0.07958481267094612,
+          "999": -0.07502810209989548
+        }
+      },
+      "Loss/value": {
+        "last_step": 999,
+        "last": 0.0064687845297157764,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.016953065656125546,
+          "500": 0.04779568210244179,
+          "999": 0.0032555568881798536
+        }
+      },
+      "Loss/surrogate": {
+        "last_step": 999,
+        "last": -0.0033722228836268187,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": -0.03107016447931528,
+          "500": -0.02080698572099209,
+          "999": -0.009504533507861197
+        }
+      },
+      "Loss/entropy": {
+        "last_step": 999,
+        "last": 4.265888690948486,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 19.922008476257325,
+          "500": 16.940411796569823,
+          "999": 4.6257454204559325
+        }
+      },
+      "Loss/learning_rate": {
+        "last_step": 999,
+        "last": 9.999999747378752e-06,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 1.2199999728181866e-05,
+          "500": 3.3143749606097115e-05,
+          "999": 2.4699999448785094e-05
+        }
+      },
+      "Policy/mean_std": {
+        "last_step": 999,
+        "last": 0.33951759338378906,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.4813720691204071,
+          "500": 0.44487785756587983,
+          "999": 0.3419034659862518
+        }
+      },
+      "Perf/total_fps": {
+        "last_step": 999,
+        "last": 55989.0,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 44916.84,
+          "500": 48037.66,
+          "999": 55224.34
+        }
+      },
+      "Perf/collection_time": {
+        "last_step": 999,
+        "last": 0.5212428569793701,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.6627417135238648,
+          "500": 0.6159616327285766,
+          "999": 0.5287411308288574
+        }
+      },
+      "Perf/learning_time": {
+        "last_step": 999,
+        "last": 0.06401371955871582,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.06682775497436523,
+          "500": 0.06656086921691895,
+          "999": 0.06477185726165771
+        }
+      },
+      "Train/mean_reward": {
+        "last_step": 999,
+        "last": 58.219661712646484,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.20220634112134575,
+          "500": 27.166623420715332,
+          "999": 58.68522392272949
+        }
+      },
+      "Train/mean_episode_length": {
+        "last_step": 999,
+        "last": 974.8099975585938,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 90.01739974975585,
+          "500": 797.6135986328125,
+          "999": 984.2921984863282
+        }
+      },
+      "Train/mean_reward/time": {
+        "last_step": 708,
+        "last": 58.219661712646484,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 0.4993046453776027,
+          "500": 49.45109714605869,
+          "708": 58.5904707515941
+        }
+      },
+      "Train/mean_episode_length/time": {
+        "last_step": 708,
+        "last": 974.8099975585938,
+        "mean_over_last_up_to_50_iterations_at": {
+          "100": 91.5085505609927,
+          "500": 973.56397658128,
+          "708": 985.0191772460937
+        }
+      }
+    }
+  }
+]

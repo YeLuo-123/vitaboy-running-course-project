@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "checkpoint": {
+    "path": "../running_sim_pipeline/artifacts/averaged_4400_4600.pt",
+    "sha256": "d89e93509bab7e5bf850adbfc87103a5fcb6045c09af2cfbc9196025513e495f"
+  },
+  "policy": {
+    "path": "../running_sim_pipeline/artifacts/running_policy.onnx",
+    "sha256": "044b5247ed35e15ad6b343ea537d70b809914c1f5ea6e659ea581a7b7f6dbb2b"
+  },
+  "checks": {
+    "cpu_nominal_600s_actual_mean_ge_2": true,
+    "flat_and_randomized_transitions": false,
+    "terrain_each_seed_ge_95_percent_and_2mps": true
+  },
+  "all_listed_simulation_checks_passed": false,
+  "terrain": {
+    "successes": 374,
+    "trials": 384,
+    "completion_fraction": 0.9739583333333334,
+    "descriptive_wilson_95_interval": [
+      0.9527329649980807,
+      0.9857945163241912
+    ],
+    "seeds": [
+      718281,
+      828182,
+      938293
+    ],
+    "duration_each_s": [
+      25.0,
+      25.0,
+      25.0
+    ],
+    "steady_speed_each_seed_mps": [
+      2.049093246459961,
+      2.065107822418213,
+      2.0686588287353516
+    ],
+    "completion_each_seed": [
+      0.9609375,
+      0.984375,
+      0.9765625
+    ],
+    "caveat": "Two synthetic surfaces per seed; outcomes can correlate. These runs do not prove 600s terrain endurance."
+  },
+  "cpu_endurance": {
+    "duration_s": 600.0,
+    "steady_speed_mps": 2.315372738028908,
+    "whole_trial_forward_speed_mps": 2.301873340598983,
+    "distance_m": 1379.679744876774,
+    "absolute_mechanical_cost_jpm": 261.4947944269333
+  },
+  "evidence": {
+    "../running_sim_pipeline/results/running_cpu_endurance_600s.json": {
+      "sha256": "b4ca7dab3e96521a48ab73a5de4db9537cef8545bb597449a48fac9a441c014c",
+      "policy_sha256": "044b5247ed35e15ad6b343ea537d70b809914c1f5ea6e659ea581a7b7f6dbb2b"
+    },
+    "../running_sim_pipeline/results/averaged_nominal_release.json": {
+      "sha256": "63b3075e84ebea4813aafe223a9f178e10e7e46d8e730bc6642e2f6c31ce42d7",
+      "policy_sha256": "d89e93509bab7e5bf850adbfc87103a5fcb6045c09af2cfbc9196025513e495f"
+    },
+    "../running_sim_pipeline/results/averaged_robust_transitions.json": {
+      "sha256": "2ef1d76b5df3caa7fedb33b1429b0dc8c38df805bbc366bb658c0b1d165a928c",
+      "policy_sha256": "d89e93509bab7e5bf850adbfc87103a5fcb6045c09af2cfbc9196025513e495f"
+    },
+    "../running_sim_pipeline/results/averaged_rough_heldout128_718281.json": {
+      "sha256": "a369dbee780ea0be8c88dc150998fe2ad6f84b93f58e1a00daa7ae94cd566a47",
+      "policy_sha256": "d89e93509bab7e5bf850adbfc87103a5fcb6045c09af2cfbc9196025513e495f"
+    },
+    "../running_sim_pipeline/results/averaged_rough_heldout128_828182.json": {
+      "sha256": "25da2e427dd1ec997cd9a86486cd8eea072e266b197213ecc3087e3baba10772",
+      "policy_sha256": "d89e93509bab7e5bf850adbfc87103a5fcb6045c09af2cfbc9196025513e495f"
+    },
+    "../running_sim_pipeline/results/averaged_rough_heldout128_938293.json": {
+      "sha256": "f73fb3d5e7ea1b7d2e16108ee440635c8fc51ca17e0b9c6fe3a6f061fbfae687",
+      "policy_sha256": "d89e93509bab7e5bf850adbfc87103a5fcb6045c09af2cfbc9196025513e495f"
+    }
+  },
+  "hardware_tested": false,
+  "battery_endurance_verified": false,
+  "hardware_calibration_completed": false,
+  "calibrated_thermal_model": false,
+  "amp_ablation_completed": false,
+  "limitations": [
+    "600s endurance is on nominal flat ground; rough tests are separate short trials.",
+    "Mechanical work is sampled at 50Hz and excludes battery, motor efficiency, heat and electronics.",
+    "CPU MuJoCo and MuJoCo-Warp share the physics family; this is deployment/numerical validation, not a different physical engine.",
+    "Simulation asset mass and 150Nm peak capability require hardware identification; manual headline values do not establish per-joint continuous limits."
+  ]
+}

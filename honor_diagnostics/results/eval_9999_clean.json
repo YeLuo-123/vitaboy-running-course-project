@@ -1,0 +1,83 @@
+[
+  {
+    "speed_command": 0.0,
+    "profile": "clean",
+    "task": "VitaBoy-Velocity-Flat",
+    "checkpoint": "logs/rsl_rl/vita_boy_velocity/2026-10-19_15-08-46/model_9999.pt",
+    "num_envs": 16,
+    "horizon_s": 20.0,
+    "first_episode_survival_rate": 1.0,
+    "first_episode_mean_lifetime_s": 20.0,
+    "first_episode_min_lifetime_s": 20.0,
+    "failures_all_episodes": 0,
+    "velocity_mean_after_1s": [
+      0.0004796952416654676,
+      -0.00040549124241806567,
+      -0.0006819304544478655
+    ],
+    "vx_mae_after_1s": 0.000488454767037183,
+    "valid_samples_after_1s": 15184,
+    "foot_contact_fraction_none_single_double": [
+      0.0,
+      0.0,
+      0.9999999403953552
+    ],
+    "action_abs_mean": 0.7056207606614076,
+    "action_abs_max": 3.637357234954834,
+    "first_episode_world_x_displacement_mean": 0.043489720672369
+  },
+  {
+    "speed_command": 0.3,
+    "profile": "clean",
+    "task": "VitaBoy-Velocity-Flat",
+    "checkpoint": "logs/rsl_rl/vita_boy_velocity/2026-10-19_15-08-46/model_9999.pt",
+    "num_envs": 16,
+    "horizon_s": 20.0,
+    "first_episode_survival_rate": 1.0,
+    "first_episode_mean_lifetime_s": 20.0,
+    "first_episode_min_lifetime_s": 20.0,
+    "failures_all_episodes": 0,
+    "velocity_mean_after_1s": [
+      0.00036212208215147257,
+      -0.00047753084800206125,
+      -0.0007039076299406588
+    ],
+    "vx_mae_after_1s": 0.299638569355011,
+    "valid_samples_after_1s": 15184,
+    "foot_contact_fraction_none_single_double": [
+      0.0,
+      0.0,
+      0.9999999403953552
+    ],
+    "action_abs_mean": 0.7090117578342563,
+    "action_abs_max": 3.703141689300537,
+    "first_episode_world_x_displacement_mean": 0.0613509826362133
+  },
+  {
+    "speed_command": 0.6,
+    "profile": "clean",
+    "task": "VitaBoy-Velocity-Flat",
+    "checkpoint": "logs/rsl_rl/vita_boy_velocity/2026-10-19_15-08-46/model_9999.pt",
+    "num_envs": 16,
+    "horizon_s": 20.0,
+    "first_episode_survival_rate": 1.0,
+    "first_episode_mean_lifetime_s": 20.0,
+    "first_episode_min_lifetime_s": 20.0,
+    "failures_all_episodes": 0,
+    "velocity_mean_after_1s": [
+      0.0003601562057156116,
+      -0.00048543987213633955,
+      -0.0007257711258716881
+    ],
+    "vx_mae_after_1s": 0.5996411442756653,
+    "valid_samples_after_1s": 15184,
+    "foot_contact_fraction_none_single_double": [
+      0.0,
+      0.0,
+      0.9999999403953552
+    ],
+    "action_abs_mean": 0.71147723607011,
+    "action_abs_max": 3.747082471847534,
+    "first_episode_world_x_displacement_mean": 0.06700680404901505
+  }
+]

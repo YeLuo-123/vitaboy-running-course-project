@@ -1,0 +1,142 @@
+{
+  "input_video_sha256": "cd38c53b4bae23d0e4c61bf049859c2be918ad918c4bbddfb45b366ca0fb9b2a",
+  "reconstruction_frames": 133,
+  "retarget_fps": 50,
+  "retarget_duration_s": 4.4,
+  "retarget_completed": true,
+  "finite_clip_dynamics_completed": true,
+  "tracking_precision_acceptance_passed": false,
+  "selected_checkpoint": "artifacts/experimental_model_599.pt",
+  "clean_evaluation": {
+    "agent": "/home/robotit/honor_ws/honor_rl_mjlab/logs/rsl_rl/vita_boy_video_tracking/2026-10-19_21-44-45_user_video_seed42/model_599.pt",
+    "motion": "/home/robotit/honor_ws/video_motion_pipeline/outputs/vita_boy/video_motion.npz",
+    "seed": 123,
+    "num_envs": 16,
+    "jitter": false,
+    "clip_steps": 218,
+    "clip_duration_s": 4.36,
+    "completed_fraction": 1.0,
+    "complete_count": 16,
+    "first_failure_or_completion_mean_s": 4.360000133514404,
+    "reference_wraps": 0,
+    "joint_rmse_rad": 0.2423977553844452,
+    "relative_body_position_rmse_m": 0.07020566612482071,
+    "root_position_rmse_m": 0.26052892208099365,
+    "forward_velocity_mean_mps": 0.07838168740272522,
+    "speed_abs_error_mean_mps": 0.12220390886068344,
+    "reference_speed_mean_mps": 0.1756516695022583,
+    "foot_contact_fraction_none_single_double": [
+      0.0,
+      0.19610090553760529,
+      0.8038990497589111
+    ],
+    "flight_fraction_after_half_second": 0.0,
+    "flight_segments_after_half_second_mean": 0.0,
+    "flight_segments_after_half_second_min": 0,
+    "world_x_displacement_mean_m": 0.5879737138748169,
+    "maximum_joint_actuator_torque_nm": 82.48812866210938,
+    "valid_samples": 3488,
+    "onnx_max_abs_action_error": null,
+    "virtual_support": false,
+    "score_note": "Errors use valid pre-failure samples; assess completion together with errors.",
+    "passes_engineering_acceptance": false,
+    "running_only_acceptance_criteria": {
+      "completion_at_least_95_percent": true,
+      "joint_rmse_at_most_0_15_rad": false,
+      "relative_body_rmse_at_most_0_06_m": false,
+      "root_rmse_at_most_0_20_m": false,
+      "speed_error_at_most_0_25_mps": true,
+      "no_reference_wrap_or_teleport": true,
+      "measured_flight_after_half_second_at_least_1_percent": false,
+      "at_least_two_flight_segments_after_half_second": false
+    },
+    "engineering_acceptance_criteria": {
+      "completion_at_least_95_percent": true,
+      "joint_rmse_at_most_0_15_rad": false,
+      "relative_body_rmse_at_most_0_06_m": false,
+      "root_rmse_at_most_0_20_m": false,
+      "no_reference_wrap_or_teleport": true
+    },
+    "evaluation_scope": "Video imitation: finite original-timing clip, pose fidelity and no falls; no running-speed target."
+  },
+  "jitter_evaluation": {
+    "agent": "/home/robotit/honor_ws/honor_rl_mjlab/logs/rsl_rl/vita_boy_video_tracking/2026-10-19_21-44-45_user_video_seed42/model_599.pt",
+    "motion": "/home/robotit/honor_ws/video_motion_pipeline/outputs/vita_boy/video_motion.npz",
+    "seed": 123,
+    "num_envs": 32,
+    "jitter": true,
+    "clip_steps": 218,
+    "clip_duration_s": 4.36,
+    "completed_fraction": 1.0,
+    "complete_count": 32,
+    "first_failure_or_completion_mean_s": 4.360000133514404,
+    "reference_wraps": 0,
+    "joint_rmse_rad": 0.2425691932439804,
+    "relative_body_position_rmse_m": 0.06974459439516068,
+    "root_position_rmse_m": 0.2769647240638733,
+    "forward_velocity_mean_mps": 0.07499568164348602,
+    "speed_abs_error_mean_mps": 0.12809084355831146,
+    "reference_speed_mean_mps": 0.1756516695022583,
+    "foot_contact_fraction_none_single_double": [
+      0.005303898826241493,
+      0.23079127073287964,
+      0.7639048099517822
+    ],
+    "flight_fraction_after_half_second": 0.0009715025906735751,
+    "flight_segments_after_half_second_mean": 0.1875,
+    "flight_segments_after_half_second_min": 0,
+    "world_x_displacement_mean_m": 0.5955684781074524,
+    "maximum_joint_actuator_torque_nm": 113.88805389404297,
+    "valid_samples": 6976,
+    "onnx_max_abs_action_error": null,
+    "virtual_support": false,
+    "score_note": "Errors use valid pre-failure samples; assess completion together with errors.",
+    "passes_engineering_acceptance": false,
+    "running_only_acceptance_criteria": {
+      "completion_at_least_95_percent": true,
+      "joint_rmse_at_most_0_15_rad": false,
+      "relative_body_rmse_at_most_0_06_m": false,
+      "root_rmse_at_most_0_20_m": false,
+      "speed_error_at_most_0_25_mps": true,
+      "no_reference_wrap_or_teleport": true,
+      "measured_flight_after_half_second_at_least_1_percent": false,
+      "at_least_two_flight_segments_after_half_second": false
+    },
+    "engineering_acceptance_criteria": {
+      "completion_at_least_95_percent": true,
+      "joint_rmse_at_most_0_15_rad": false,
+      "relative_body_rmse_at_most_0_06_m": false,
+      "root_rmse_at_most_0_20_m": false,
+      "no_reference_wrap_or_teleport": true
+    },
+    "evaluation_scope": "Video imitation: finite original-timing clip, pose fidelity and no falls; no running-speed target."
+  },
+  "anatomical_direction_errors_to_estimated_human": {
+    "left_upper_arm": {
+      "mean_deg": 8.152882587004763,
+      "p95_deg": 18.66161942547748,
+      "max_deg": 45.109540430030314
+    },
+    "left_forearm": {
+      "mean_deg": 6.250919108096249,
+      "p95_deg": 16.859858904118123,
+      "max_deg": 27.187950250924555
+    },
+    "right_upper_arm": {
+      "mean_deg": 8.336352555846956,
+      "p95_deg": 16.581063761721705,
+      "max_deg": 34.1569325601189
+    },
+    "right_forearm": {
+      "mean_deg": 4.644988150748409,
+      "p95_deg": 11.452335487252753,
+      "max_deg": 28.82733865400128
+    }
+  },
+  "current_limitations": [
+    "Tracking pose and root errors exceed stated thresholds",
+    "Fast shoulder branch changes remain",
+    "No hardware deployment"
+  ],
+  "viewer_url": "http://127.0.0.1:8090"
+}

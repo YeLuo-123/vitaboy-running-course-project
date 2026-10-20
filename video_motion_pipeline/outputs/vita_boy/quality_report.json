@@ -1,0 +1,80 @@
+{
+  "anatomical_direction_error_to_GVHMR": {
+    "left_upper_arm": {
+      "mean_deg": 8.152882587004763,
+      "p95_deg": 18.66161942547748,
+      "max_deg": 45.109540430030314
+    },
+    "left_forearm": {
+      "mean_deg": 6.250919108096249,
+      "p95_deg": 16.859858904118123,
+      "max_deg": 27.187950250924555
+    },
+    "right_upper_arm": {
+      "mean_deg": 8.336352555846956,
+      "p95_deg": 16.581063761721705,
+      "max_deg": 34.1569325601189
+    },
+    "right_forearm": {
+      "mean_deg": 4.644988150748409,
+      "p95_deg": 11.452335487252753,
+      "max_deg": 28.82733865400128
+    }
+  },
+  "kinematic_manifest": {
+    "source": "GVHMR smpl_params_global",
+    "source_skeleton_sha256": "34e7116dd6c61b6155551db8786e11c7d0134fd2cb16ac225e3cc770d429b66b",
+    "source_frames": 133,
+    "source_fps": 30.0,
+    "output_frames": 221,
+    "output_fps": 50,
+    "duration_s": 4.4,
+    "calibration": "SMPL-X neutral T-pose to actual VitaBoy T-pose; per-link constant orientation offsets",
+    "global_ground_shift_m": 0.007829093892092503,
+    "contact_correction_range_m": [
+      -0.02309396683190378,
+      0.0014420781920892545
+    ],
+    "root_height_range_m": [
+      0.7916674785654491,
+      0.8166817341860445
+    ],
+    "minimum_sole_clearance_m": 0.0018936101795885493,
+    "clipped_values": 54,
+    "max_joint_velocity_rads": 31.400395689778215,
+    "joint_velocity_p99_rads": 12.694803229548247,
+    "joint_names": [
+      "left_hip_pitch_joint",
+      "left_hip_roll_joint",
+      "left_hip_yaw_joint",
+      "left_knee_joint",
+      "left_ankle_pitch_joint",
+      "left_ankle_roll_joint",
+      "right_hip_pitch_joint",
+      "right_hip_roll_joint",
+      "right_hip_yaw_joint",
+      "right_knee_joint",
+      "right_ankle_pitch_joint",
+      "right_ankle_roll_joint",
+      "waist_yaw_joint",
+      "waist_roll_joint",
+      "waist_pitch_joint",
+      "left_shoulder_pitch_joint",
+      "left_shoulder_roll_joint",
+      "left_shoulder_yaw_joint",
+      "left_elbow_joint",
+      "left_wrist_roll_joint",
+      "left_wrist_pitch_joint",
+      "left_wrist_yaw_joint",
+      "right_shoulder_pitch_joint",
+      "right_shoulder_roll_joint",
+      "right_shoulder_yaw_joint",
+      "right_elbow_joint",
+      "right_wrist_roll_joint",
+      "right_wrist_pitch_joint",
+      "right_wrist_yaw_joint"
+    ],
+    "scope": "Kinematic reference only; dynamic Tracking is a separate validation."
+  },
+  "note": "Reconstruction has no 3D ground truth; these errors measure GMR fidelity to estimated human joints, not true human pose accuracy."
+}

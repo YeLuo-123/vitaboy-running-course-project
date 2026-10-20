@@ -1,0 +1,52 @@
+{
+  "flat_v2_seed42": {
+    "files": [
+      "env.yaml",
+      "agent.yaml",
+      "manifest.json",
+      "warm_start_validation.json"
+    ],
+    "source_snapshot_available": false
+  },
+  "robust_seed42": {
+    "files": [
+      "env.yaml",
+      "agent.yaml",
+      "manifest.json"
+    ],
+    "source_snapshot_available": false
+  },
+  "rough_seed42": {
+    "files": [
+      "env.yaml",
+      "agent.yaml",
+      "manifest.json"
+    ],
+    "source_snapshot_available": false
+  },
+  "rough_focus_seed42": {
+    "files": [
+      "env.yaml",
+      "agent.yaml",
+      "manifest.json"
+    ],
+    "source_snapshot_available": true
+  },
+  "rough_stability_seed42": {
+    "files": [
+      "env.yaml",
+      "agent.yaml",
+      "manifest.json"
+    ],
+    "source_snapshot_available": true
+  },
+  "rough_precision_seed42": {
+    "files": [
+      "env.yaml",
+      "agent.yaml",
+      "manifest.json",
+      "stop_record.json"
+    ],
+    "source_snapshot_available": true
+  }
+}

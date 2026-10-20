@@ -1,0 +1,30 @@
+[
+  {
+    "file": "run1_subject2.bvh",
+    "archive_path": "run1_subject2.bvh",
+    "bytes": 4998074,
+    "sha256": "823dbe4f386a8c4a471999381a16cd0bc4d93a39907098442ccda886dcec9c95",
+    "source": "https://media.githubusercontent.com/media/ubisoft/ubisoft-laforge-animation-dataset/master/lafan1/lafan1.zip"
+  },
+  {
+    "file": "run1_subject5.bvh",
+    "archive_path": "run1_subject5.bvh",
+    "bytes": 5000545,
+    "sha256": "1eb77d39208ee93a15f5bf0235cc291c9680c93ffc524aa87007be67e9b4fcaa",
+    "source": "https://media.githubusercontent.com/media/ubisoft/ubisoft-laforge-animation-dataset/master/lafan1/lafan1.zip"
+  },
+  {
+    "file": "run2_subject1.bvh",
+    "archive_path": "run2_subject1.bvh",
+    "bytes": 5162245,
+    "sha256": "6a88975cfcc3b5cf24af703222389593a9a74ad752583ee999f79e52f0755dc8",
+    "source": "https://media.githubusercontent.com/media/ubisoft/ubisoft-laforge-animation-dataset/master/lafan1/lafan1.zip"
+  },
+  {
+    "file": "run2_subject4.bvh",
+    "archive_path": "run2_subject4.bvh",
+    "bytes": 5173034,
+    "sha256": "cecbb82267dae06e4aabfaa761f7126b8bf384b38c159d92f9677b9c687100e7",
+    "source": "https://media.githubusercontent.com/media/ubisoft/ubisoft-laforge-animation-dataset/master/lafan1/lafan1.zip"
+  }
+]

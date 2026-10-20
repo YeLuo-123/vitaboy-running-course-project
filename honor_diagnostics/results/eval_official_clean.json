@@ -1,0 +1,56 @@
+[
+  {
+    "speed_command": 0.3,
+    "profile": "clean",
+    "task": "VitaBoy-Velocity-Flat",
+    "checkpoint": "deploy/checkpoints/loco.onnx",
+    "num_envs": 1,
+    "horizon_s": 20.0,
+    "first_episode_survival_rate": 1.0,
+    "first_episode_mean_lifetime_s": 20.0,
+    "first_episode_min_lifetime_s": 20.0,
+    "failures_all_episodes": 0,
+    "velocity_mean_after_1s": [
+      0.3090529143810272,
+      -0.0014925008872523904,
+      -0.0034459619782865047
+    ],
+    "vx_mae_after_1s": 0.01312762126326561,
+    "valid_samples_after_1s": 949,
+    "foot_contact_fraction_none_single_double": [
+      0.0,
+      0.7776606678962708,
+      0.22233930230140686
+    ],
+    "action_abs_mean": 0.32184287468312217,
+    "action_abs_max": 1.724921464920044,
+    "first_episode_world_x_displacement_mean": 5.976237773895264
+  },
+  {
+    "speed_command": 0.6,
+    "profile": "clean",
+    "task": "VitaBoy-Velocity-Flat",
+    "checkpoint": "deploy/checkpoints/loco.onnx",
+    "num_envs": 1,
+    "horizon_s": 20.0,
+    "first_episode_survival_rate": 1.0,
+    "first_episode_mean_lifetime_s": 20.0,
+    "first_episode_min_lifetime_s": 20.0,
+    "failures_all_episodes": 0,
+    "velocity_mean_after_1s": [
+      0.6015767455101013,
+      0.014380954205989838,
+      -0.011914188973605633
+    ],
+    "vx_mae_after_1s": 0.016326403245329857,
+    "valid_samples_after_1s": 949,
+    "foot_contact_fraction_none_single_double": [
+      0.0,
+      0.860906183719635,
+      0.1390937715768814
+    ],
+    "action_abs_mean": 0.3865178175337426,
+    "action_abs_max": 2.1126599311828613,
+    "first_episode_world_x_displacement_mean": 11.71993637084961
+  }
+]

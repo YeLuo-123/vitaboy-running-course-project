@@ -1,0 +1,8 @@
+{
+  "source_filename": "fbf6fdff4d44dc198904dcb988964fa0.mp4",
+  "source_sha256": "95db5e26e2bc1f9d0bc90c5b2579a94d877e87bbd1563276201d102c7a991595",
+  "GVHMR_commit": "ee960bb6e2ea2d381aa97f08e9b71ef320b624b1",
+  "GMR_commit": "bb1bbe40774794fceb2a7c579a3464a28e68c844",
+  "robot_xml_sha256": "97ce1b28f87f43f98929592efecb96eb2022be7ffba46db277c73b57287c8674",
+  "scope": "Complete Tai Chi kinematic retarget; no RL training or hardware execution."
+}

@@ -1,0 +1,52 @@
+{
+  "agent": "/home/robotit/honor_ws/honor_rl_mjlab/logs/rsl_rl/vita_boy_video_tracking/2026-10-19_21-44-45_user_video_seed42/model_599.pt",
+  "motion": "/home/robotit/honor_ws/video_motion_pipeline/outputs/vita_boy/video_motion.npz",
+  "seed": 123,
+  "num_envs": 32,
+  "jitter": true,
+  "clip_steps": 218,
+  "clip_duration_s": 4.36,
+  "completed_fraction": 1.0,
+  "complete_count": 32,
+  "first_failure_or_completion_mean_s": 4.360000133514404,
+  "reference_wraps": 0,
+  "joint_rmse_rad": 0.2425691932439804,
+  "relative_body_position_rmse_m": 0.06974459439516068,
+  "root_position_rmse_m": 0.2769647240638733,
+  "forward_velocity_mean_mps": 0.07499568164348602,
+  "speed_abs_error_mean_mps": 0.12809084355831146,
+  "reference_speed_mean_mps": 0.1756516695022583,
+  "foot_contact_fraction_none_single_double": [
+    0.005303898826241493,
+    0.23079127073287964,
+    0.7639048099517822
+  ],
+  "flight_fraction_after_half_second": 0.0009715025906735751,
+  "flight_segments_after_half_second_mean": 0.1875,
+  "flight_segments_after_half_second_min": 0,
+  "world_x_displacement_mean_m": 0.5955684781074524,
+  "maximum_joint_actuator_torque_nm": 113.88805389404297,
+  "valid_samples": 6976,
+  "onnx_max_abs_action_error": null,
+  "virtual_support": false,
+  "score_note": "Errors use valid pre-failure samples; assess completion together with errors.",
+  "passes_engineering_acceptance": false,
+  "running_only_acceptance_criteria": {
+    "completion_at_least_95_percent": true,
+    "joint_rmse_at_most_0_15_rad": false,
+    "relative_body_rmse_at_most_0_06_m": false,
+    "root_rmse_at_most_0_20_m": false,
+    "speed_error_at_most_0_25_mps": true,
+    "no_reference_wrap_or_teleport": true,
+    "measured_flight_after_half_second_at_least_1_percent": false,
+    "at_least_two_flight_segments_after_half_second": false
+  },
+  "engineering_acceptance_criteria": {
+    "completion_at_least_95_percent": true,
+    "joint_rmse_at_most_0_15_rad": false,
+    "relative_body_rmse_at_most_0_06_m": false,
+    "root_rmse_at_most_0_20_m": false,
+    "no_reference_wrap_or_teleport": true
+  },
+  "evaluation_scope": "Video imitation: finite original-timing clip, pose fidelity and no falls; no running-speed target."
+}
