@@ -1,0 +1,29 @@
+{
+  "stage": "rough",
+  "num_envs": 1024,
+  "seed": 42,
+  "additional_iterations": 400,
+  "resume": "/home/robotit/honor_ws/running_sim_pipeline/logs/transition_20261025_v1/model_5000.pt",
+  "amp_weight": 0.4,
+  "expert": {
+    "source": "/home/robotit/honor_ws/running_sim_pipeline/assets/dynamic_amp_expert.npz",
+    "sha256": "bbe92fd632723a8e8076689e2066d4b1db848d1fb7e85eec4b0db02b554f5975",
+    "feature_dim": 74,
+    "transition_dim": 148,
+    "expert_transitions": 5440,
+    "time_warp_factors": [],
+    "source_type": "Validated Tracking dynamics rollouts; no kinematic reconstruction gap"
+  },
+  "algorithm": "PPO + LS-AMP dynamics experts; +/-0.8 label smoothing, replay, interpolated gradient penalty",
+  "expert_source": "dynamic",
+  "focus_running": true,
+  "refine_stability": true,
+  "precision_running": true,
+  "transition_focus": true,
+  "transition_preserve_speed": true,
+  "fixed_learning_rate": 2e-05,
+  "reset_amp_on_resume": false,
+  "actuator_control_hz": 200,
+  "policy_hz": 50,
+  "hardware_execution": false
+}

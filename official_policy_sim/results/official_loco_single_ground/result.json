@@ -1,0 +1,873 @@
+{
+  "status": "completed",
+  "hardware_execution": false,
+  "isolation": {
+    "ros_domain_id": 117,
+    "localhost_only": true,
+    "dds_interface": "127.0.0.1",
+    "topic_prefix": "/honor_sim_only/"
+  },
+  "policy": "/home/s/honor_deploy_ws/src/honor_rl_deploy/source/config/vita_boy/SIM_ONLY/rl_locomotion/vita_boy_loco.onnx",
+  "policy_sha256": "c8978c07a7ce2cd85370ff1010cc23a1b2ec0a0686b024fc7533e947852d19a7",
+  "mujoco_version": "3.3.7",
+  "model_mass_kg": 41.56,
+  "ground_plane_count": 1,
+  "initial_qpos": [
+    0.0,
+    0.0,
+    0.7723560557224527,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.312,
+    0.0,
+    0.0,
+    0.669,
+    -0.363,
+    0.0,
+    -0.312,
+    0.0,
+    0.0,
+    0.669,
+    -0.363,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.2,
+    0.0,
+    0.6,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    -0.2,
+    0.0,
+    0.6,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "final_qpos": [
+    3.0901753259967535,
+    0.3202169337203332,
+    0.7759722929657696,
+    0.9066376453540944,
+    -0.020840541244409448,
+    0.0074396286447668625,
+    0.42132944804873657,
+    -0.3085620592206223,
+    0.022256348061063854,
+    -0.06904377489368375,
+    0.6347836155289783,
+    -0.35793478529123485,
+    -0.007470057283664026,
+    -0.3059670553694073,
+    -0.0361310641932485,
+    0.016081636793690263,
+    0.56382972501948,
+    -0.29081666770538894,
+    0.07188962447197435,
+    0.013229106254980735,
+    -0.013315384959157042,
+    0.0023210097039811687,
+    0.20969037963583745,
+    0.1946655591843461,
+    0.0016561636279120813,
+    0.623930527167719,
+    -0.026420363961713007,
+    -0.0022564488503205716,
+    -0.003293476809973161,
+    0.1917437790655819,
+    -0.19478725757322998,
+    0.0016996514284390357,
+    0.61597586894754,
+    -0.005077301310247276,
+    0.002893587148036293,
+    -0.000752044389989299
+  ],
+  "release_wall_s": 5.451733312000215,
+  "initialization": "frozen nominal standing state through R/4.4s/L/0.7s; then free dynamics, no band, root reset, external force or state teleport",
+  "simulation_dt_s": 0.002,
+  "effort_caps_nm": [
+    150.0,
+    139.0,
+    88.0,
+    139.0,
+    60.0,
+    60.0,
+    150.0,
+    139.0,
+    88.0,
+    139.0,
+    60.0,
+    60.0,
+    150.0,
+    60.0,
+    60.0,
+    30.0,
+    30.0,
+    30.0,
+    30.0,
+    30.0,
+    7.0,
+    7.0,
+    30.0,
+    30.0,
+    30.0,
+    30.0,
+    30.0,
+    7.0,
+    7.0
+  ],
+  "physics_real_time_factor": 1.0000028298378298,
+  "motor_command_messages": 12572,
+  "fallen": false,
+  "phase_metrics": [
+    {
+      "name": "standing",
+      "start_wall_s": 5.451738751999983,
+      "end_wall_s": 9.451803810000456,
+      "samples": 160,
+      "mean_body_vx": 0.0020224131511322025,
+      "mean_body_vy": 0.0031661107010959874,
+      "mean_yaw_rate_rad_s": 0.008577270253552847,
+      "min_root_z": 0.7715317026513506,
+      "max_tilt_rad": 0.05823251296311021,
+      "distance_xy_m": 0.029061089152552955
+    },
+    {
+      "name": "forward",
+      "start_wall_s": 9.45185199900061,
+      "end_wall_s": 15.4519138200003,
+      "samples": 260,
+      "mean_body_vx": 0.4817240419927975,
+      "mean_body_vy": 0.004687891633269401,
+      "mean_yaw_rate_rad_s": 0.016069308134202882,
+      "min_root_z": 0.7609568705182447,
+      "max_tilt_rad": 0.052406951594312065,
+      "distance_xy_m": 2.5933621348322307
+    },
+    {
+      "name": "stop",
+      "start_wall_s": 15.45195626900022,
+      "end_wall_s": 18.452014041999973,
+      "samples": 110,
+      "mean_body_vx": 0.047527640531542556,
+      "mean_body_vy": 0.002846548903499628,
+      "mean_yaw_rate_rad_s": 0.010615598139530627,
+      "min_root_z": 0.7708986137093141,
+      "max_tilt_rad": 0.03840527620771859,
+      "distance_xy_m": 0.47478073434439866
+    },
+    {
+      "name": "left_turn",
+      "start_wall_s": 18.45205458700002,
+      "end_wall_s": 22.45211766200009,
+      "samples": 160,
+      "mean_body_vx": -0.002686621477754828,
+      "mean_body_vy": -0.012134728463693255,
+      "mean_yaw_rate_rad_s": 0.1324344004976541,
+      "min_root_z": 0.7736667025276813,
+      "max_tilt_rad": 0.04214923474023939,
+      "distance_xy_m": 0.04196049470116428
+    },
+    {
+      "name": "stop_after_turn",
+      "start_wall_s": 22.4521583679998,
+      "end_wall_s": 25.452224607000062,
+      "samples": 110,
+      "mean_body_vx": 0.006943883349264409,
+      "mean_body_vy": 0.011630116612317177,
+      "mean_yaw_rate_rad_s": 0.01311939718587044,
+      "min_root_z": 0.7749173804548443,
+      "max_tilt_rad": 0.05345458943651251,
+      "distance_xy_m": 0.04905947394300728
+    }
+  ],
+  "keyboard_events": [
+    {
+      "wall_s": 0.3515197349997834,
+      "key": "r"
+    },
+    {
+      "wall_s": 4.751587319999999,
+      "key": "l"
+    },
+    {
+      "wall_s": 9.451863039999807,
+      "key": "w"
+    },
+    {
+      "wall_s": 9.551943747999758,
+      "key": "w"
+    },
+    {
+      "wall_s": 9.652016861999982,
+      "key": "w"
+    },
+    {
+      "wall_s": 9.75210422300006,
+      "key": "w"
+    },
+    {
+      "wall_s": 9.852180603000306,
+      "key": "w"
+    },
+    {
+      "wall_s": 9.952313138000136,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.052403134000087,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.152485475000503,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.252565452000454,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.35336938599994,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.453446528000313,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.553549758000372,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.653626799999984,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.753724660000444,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.853797533000034,
+      "key": "w"
+    },
+    {
+      "wall_s": 10.953845030000593,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.053918655000416,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.153992901000493,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.25407066400021,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.354145020000033,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.454217874000278,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.554303892000462,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.654377828000179,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.754451812999832,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.854524196000057,
+      "key": "w"
+    },
+    {
+      "wall_s": 11.954600265000408,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.054926720999902,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.15500021600019,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.255072728999949,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.355145442000321,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.455218445000355,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.55528766200041,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.65535968400036,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.755431596000562,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.855503628000406,
+      "key": "w"
+    },
+    {
+      "wall_s": 12.955575468999996,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.05564925500039,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.155722499000149,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.25579407999976,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.355849561000468,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.456139427999915,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.556209737000245,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.656302878000133,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.75637346700023,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.856445389000328,
+      "key": "w"
+    },
+    {
+      "wall_s": 13.956516969999939,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.056588120000015,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.156889167999907,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.25696212100047,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.357034925000335,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.457107797999925,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.557179239000106,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.657251340000585,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.75732316199992,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.857393991000208,
+      "key": "w"
+    },
+    {
+      "wall_s": 14.957466093000221,
+      "key": "w"
+    },
+    {
+      "wall_s": 15.057537122999747,
+      "key": "w"
+    },
+    {
+      "wall_s": 15.157607662000373,
+      "key": "w"
+    },
+    {
+      "wall_s": 15.257676166999772,
+      "key": "w"
+    },
+    {
+      "wall_s": 15.357746184999996,
+      "key": "w"
+    },
+    {
+      "wall_s": 18.45206389499981,
+      "key": "q"
+    },
+    {
+      "wall_s": 18.55212872300035,
+      "key": "q"
+    },
+    {
+      "wall_s": 18.652191807000236,
+      "key": "q"
+    },
+    {
+      "wall_s": 18.752255012000205,
+      "key": "q"
+    },
+    {
+      "wall_s": 18.85231383900009,
+      "key": "q"
+    },
+    {
+      "wall_s": 18.95237783599987,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.0524482740002,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.152517831000296,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.252591344999928,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.35283327199977,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.45310388300004,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.55317548400035,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.653243818000192,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.75331938599993,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.85339080599988,
+      "key": "q"
+    },
+    {
+      "wall_s": 19.953464369999892,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.05353535999984,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.153605366999727,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.253676295999867,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.35374563300047,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.453820249000273,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.553844390999984,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.653915249999955,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.75398520700037,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.854057970000213,
+      "key": "q"
+    },
+    {
+      "wall_s": 20.95412844800012,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.054198845999963,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.15427048699985,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.25435679400016,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.35442957699979,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.45449998500044,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.554571515000134,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.654642845000126,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.754878149999968,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.854950081000425,
+      "key": "q"
+    },
+    {
+      "wall_s": 21.95501949699974,
+      "key": "q"
+    },
+    {
+      "wall_s": 22.055089244000555,
+      "key": "q"
+    },
+    {
+      "wall_s": 22.155157547999806,
+      "key": "q"
+    },
+    {
+      "wall_s": 22.255227004000517,
+      "key": "q"
+    },
+    {
+      "wall_s": 22.35527867700057,
+      "key": "q"
+    }
+  ],
+  "graph_snapshots": [
+    {
+      "wall_s": 5.451722933000383,
+      "nodes": [
+        [
+          "ros2_bridge_node",
+          "/"
+        ],
+        [
+          "motion_intelligence",
+          "/"
+        ]
+      ],
+      "topics": [
+        [
+          "/honor_sim_only/imu",
+          [
+            "sensor_msgs/msg/Imu"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_cmd",
+          [
+            "interaction_msgs/msg/LowCommand"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_state",
+          [
+            "interaction_msgs/msg/LowState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ]
+    },
+    {
+      "wall_s": 9.45184549700025,
+      "nodes": [
+        [
+          "ros2_bridge_node",
+          "/"
+        ],
+        [
+          "motion_intelligence",
+          "/"
+        ]
+      ],
+      "topics": [
+        [
+          "/honor_sim_only/imu",
+          [
+            "sensor_msgs/msg/Imu"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_cmd",
+          [
+            "interaction_msgs/msg/LowCommand"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_state",
+          [
+            "interaction_msgs/msg/LowState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ]
+    },
+    {
+      "wall_s": 15.451949866999712,
+      "nodes": [
+        [
+          "ros2_bridge_node",
+          "/"
+        ],
+        [
+          "motion_intelligence",
+          "/"
+        ]
+      ],
+      "topics": [
+        [
+          "/honor_sim_only/imu",
+          [
+            "sensor_msgs/msg/Imu"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_cmd",
+          [
+            "interaction_msgs/msg/LowCommand"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_state",
+          [
+            "interaction_msgs/msg/LowState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ]
+    },
+    {
+      "wall_s": 18.45204857600038,
+      "nodes": [
+        [
+          "ros2_bridge_node",
+          "/"
+        ],
+        [
+          "motion_intelligence",
+          "/"
+        ]
+      ],
+      "topics": [
+        [
+          "/honor_sim_only/imu",
+          [
+            "sensor_msgs/msg/Imu"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_cmd",
+          [
+            "interaction_msgs/msg/LowCommand"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_state",
+          [
+            "interaction_msgs/msg/LowState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ]
+    },
+    {
+      "wall_s": 22.452151806000074,
+      "nodes": [
+        [
+          "ros2_bridge_node",
+          "/"
+        ],
+        [
+          "motion_intelligence",
+          "/"
+        ]
+      ],
+      "topics": [
+        [
+          "/honor_sim_only/imu",
+          [
+            "sensor_msgs/msg/Imu"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_cmd",
+          [
+            "interaction_msgs/msg/LowCommand"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_state",
+          [
+            "interaction_msgs/msg/LowState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ]
+    },
+    {
+      "wall_s": 25.4523070310006,
+      "nodes": [
+        [
+          "ros2_bridge_node",
+          "/"
+        ],
+        [
+          "motion_intelligence",
+          "/"
+        ]
+      ],
+      "topics": [
+        [
+          "/honor_sim_only/imu",
+          [
+            "sensor_msgs/msg/Imu"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_cmd",
+          [
+            "interaction_msgs/msg/LowCommand"
+          ]
+        ],
+        [
+          "/honor_sim_only/low_state",
+          [
+            "interaction_msgs/msg/LowState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ]
+    }
+  ],
+  "errors": []
+}

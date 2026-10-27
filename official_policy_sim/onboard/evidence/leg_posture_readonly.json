@@ -1,0 +1,1359 @@
+{
+  "captured_at": "2026-10-26T21:42:20.466101+08:00",
+  "read_only": true,
+  "commands_sent": 0,
+  "counts": {
+    "command": 1365,
+    "feedback": 1365,
+    "monitor": 1363,
+    "state": 40
+  },
+  "publishers": [
+    "motion_intelligence"
+  ],
+  "last": {
+    "command": {
+      "header": {
+        "stamp": {
+          "sec": 1793022140,
+          "nanosec": 454650027
+        },
+        "frame_id": ""
+      },
+      "mode_pr": 0,
+      "mode_machine": 0,
+      "motor_cmd": [
+        {
+          "joint_id": 10006,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 10005,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 10004,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 10003,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 10002,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 10001,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 20006,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 20005,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 20004,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 20003,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 20002,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 20001,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 50001,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 50002,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 50003,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 30007,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 30006,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 30005,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 30004,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 30003,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 30002,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 30001,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 40007,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 40006,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 40005,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 40004,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 40003,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 40002,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 40001,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 60001,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        },
+        {
+          "joint_id": 60002,
+          "cmd_mode": 25,
+          "pos": 0.0,
+          "vel": 0.0,
+          "tau": 0.0,
+          "kp": 0.0,
+          "kd": 0.0
+        }
+      ]
+    },
+    "feedback": {
+      "header": {
+        "stamp": {
+          "sec": 1793022140,
+          "nanosec": 459904410
+        },
+        "frame_id": "low_state"
+      },
+      "version": 1,
+      "tick": 681957,
+      "mode_pr": 0,
+      "mode_machine": 0,
+      "motor_state": [
+        {
+          "joint_id": 10006,
+          "mode": 1,
+          "pos_fb": -1.2699978351593018,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.307692289352417,
+          "temp_fb": [
+            30.0,
+            25.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10005,
+          "mode": 1,
+          "pos_fb": 1.097247838973999,
+          "vel_fb": 0.010991692543029785,
+          "tau_fb": 0.039081573486328125,
+          "temp_fb": [
+            30.0,
+            27.0
+          ],
+          "error_code": 31
+        },
+        {
+          "joint_id": 10004,
+          "mode": 1,
+          "pos_fb": -3.0000271797180176,
+          "vel_fb": -0.03296971321105957,
+          "tau_fb": 0.026862025260925293,
+          "temp_fb": [
+            30.0,
+            25.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10003,
+          "mode": 1,
+          "pos_fb": -0.6039089560508728,
+          "vel_fb": 0.010991692543029785,
+          "tau_fb": -0.03907203674316406,
+          "temp_fb": [
+            30.0,
+            25.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10002,
+          "mode": 0,
+          "pos_fb": -0.24238508939743042,
+          "vel_fb": -0.0034814157988876104,
+          "tau_fb": -0.09029654413461685,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10001,
+          "mode": 0,
+          "pos_fb": -0.36462488770484924,
+          "vel_fb": -0.0060581942088902,
+          "tau_fb": -0.05884920433163643,
+          "temp_fb": [
+            29.0,
+            24.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20006,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20005,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20004,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20003,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20002,
+          "mode": 0,
+          "pos_fb": 0.001393284066580236,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20001,
+          "mode": 0,
+          "pos_fb": 0.0013893404975533485,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 50001,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 50002,
+          "mode": 1,
+          "pos_fb": -0.020077956840395927,
+          "vel_fb": 0.025136595591902733,
+          "tau_fb": 0.1495930552482605,
+          "temp_fb": [
+            34.0,
+            30.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 50003,
+          "mode": 1,
+          "pos_fb": 0.011747577227652073,
+          "vel_fb": 0.01191807258874178,
+          "tau_fb": -0.04531249403953552,
+          "temp_fb": [
+            33.0,
+            28.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30007,
+          "mode": 1,
+          "pos_fb": 0.07731986045837402,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.06105005741119385,
+          "temp_fb": [
+            39.000003814697266,
+            34.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30006,
+          "mode": 1,
+          "pos_fb": 0.03536558151245117,
+          "vel_fb": -0.03296703100204468,
+          "tau_fb": -0.06105005741119385,
+          "temp_fb": [
+            36.0,
+            32.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30005,
+          "mode": 1,
+          "pos_fb": -0.005464315414428711,
+          "vel_fb": 0.010989010334014893,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            36.0,
+            31.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30004,
+          "mode": 1,
+          "pos_fb": 1.4210128784179688,
+          "vel_fb": 0.010991692543029785,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            33.0,
+            29.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30003,
+          "mode": 1,
+          "pos_fb": -0.006195068359375,
+          "vel_fb": 0.010991692543029785,
+          "tau_fb": -0.03663003444671631,
+          "temp_fb": [
+            32.0,
+            28.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30002,
+          "mode": 1,
+          "pos_fb": -0.01604628562927246,
+          "vel_fb": 0.01221001148223877,
+          "tau_fb": 0.007326006889343262,
+          "temp_fb": [
+            29.0000057220459,
+            27.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30001,
+          "mode": 1,
+          "pos_fb": -0.025202274322509766,
+          "vel_fb": 0.012212991714477539,
+          "tau_fb": -0.002442002296447754,
+          "temp_fb": [
+            30.0000057220459,
+            27.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40007,
+          "mode": 0,
+          "pos_fb": 0.09944605827331543,
+          "vel_fb": 0.010989010334014893,
+          "tau_fb": 0.06105005741119385,
+          "temp_fb": [
+            34.0,
+            29.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40006,
+          "mode": 1,
+          "pos_fb": -0.010187864303588867,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            33.0,
+            29.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40005,
+          "mode": 1,
+          "pos_fb": 0.006227254867553711,
+          "vel_fb": 0.010989010334014893,
+          "tau_fb": 0.06105005741119385,
+          "temp_fb": [
+            34.0,
+            29.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40004,
+          "mode": 1,
+          "pos_fb": 1.404608964920044,
+          "vel_fb": 0.05494505167007446,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            32.0,
+            28.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40003,
+          "mode": 1,
+          "pos_fb": -0.0025794506072998047,
+          "vel_fb": -0.05494505167007446,
+          "tau_fb": -0.06105005741119385,
+          "temp_fb": [
+            32.0,
+            28.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40002,
+          "mode": 1,
+          "pos_fb": 0.0022649765014648438,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": -0.017094016075134277,
+          "temp_fb": [
+            30.0000057220459,
+            28.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40001,
+          "mode": 1,
+          "pos_fb": -0.002645730972290039,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": -0.017094016075134277,
+          "temp_fb": [
+            30.0000057220459,
+            28.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 60001,
+          "mode": 1,
+          "pos_fb": -0.0009037256240844727,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": -0.021978020668029785,
+          "temp_fb": [
+            35.000003814697266,
+            34.000003814697266
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 60002,
+          "mode": 1,
+          "pos_fb": 0.17683357000350952,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": -0.007326006889343262,
+          "temp_fb": [
+            35.000003814697266,
+            33.000003814697266
+          ],
+          "error_code": 0
+        }
+      ]
+    },
+    "monitor": {
+      "header": {
+        "stamp": {
+          "sec": 1793022140,
+          "nanosec": 457784890
+        },
+        "frame_id": "low_state"
+      },
+      "tick": 681955,
+      "cycle_interval": 1060,
+      "cycle_cost": 263,
+      "link_state": [
+        {
+          "joint_id": 10006,
+          "response_cost": 833,
+          "response_interval": 1058,
+          "send_counter": 681657,
+          "read_counter": 681683
+        },
+        {
+          "joint_id": 10005,
+          "response_cost": 831,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681250
+        },
+        {
+          "joint_id": 10004,
+          "response_cost": 830,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681686
+        },
+        {
+          "joint_id": 10003,
+          "response_cost": 828,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681691
+        },
+        {
+          "joint_id": 10002,
+          "response_cost": 4692,
+          "response_interval": 1085,
+          "send_counter": 681657,
+          "read_counter": 45
+        },
+        {
+          "joint_id": 10001,
+          "response_cost": 827,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681693
+        },
+        {
+          "joint_id": 20006,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 681657,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20005,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 681657,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20004,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 681657,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20003,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 681657,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20002,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 681657,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20001,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 681657,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 50001,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 681657,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 50002,
+          "response_cost": 826,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681666
+        },
+        {
+          "joint_id": 50003,
+          "response_cost": 826,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681666
+        },
+        {
+          "joint_id": 30007,
+          "response_cost": 832,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681683
+        },
+        {
+          "joint_id": 30006,
+          "response_cost": 831,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681684
+        },
+        {
+          "joint_id": 30005,
+          "response_cost": 829,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681685
+        },
+        {
+          "joint_id": 30004,
+          "response_cost": 828,
+          "response_interval": 1058,
+          "send_counter": 681657,
+          "read_counter": 681686
+        },
+        {
+          "joint_id": 30003,
+          "response_cost": 826,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681693
+        },
+        {
+          "joint_id": 30002,
+          "response_cost": 825,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681657
+        },
+        {
+          "joint_id": 30001,
+          "response_cost": 824,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681657
+        },
+        {
+          "joint_id": 40007,
+          "response_cost": 831,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681682
+        },
+        {
+          "joint_id": 40006,
+          "response_cost": 826,
+          "response_interval": 1055,
+          "send_counter": 681657,
+          "read_counter": 681683
+        },
+        {
+          "joint_id": 40005,
+          "response_cost": 831,
+          "response_interval": 1061,
+          "send_counter": 681657,
+          "read_counter": 681684
+        },
+        {
+          "joint_id": 40004,
+          "response_cost": 829,
+          "response_interval": 1062,
+          "send_counter": 681657,
+          "read_counter": 681685
+        },
+        {
+          "joint_id": 40003,
+          "response_cost": 828,
+          "response_interval": 1060,
+          "send_counter": 681657,
+          "read_counter": 681693
+        },
+        {
+          "joint_id": 40002,
+          "response_cost": 825,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681657
+        },
+        {
+          "joint_id": 40001,
+          "response_cost": 823,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681657
+        },
+        {
+          "joint_id": 60001,
+          "response_cost": 823,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681657
+        },
+        {
+          "joint_id": 60002,
+          "response_cost": 825,
+          "response_interval": 1059,
+          "send_counter": 681657,
+          "read_counter": 681657
+        }
+      ],
+      "power_state": [
+        {
+          "joint_id": 10006,
+          "temp_mos": 30.0,
+          "temp_rotor": 25.0,
+          "dc_voltage": 46.2365608215332,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10005,
+          "temp_mos": 30.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.432064056396484,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10004,
+          "temp_mos": 30.0,
+          "temp_rotor": 25.0,
+          "dc_voltage": 45.84555435180664,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10003,
+          "temp_mos": 30.0,
+          "temp_rotor": 25.0,
+          "dc_voltage": 46.04105758666992,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10002,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 10001,
+          "temp_mos": 29.0,
+          "temp_rotor": 24.0,
+          "dc_voltage": 45.84555435180664,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 20006,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20005,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20004,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20003,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20002,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20001,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 50001,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 50002,
+          "temp_mos": 34.0,
+          "temp_rotor": 30.0,
+          "dc_voltage": 45.747802734375,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 50003,
+          "temp_mos": 33.0,
+          "temp_rotor": 28.0,
+          "dc_voltage": 45.84555435180664,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30007,
+          "temp_mos": 39.000003814697266,
+          "temp_rotor": 34.0,
+          "dc_voltage": 45.65005111694336,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30006,
+          "temp_mos": 36.0,
+          "temp_rotor": 32.0,
+          "dc_voltage": 45.55229949951172,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30005,
+          "temp_mos": 36.0,
+          "temp_rotor": 31.0,
+          "dc_voltage": 45.84555435180664,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30004,
+          "temp_mos": 33.0,
+          "temp_rotor": 29.0,
+          "dc_voltage": 45.65005111694336,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30003,
+          "temp_mos": 32.0,
+          "temp_rotor": 28.0,
+          "dc_voltage": 45.747802734375,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30002,
+          "temp_mos": 29.0000057220459,
+          "temp_rotor": 27.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 30001,
+          "temp_mos": 30.0000057220459,
+          "temp_rotor": 27.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 40007,
+          "temp_mos": 34.0,
+          "temp_rotor": 29.0,
+          "dc_voltage": 45.94330596923828,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40006,
+          "temp_mos": 33.0,
+          "temp_rotor": 29.0,
+          "dc_voltage": 45.747802734375,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40005,
+          "temp_mos": 34.0,
+          "temp_rotor": 29.0,
+          "dc_voltage": 45.747802734375,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40004,
+          "temp_mos": 32.0,
+          "temp_rotor": 28.0,
+          "dc_voltage": 45.747802734375,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40003,
+          "temp_mos": 32.0,
+          "temp_rotor": 28.0,
+          "dc_voltage": 45.84555435180664,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40002,
+          "temp_mos": 30.0000057220459,
+          "temp_rotor": 28.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 40001,
+          "temp_mos": 30.0000057220459,
+          "temp_rotor": 28.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 60001,
+          "temp_mos": 35.000003814697266,
+          "temp_rotor": 34.000003814697266,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 60002,
+          "temp_mos": 35.000003814697266,
+          "temp_rotor": 33.000003814697266,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        }
+      ]
+    },
+    "state": {
+      "header": {
+        "stamp": {
+          "sec": 1793022140,
+          "nanosec": 424782859
+        },
+        "frame_id": ""
+      },
+      "version": 2,
+      "tick": 0,
+      "mode_machine": 0,
+      "mode_pr": 0,
+      "current_state_id": 10001,
+      "current_motion_id": 0,
+      "last_state_id": 10001,
+      "last_motion_id": 0,
+      "desired_state_id": 10001,
+      "desired_motion_id": 0,
+      "cycle_time": 0.0002466909936629236,
+      "pelvis_euler_zyx": [
+        -0.7974343299865723,
+        -0.05079701542854309,
+        -0.016592441126704216
+      ],
+      "reserved": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        11011.0
+      ],
+      "action_id": 11011,
+      "pelvis_quaternion_xyzw": [
+        -0.017502136528491974,
+        -0.020183103159070015,
+        -0.3882920444011688,
+        0.9211490750312805
+      ],
+      "cmd_base_position": [
+        0.0,
+        0.0,
+        0.30000001192092896
+      ],
+      "cmd_base_euler_zyx": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cmd_base_linear_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cmd_base_angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_cmd_base_linear_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_cmd_base_angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "est_base_linear_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "est_base_angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "motor_enabled": true,
+      "is_sim": false,
+      "status_flags": 0,
+      "forward_direction": 1
+    }
+  },
+  "link_deltas": {
+    "10006": {
+      "send": 3756,
+      "read": 3756
+    },
+    "10005": {
+      "send": 3756,
+      "read": 3756
+    },
+    "10004": {
+      "send": 3756,
+      "read": 3756
+    },
+    "10003": {
+      "send": 3756,
+      "read": 3756
+    },
+    "10002": {
+      "send": 3756,
+      "read": 0
+    },
+    "10001": {
+      "send": 3756,
+      "read": 3756
+    },
+    "20006": {
+      "send": 3756,
+      "read": 0
+    },
+    "20005": {
+      "send": 3756,
+      "read": 0
+    },
+    "20004": {
+      "send": 3756,
+      "read": 0
+    },
+    "20003": {
+      "send": 3756,
+      "read": 0
+    },
+    "20002": {
+      "send": 3756,
+      "read": 0
+    },
+    "20001": {
+      "send": 3756,
+      "read": 0
+    },
+    "50001": {
+      "send": 3756,
+      "read": 0
+    },
+    "50002": {
+      "send": 3756,
+      "read": 3756
+    },
+    "50003": {
+      "send": 3756,
+      "read": 3756
+    },
+    "30007": {
+      "send": 3756,
+      "read": 3756
+    },
+    "30006": {
+      "send": 3756,
+      "read": 3756
+    },
+    "30005": {
+      "send": 3756,
+      "read": 3756
+    },
+    "30004": {
+      "send": 3756,
+      "read": 3756
+    },
+    "30003": {
+      "send": 3756,
+      "read": 3756
+    },
+    "30002": {
+      "send": 3756,
+      "read": 3756
+    },
+    "30001": {
+      "send": 3756,
+      "read": 3756
+    },
+    "40007": {
+      "send": 3756,
+      "read": 3757
+    },
+    "40006": {
+      "send": 3756,
+      "read": 3756
+    },
+    "40005": {
+      "send": 3756,
+      "read": 3756
+    },
+    "40004": {
+      "send": 3756,
+      "read": 3756
+    },
+    "40003": {
+      "send": 3756,
+      "read": 3756
+    },
+    "40002": {
+      "send": 3756,
+      "read": 3756
+    },
+    "40001": {
+      "send": 3756,
+      "read": 3756
+    },
+    "60001": {
+      "send": 3756,
+      "read": 3756
+    },
+    "60002": {
+      "send": 3756,
+      "read": 3756
+    }
+  }
+}

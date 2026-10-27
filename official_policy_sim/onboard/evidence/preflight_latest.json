@@ -1,0 +1,1166 @@
+{
+  "captured_at": "2026-10-26T21:04:45.103361+08:00",
+  "read_only": true,
+  "commands_sent": 0,
+  "passed": false,
+  "exclusive_check": true,
+  "failures": [
+    "motor link is not continuously responding: 10002 (send=5634, read=0)",
+    "motor link is not continuously responding: 20006 (send=5634, read=0)",
+    "motor link is not continuously responding: 20005 (send=5634, read=0)",
+    "motor link is not continuously responding: 20004 (send=5634, read=0)",
+    "motor link is not continuously responding: 20003 (send=5634, read=0)",
+    "motor link is not continuously responding: 20002 (send=5634, read=0)",
+    "motor link is not continuously responding: 20001 (send=5634, read=0)",
+    "motor link is not continuously responding: 50001 (send=5634, read=0)",
+    "another /xlab/hr/low_cmd publisher is still present; do not start a second controller"
+  ],
+  "counts": {
+    "low_state": 2474,
+    "imu": 2473,
+    "monitor": 2473,
+    "robot_state": 60
+  },
+  "receive_age_seconds": {
+    "low_state": 2.9408000045805238e-05,
+    "imu": 0.002190208000001803,
+    "monitor": 0.0011616640000511325,
+    "robot_state": 0.0060106240000550315
+  },
+  "command_publishers": [
+    {
+      "node": "motion_intelligence",
+      "namespace": "/",
+      "type": "interaction_msgs/msg/LowCommand"
+    }
+  ],
+  "command_subscribers": [
+    {
+      "node": "topic_bag_recorder",
+      "namespace": "/",
+      "type": "interaction_msgs/msg/LowCommand"
+    },
+    {
+      "node": "controller_node",
+      "namespace": "/",
+      "type": "interaction_msgs/msg/LowCommand"
+    },
+    {
+      "node": "topic_bag_recorder",
+      "namespace": "/",
+      "type": "interaction_msgs/msg/LowCommand"
+    }
+  ],
+  "motor_link_deltas": {
+    "10006": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "10005": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "10004": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "10003": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "10002": {
+      "send_delta": 5634,
+      "read_delta": 0
+    },
+    "10001": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "20006": {
+      "send_delta": 5634,
+      "read_delta": 0
+    },
+    "20005": {
+      "send_delta": 5634,
+      "read_delta": 0
+    },
+    "20004": {
+      "send_delta": 5634,
+      "read_delta": 0
+    },
+    "20003": {
+      "send_delta": 5634,
+      "read_delta": 0
+    },
+    "20002": {
+      "send_delta": 5634,
+      "read_delta": 0
+    },
+    "20001": {
+      "send_delta": 5634,
+      "read_delta": 0
+    },
+    "50001": {
+      "send_delta": 5634,
+      "read_delta": 0
+    },
+    "50002": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "50003": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "30007": {
+      "send_delta": 5634,
+      "read_delta": 5632
+    },
+    "30006": {
+      "send_delta": 5634,
+      "read_delta": 5633
+    },
+    "30005": {
+      "send_delta": 5634,
+      "read_delta": 5633
+    },
+    "30004": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "30003": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "30002": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "30001": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "40007": {
+      "send_delta": 5634,
+      "read_delta": 5633
+    },
+    "40006": {
+      "send_delta": 5634,
+      "read_delta": 5633
+    },
+    "40005": {
+      "send_delta": 5634,
+      "read_delta": 5633
+    },
+    "40004": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "40003": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "40002": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "40001": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "60001": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    },
+    "60002": {
+      "send_delta": 5634,
+      "read_delta": 5634
+    }
+  },
+  "last": {
+    "low_state": {
+      "header": {
+        "stamp": {
+          "sec": 1793019885,
+          "nanosec": 97422121
+        },
+        "frame_id": "low_state"
+      },
+      "version": 1,
+      "tick": 660258,
+      "mode_pr": 0,
+      "mode_machine": 0,
+      "motor_state": [
+        {
+          "joint_id": 10006,
+          "mode": 1,
+          "pos_fb": -1.1525037288665771,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.04395604133605957,
+          "temp_fb": [
+            27.0,
+            24.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10005,
+          "mode": 1,
+          "pos_fb": 2.673123836517334,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.03907203674316406,
+          "temp_fb": [
+            27.0,
+            24.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10004,
+          "mode": 1,
+          "pos_fb": -2.5838375091552734,
+          "vel_fb": 0.010989010334014893,
+          "tau_fb": 0.026862025260925293,
+          "temp_fb": [
+            27.0,
+            23.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10003,
+          "mode": 1,
+          "pos_fb": -0.9586809873580933,
+          "vel_fb": 0.010991692543029785,
+          "tau_fb": -0.03907203674316406,
+          "temp_fb": [
+            26.0,
+            23.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10002,
+          "mode": 0,
+          "pos_fb": -0.17828530073165894,
+          "vel_fb": -0.018709300085902214,
+          "tau_fb": -0.01727321557700634,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10001,
+          "mode": 0,
+          "pos_fb": -0.2583228349685669,
+          "vel_fb": -0.02967924438416958,
+          "tau_fb": -0.011715592816472054,
+          "temp_fb": [
+            26.0,
+            23.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20006,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20005,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20004,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20003,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20002,
+          "mode": 0,
+          "pos_fb": 0.001393284066580236,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20001,
+          "mode": 0,
+          "pos_fb": 0.0013893404975533485,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 50001,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 50002,
+          "mode": 1,
+          "pos_fb": -0.029437324032187462,
+          "vel_fb": 0.08779063075780869,
+          "tau_fb": 0.021382123231887817,
+          "temp_fb": [
+            31.0,
+            29.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 50003,
+          "mode": 1,
+          "pos_fb": -0.010601568967103958,
+          "vel_fb": 0.024430330842733383,
+          "tau_fb": 5.374774627853185e-05,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30007,
+          "mode": 1,
+          "pos_fb": 0.09143424034118652,
+          "vel_fb": -0.07692307233810425,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            34.0,
+            33.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30006,
+          "mode": 1,
+          "pos_fb": 0.08076119422912598,
+          "vel_fb": -0.03296703100204468,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            32.0,
+            30.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30005,
+          "mode": 1,
+          "pos_fb": 0.0651082992553711,
+          "vel_fb": -0.010991692543029785,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            31.0,
+            29.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30004,
+          "mode": 1,
+          "pos_fb": 1.4595420360565186,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30003,
+          "mode": 1,
+          "pos_fb": -0.0065765380859375,
+          "vel_fb": 0.010991692543029785,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30002,
+          "mode": 1,
+          "pos_fb": 0.1216665506362915,
+          "vel_fb": 0.01221001148223877,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            28.0000057220459,
+            27.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30001,
+          "mode": 1,
+          "pos_fb": -0.0015511512756347656,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": 0.002442598342895508,
+          "temp_fb": [
+            29.0000057220459,
+            27.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40007,
+          "mode": 0,
+          "pos_fb": 0.06778240203857422,
+          "vel_fb": -0.010991692543029785,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            30.0,
+            28.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40006,
+          "mode": 1,
+          "pos_fb": -0.07008004188537598,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40005,
+          "mode": 1,
+          "pos_fb": -0.1471250057220459,
+          "vel_fb": 0.010989010334014893,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            30.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40004,
+          "mode": 1,
+          "pos_fb": 1.5160009860992432,
+          "vel_fb": -0.03296971321105957,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40003,
+          "mode": 1,
+          "pos_fb": -0.516045093536377,
+          "vel_fb": 0.010991692543029785,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40002,
+          "mode": 1,
+          "pos_fb": 0.23038697242736816,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": 0.002442598342895508,
+          "temp_fb": [
+            30.0000057220459,
+            28.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40001,
+          "mode": 1,
+          "pos_fb": 0.09119725227355957,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            30.0000057220459,
+            28.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 60001,
+          "mode": 1,
+          "pos_fb": -0.0009037256240844727,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            35.000003814697266,
+            33.000003814697266
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 60002,
+          "mode": 1,
+          "pos_fb": 0.15470832586288452,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": -0.002442002296447754,
+          "temp_fb": [
+            35.000003814697266,
+            32.000003814697266
+          ],
+          "error_code": 0
+        }
+      ]
+    },
+    "imu": {
+      "header": {
+        "stamp": {
+          "sec": 1793019885,
+          "nanosec": 95298377
+        },
+        "frame_id": "body_imu"
+      },
+      "orientation": {
+        "x": 0.0030419998802244663,
+        "y": -0.004040000028908253,
+        "z": 0.0012400000123307109,
+        "w": 0.9999859929084778
+      },
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": {
+        "x": -0.004021081607788801,
+        "y": -0.00039653878775425255,
+        "z": -0.0012209624983370304
+      },
+      "angular_velocity_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "linear_acceleration": {
+        "x": 0.07723399996757507,
+        "y": 0.057450998574495316,
+        "z": 9.93478012084961
+      },
+      "linear_acceleration_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "monitor": {
+      "header": {
+        "stamp": {
+          "sec": 1793019885,
+          "nanosec": 95298377
+        },
+        "frame_id": "low_state"
+      },
+      "tick": 660256,
+      "cycle_interval": 1060,
+      "cycle_cost": 291,
+      "link_state": [
+        {
+          "joint_id": 10006,
+          "response_cost": 814,
+          "response_interval": 1068,
+          "send_counter": 660255,
+          "read_counter": 660242
+        },
+        {
+          "joint_id": 10005,
+          "response_cost": 812,
+          "response_interval": 1068,
+          "send_counter": 660255,
+          "read_counter": 660245
+        },
+        {
+          "joint_id": 10004,
+          "response_cost": 811,
+          "response_interval": 1068,
+          "send_counter": 660255,
+          "read_counter": 660252
+        },
+        {
+          "joint_id": 10003,
+          "response_cost": 809,
+          "response_interval": 1069,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 10002,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 660255,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 10001,
+          "response_cost": 807,
+          "response_interval": 1068,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 20006,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 660255,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20005,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 660255,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20004,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 660255,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20003,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 660255,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20002,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 660255,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20001,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 660255,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 50001,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 660255,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 50002,
+          "response_cost": 798,
+          "response_interval": 1059,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 50003,
+          "response_cost": 808,
+          "response_interval": 1069,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 30007,
+          "response_cost": 840,
+          "response_interval": 1064,
+          "send_counter": 660255,
+          "read_counter": 660240
+        },
+        {
+          "joint_id": 30006,
+          "response_cost": 813,
+          "response_interval": 1068,
+          "send_counter": 660255,
+          "read_counter": 660242
+        },
+        {
+          "joint_id": 30005,
+          "response_cost": 808,
+          "response_interval": 1064,
+          "send_counter": 660255,
+          "read_counter": 660247
+        },
+        {
+          "joint_id": 30004,
+          "response_cost": 809,
+          "response_interval": 1070,
+          "send_counter": 660255,
+          "read_counter": 660254
+        },
+        {
+          "joint_id": 30003,
+          "response_cost": 812,
+          "response_interval": 1069,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 30002,
+          "response_cost": 807,
+          "response_interval": 1068,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 30001,
+          "response_cost": 805,
+          "response_interval": 1069,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 40007,
+          "response_cost": 809,
+          "response_interval": 1070,
+          "send_counter": 660255,
+          "read_counter": 660241
+        },
+        {
+          "joint_id": 40006,
+          "response_cost": 807,
+          "response_interval": 1063,
+          "send_counter": 660255,
+          "read_counter": 660242
+        },
+        {
+          "joint_id": 40005,
+          "response_cost": 843,
+          "response_interval": 1074,
+          "send_counter": 660255,
+          "read_counter": 660246
+        },
+        {
+          "joint_id": 40004,
+          "response_cost": 812,
+          "response_interval": 1070,
+          "send_counter": 660255,
+          "read_counter": 660251
+        },
+        {
+          "joint_id": 40003,
+          "response_cost": 811,
+          "response_interval": 1070,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 40002,
+          "response_cost": 806,
+          "response_interval": 1068,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 40001,
+          "response_cost": 804,
+          "response_interval": 1068,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 60001,
+          "response_cost": 795,
+          "response_interval": 1060,
+          "send_counter": 660255,
+          "read_counter": 660255
+        },
+        {
+          "joint_id": 60002,
+          "response_cost": 797,
+          "response_interval": 1059,
+          "send_counter": 660255,
+          "read_counter": 660255
+        }
+      ],
+      "power_state": [
+        {
+          "joint_id": 10006,
+          "temp_mos": 27.0,
+          "temp_rotor": 24.0,
+          "dc_voltage": 46.92082214355469,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10005,
+          "temp_mos": 27.0,
+          "temp_rotor": 24.0,
+          "dc_voltage": 47.31182861328125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10004,
+          "temp_mos": 27.0,
+          "temp_rotor": 23.0,
+          "dc_voltage": 46.627567291259766,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10003,
+          "temp_mos": 26.0,
+          "temp_rotor": 23.0,
+          "dc_voltage": 46.82307052612305,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10002,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 10001,
+          "temp_mos": 26.0,
+          "temp_rotor": 23.0,
+          "dc_voltage": 46.627567291259766,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 20006,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20005,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20004,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20003,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20002,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20001,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 50001,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 50002,
+          "temp_mos": 31.0,
+          "temp_rotor": 29.0,
+          "dc_voltage": 46.432064056396484,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 50003,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.627567291259766,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30007,
+          "temp_mos": 34.0,
+          "temp_rotor": 33.0,
+          "dc_voltage": 46.432064056396484,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30006,
+          "temp_mos": 32.0,
+          "temp_rotor": 30.0,
+          "dc_voltage": 46.432064056396484,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30005,
+          "temp_mos": 31.0,
+          "temp_rotor": 29.0,
+          "dc_voltage": 46.627567291259766,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30004,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30003,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30002,
+          "temp_mos": 28.0000057220459,
+          "temp_rotor": 27.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 30001,
+          "temp_mos": 29.0000057220459,
+          "temp_rotor": 27.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 40007,
+          "temp_mos": 30.0,
+          "temp_rotor": 28.0,
+          "dc_voltage": 46.82307052612305,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40006,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40005,
+          "temp_mos": 30.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40004,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40003,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.627567291259766,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40002,
+          "temp_mos": 30.0000057220459,
+          "temp_rotor": 28.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 40001,
+          "temp_mos": 30.0000057220459,
+          "temp_rotor": 28.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 60001,
+          "temp_mos": 35.000003814697266,
+          "temp_rotor": 33.000003814697266,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 60002,
+          "temp_mos": 35.000003814697266,
+          "temp_rotor": 32.000003814697266,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        }
+      ]
+    },
+    "robot_state": {
+      "header": {
+        "stamp": {
+          "sec": 1793019885,
+          "nanosec": 91723634
+        },
+        "frame_id": ""
+      },
+      "version": 2,
+      "tick": 0,
+      "mode_machine": 0,
+      "mode_pr": 0,
+      "current_state_id": 10002,
+      "current_motion_id": 0,
+      "last_state_id": 10002,
+      "last_motion_id": 0,
+      "desired_state_id": 10002,
+      "desired_motion_id": 0,
+      "cycle_time": 0.00022451599943451583,
+      "pelvis_euler_zyx": [
+        0.00248171528801322,
+        -0.002201351337134838,
+        0.004125441424548626
+      ],
+      "reserved": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        11011.0
+      ],
+      "action_id": 11011,
+      "pelvis_quaternion_xyzw": [
+        0.002064082305878401,
+        -0.0010981126688420773,
+        0.0012431242503225803,
+        0.9999964833259583
+      ],
+      "cmd_base_position": [
+        0.0,
+        0.0,
+        0.30000001192092896
+      ],
+      "cmd_base_euler_zyx": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cmd_base_linear_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cmd_base_angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_cmd_base_linear_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_cmd_base_angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "est_base_linear_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "est_base_angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "motor_enabled": true,
+      "is_sim": false,
+      "status_flags": 0,
+      "forward_direction": 1
+    }
+  },
+  "scope": "short-window checks only; not certification of balance, calibration, physical support or emergency stop"
+}

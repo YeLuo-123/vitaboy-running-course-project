@@ -1,0 +1,71 @@
+{
+  "slam_executed": true,
+  "navigation_passed": true,
+  "oracle_odometry": true,
+  "goals": [
+    {
+      "goal": [
+        0.8,
+        0.0
+      ],
+      "start": [
+        0.002723540220491526,
+        -0.003766085805824141
+      ],
+      "reached": true,
+      "saw_path": true,
+      "minimum_error_m": 0.1759186793741742,
+      "wall_duration_s": 2.788857820996782,
+      "final": [
+        0.6286747687381852,
+        0.039938038081998535
+      ]
+    },
+    {
+      "goal": [
+        0.5,
+        1.2
+      ],
+      "start": [
+        0.6286747687381852,
+        0.039938038081998535
+      ],
+      "reached": true,
+      "saw_path": true,
+      "minimum_error_m": 0.1765946343587519,
+      "wall_duration_s": 10.339960648008855,
+      "final": [
+        0.6536287001160392,
+        1.1129144823466188
+      ]
+    },
+    {
+      "goal": [
+        2.8,
+        0.0
+      ],
+      "start": [
+        0.6536287001160392,
+        1.1129144823466188
+      ],
+      "reached": true,
+      "saw_path": true,
+      "minimum_error_m": 0.17723623802897218,
+      "wall_duration_s": 21.780141325987643,
+      "final": [
+        2.6410094480783353,
+        -0.07832425212095527
+      ]
+    }
+  ],
+  "backend": "ROS2 slam_toolbox + G1-Nav algorithms + VitaBoy MuJoCo",
+  "bootstrap_occupied_cells": 9,
+  "occupied_or_unknown_goal_rejected": true,
+  "final_stop_mean_mps": 0.005818708312313543,
+  "stopped_after_rejected_goal": true,
+  "map_messages": 38,
+  "known_cells": 32758,
+  "occupied_cells": 455,
+  "odometry_hz_sim": 50.0,
+  "scan_hz_sim": 15.005417118093174
+}

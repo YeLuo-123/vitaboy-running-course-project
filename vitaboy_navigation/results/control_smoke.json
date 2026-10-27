@@ -1,0 +1,16 @@
+{
+  "backend": "Official VitaBoy ONNX / MuJoCo with physical obstacles",
+  "failed": false,
+  "obstacle_collision": false,
+  "simulated_duration_s": 21.999999999999908,
+  "forward_mean_mps": 0.21816837787739654,
+  "stopped_planar_mean_mps": 0.001925420238204358,
+  "turning_mean_radps": 0.18064012464776857,
+  "actual_displacement_m": 1.181603791936852,
+  "joint_excursion_max_rad": 0.5030050622962898,
+  "minimum_base_height_m": 0.7540853522986586,
+  "virtual_support": false,
+  "base_pose_integration": false,
+  "policy_sha256": "e83e01c35498f900e218212f406110546a0f5f0db4ca51919f075ab30701d5e6",
+  "passed": true
+}

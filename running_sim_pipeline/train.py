@@ -68,32 +68,62 @@ def main():
     p.add_argument('--focus-running',action='store_true',help='More sustained high-speed straight commands; keep standing/turn samples')
     p.add_argument('--refine-stability',action='store_true',help='Swing clearance, lateral foot margin, tighter yaw tracking and fall cost')
     p.add_argument('--precision-running',action='store_true',help='Higher swing clearance, filtered yaw reward and restored fall cost')
+    p.add_argument('--transition-focus',action='store_true',help='Opt-in balanced stop/turn curriculum and settled-stance rewards')
+    p.add_argument('--transition-preserve-speed',action='store_true',help='Stronger settled stance and velocity tracking in the transition curriculum')
+    p.add_argument('--fixed-learning-rate',type=float,help='Explicit fine-tuning LR; overrides the loaded optimizer LR')
+    p.add_argument('--retention-teacher',type=Path,help='Training-only validated actor for straight-running retention')
+    p.add_argument('--retention-weight',type=float,default=1.)
     args=p.parse_args();configure_torch_backends()
+    if args.transition_preserve_speed and not args.transition_focus:raise ValueError('Speed-preserving profile requires --transition-focus')
     cfg=make_config(args.stage,args.num_envs,True,args.seed,focus_running=args.focus_running,refine_stability=args.refine_stability,precision_running=args.precision_running);agent=agent_config()
+    if args.transition_focus:
+        if not args.resume:raise ValueError('Transition fine-tuning requires an original training checkpoint')
+        from transition_optimization import make_transition_config
+        cfg=make_transition_config(args.stage,args.num_envs,args.seed,preserve_speed=args.transition_preserve_speed)
+    if args.fixed_learning_rate is not None:
+        if not 0<args.fixed_learning_rate<=1e-4:raise ValueError('Fine-tuning LR must be in (0, 1e-4]')
+        agent.algorithm.learning_rate=args.fixed_learning_rate;agent.algorithm.schedule='fixed'
     agent.seed=args.seed;agent.max_iterations=args.iterations;agent.save_interval=args.save_interval
     log=args.log_dir or ROOT/'logs'/(datetime.now().strftime('%Y-%m-%d_%H-%M-%S')+'_'+args.stage)
     log.mkdir(parents=True,exist_ok=True)
     source=args.expert_source or ('dynamic' if args.stage=='rough' else 'kinematic')
-    raw=ManagerBasedRlEnv(cfg=cfg,device='cuda:0');env=AmpWrapper(raw,args.amp_weight,source)
+    raw=ManagerBasedRlEnv(cfg=cfg,device='cuda:0')
+    wrapper=AmpWrapper
+    if args.retention_teacher:
+        from retention_prior import RetentionWrapper
+        wrapper=RetentionWrapper
+    env=wrapper(raw,args.amp_weight,source)
     runner=AmpRunner(env,asdict(agent),str(log),device='cuda:0',reset_amp_on_load=args.reset_amp)
     if args.resume:
         runner.load(str(Path(args.resume).resolve()),map_location='cuda:0')
     else:
         warm=official_warm_start(runner,env)
         (log/'warm_start_validation.json').write_text(json.dumps(warm,indent=2))
+    if args.fixed_learning_rate is not None:
+        runner.alg.learning_rate=args.fixed_learning_rate
+        for group in runner.alg.optimizer.param_groups:group['lr']=args.fixed_learning_rate
+    retention=None
+    if args.retention_teacher:
+        if not args.resume or args.retention_weight<=0:raise ValueError('Retention requires resume and positive weight')
+        from retention_prior import install_retention_update
+        retention=install_retention_update(runner,env,args.retention_teacher,args.retention_weight)
     manifest=dict(stage=args.stage,num_envs=args.num_envs,seed=args.seed,additional_iterations=args.iterations,
         resume=args.resume,amp_weight=args.amp_weight,expert=env.amp.provenance,
         algorithm=('PPO + LS-AMP legacy kinematic experts; expert-only gradient penalty' if source=='kinematic' else
                    'PPO + LS-AMP dynamics experts; +/-0.8 label smoothing, replay, interpolated gradient penalty'),
         expert_source=source,
-        focus_running=args.focus_running,
-        refine_stability=args.refine_stability,
-        precision_running=args.precision_running,
+        focus_running=args.focus_running or args.transition_focus,
+        refine_stability=args.refine_stability or args.transition_focus,
+        precision_running=args.precision_running or args.transition_focus,
+        transition_focus=args.transition_focus,
+        transition_preserve_speed=args.transition_preserve_speed,
+        fixed_learning_rate=args.fixed_learning_rate,
+        retention_teacher=retention,
         reset_amp_on_resume=args.reset_amp,
         actuator_control_hz=200,policy_hz=50,hardware_execution=False)
     (log/'manifest.json').write_text(json.dumps(manifest,indent=2))
     (log/'code').mkdir(exist_ok=True)
-    for filename in ['train.py','amp.py','run_config.py']:
+    for filename in ['train.py','amp.py','run_config.py']+(['transition_optimization.py'] if args.transition_focus else [])+(['retention_prior.py'] if args.retention_teacher else []):
         shutil.copy2(ROOT/filename,log/'code'/filename)
     dump_yaml(log/'env.yaml',asdict(cfg));dump_yaml(log/'agent.yaml',asdict(agent))
     (ROOT/'active_run.json').write_text(json.dumps(dict(log_dir=str(log),pid=os.getpid(),stage=args.stage),indent=2))

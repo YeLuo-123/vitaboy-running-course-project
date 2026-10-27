@@ -1,0 +1,23 @@
+{
+  "source": "git archive HEAD from existing official checkouts on training host",
+  "repositories": {
+    "honor_rl_deploy": {
+      "url": "https://github.com/HonorRobotics/honor_rl_deploy",
+      "commit": "709c809d98ada109f8d5587ea655f1d4ca89ce47",
+      "archive_sha256": "97cd2a7fa35414e4633053438ec684fe7533c141297bddefc757733832ec1ed4"
+    },
+    "honor_mujoco": {
+      "url": "https://github.com/HonorRobotics/honor_mujoco",
+      "commit": "7c76b0cc6d7b706e5726d4acfbe4e5fa75267a89",
+      "archive_sha256": "c5ff07fb9529e790f929ffb5846ad994e78e5b27d36712cd8b9814615083488f"
+    },
+    "honor_robot_sdk": {
+      "url": "https://github.com/HonorRobotics/honor_robot_sdk",
+      "commit": "43f1dba12e2e0d25aaaec0fe4978da179a8c26f2",
+      "archive_sha256": "50bb7f62bb20f7dde8096fc2628373287235c24e67eafea59472fbede02f5f2e"
+    }
+  },
+  "hardware_execution": false,
+  "simulation_profile": "SIM_ONLY; V1 preserved; keyboard vx=0.5 m/s, vy=0.3 m/s, yaw=0.35 rad/s",
+  "build_patch": "Only remove unused nav2_util CMake dependency; C++ source unchanged"
+}

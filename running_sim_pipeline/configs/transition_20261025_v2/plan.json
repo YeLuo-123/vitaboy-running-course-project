@@ -1,0 +1,63 @@
+{
+  "id": "transition_20261025_v2",
+  "hardware_execution": false,
+  "source_checkpoint": "logs/transition_20261025_v1/model_5000.pt",
+  "baseline_policy_sha256": "044b5247ed35e15ad6b343ea537d70b809914c1f5ea6e659ea581a7b7f6dbb2b",
+  "training": {
+    "envs": 1024,
+    "updates": 400,
+    "lr": 2e-05,
+    "stage": "rough",
+    "seed": 42,
+    "amp": "unchanged dynamics expert and optimizer",
+    "preserve_speed": true,
+    "save_interval": 100
+  },
+  "development": {
+    "transitions_seed": 105261,
+    "transition_seeds": [
+      105261,
+      105262
+    ],
+    "terrain_seed": 105252
+  },
+  "final_new_seeds": [
+    105271,
+    105272,
+    105273
+  ],
+  "legacy_terrain_seeds": [
+    718281,
+    828182,
+    938293
+  ],
+  "thresholds": {
+    "stop_max_mps": 0.15,
+    "turn_bias_max_rads": 0.08,
+    "filtered_turn_mae_max_rads": 0.15,
+    "tilt_rms_max_rad": 0.25,
+    "speed_min_mps": 2.0,
+    "rough_completion_each_seed_min": 0.95,
+    "cpu_duration_s": 600
+  },
+  "promotion": "Only promote a single policy after nominal and randomized transition checks, terrain non-regression and CPU endurance pass. All failures retained.",
+  "preservation_gates": {
+    "cpu_whole_trial_speed_min_mps": 2.251873340598983,
+    "legacy_terrain_successes_min_of_384": 374,
+    "legacy_terrain_each_seed_speed_min_mps": [
+      2.0,
+      2.015107822418213,
+      2.0186588287353517
+    ],
+    "each_seed_completion_min": 0.95,
+    "new_seed_terrain_aggregate_not_below_paired_baseline": true,
+    "new_seed_terrain_speed_tolerance_mps": 0.05,
+    "comparison_note": "Up to 0.05m/s speed tolerance is declared for repeated simulator variability, always >=2m/s; original terrain aggregate success count cannot decrease."
+  },
+  "candidate_steps": [
+    5100,
+    5200,
+    5399
+  ],
+  "reason": "V1 new seeds 105261/105262 exposed settled speed slightly >0.15m/s. They are now development seeds, never called held-out for V2. Increase settled-stance/drift and forward-speed rewards."
+}

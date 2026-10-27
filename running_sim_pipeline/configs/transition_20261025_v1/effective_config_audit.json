@@ -1,0 +1,13 @@
+{
+  "note": "The CLI enabled --transition-focus, which internally enables focus_running/refine_stability/precision_running. The original manifest records those individual CLI flags as false; env.yaml and the executed transition_optimization.py contain the effective configuration. No training or evaluation data are altered.",
+  "effective_features": {
+    "focus_running": true,
+    "refine_stability": true,
+    "precision_running": true,
+    "sequence_environment_fraction": 0.5,
+    "episode_length_s": 40,
+    "mean_yaw_tracking_weight": 10.0,
+    "settled_stance_weight": 3.0,
+    "stopped_drift_weight": -3.0
+  }
+}

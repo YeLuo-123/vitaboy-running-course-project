@@ -1,0 +1,18 @@
+{
+    "source":  "Local user-owned G1-Nav-master snapshot",
+    "license":  "BSD-3-Clause, retained in LICENSE",
+    "files":  [
+                  {
+                      "copied_to":  "vitaboy_navigation/_g1/dijkstra_planner.py",
+                      "sha256":  "ab3bc824ddea09e18fb9e1ba83dbe18157d0984206a7b3655a6d030299efab34",
+                      "source":  "G1-Nav-master/g1pilot/navigation/dijkstra_planner.py"
+                  },
+                  {
+                      "copied_to":  "vitaboy_navigation/_g1/nav2point.py",
+                      "sha256":  "162628e555c808d49369c0424e5c6811f28d5a25a1cbc39819c8c70b9ef06e0d",
+                      "source":  "G1-Nav-master/g1pilot/navigation/nav2point.py"
+                  }
+              ],
+    "honor_commit":  "10c2ba02c7c001bb574771855b9dc41ef193e01d",
+    "migration_scope":  "Navigation front-end and online SLAM; no Unitree DDS/LowCmd or G1 policy used"
+}

@@ -1,0 +1,16 @@
+{
+  "stage_only": true,
+  "hardware_controller_started": false,
+  "repository": "https://github.com/HonorRobotics/honor_rl_deploy",
+  "commit": "709c809d98ada109f8d5587ea655f1d4ca89ce47",
+  "source_archive_sha256": "97cd2a7fa35414e4633053438ec684fe7533c141297bddefc757733832ec1ed4",
+  "model_sha256": "c8978c07a7ce2cd85370ff1010cc23a1b2ec0a0686b024fc7533e947852d19a7",
+  "root": "/data/hihonor_onnx_keyboard/official_walk_709c809_20261026",
+  "native_sdk": "/opt/build_dist/common",
+  "system_installations": false,
+  "factory_services_modified": false,
+  "profile": "ONBOARD_WALK",
+  "keyboard_vx_limit_mps": 0.3,
+  "tracking_disabled_in_profile": true,
+  "configuration_note": "Staged for future supervised hardware testing; not proof of actuator readiness or calibrated limits"
+}

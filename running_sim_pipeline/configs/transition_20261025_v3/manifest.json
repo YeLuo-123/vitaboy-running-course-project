@@ -1,0 +1,38 @@
+{
+  "stage": "rough",
+  "num_envs": 1024,
+  "seed": 42,
+  "additional_iterations": 200,
+  "resume": "/home/robotit/honor_ws/running_sim_pipeline/logs/transition_20261025_v2/model_5200.pt",
+  "amp_weight": 0.4,
+  "expert": {
+    "source": "/home/robotit/honor_ws/running_sim_pipeline/assets/dynamic_amp_expert.npz",
+    "sha256": "bbe92fd632723a8e8076689e2066d4b1db848d1fb7e85eec4b0db02b554f5975",
+    "feature_dim": 74,
+    "transition_dim": 148,
+    "expert_transitions": 5440,
+    "time_warp_factors": [],
+    "source_type": "Validated Tracking dynamics rollouts; no kinematic reconstruction gap"
+  },
+  "algorithm": "PPO + LS-AMP dynamics experts; +/-0.8 label smoothing, replay, interpolated gradient penalty",
+  "expert_source": "dynamic",
+  "focus_running": true,
+  "refine_stability": true,
+  "precision_running": true,
+  "transition_focus": true,
+  "transition_preserve_speed": true,
+  "fixed_learning_rate": 1e-05,
+  "retention_teacher": {
+    "path": "/home/robotit/honor_ws/running_sim_pipeline/artifacts/averaged_4400_4600.pt",
+    "sha256": "d89e93509bab7e5bf850adbfc87103a5fcb6045c09af2cfbc9196025513e495f",
+    "weight": 1.0,
+    "mask": "vx>1.5m/s, |vy|<0.08m/s, |yaw_rate|<0.05rad/s, not done",
+    "batch_size": 1024,
+    "steps_per_ppo_update": 1,
+    "inference_teacher": false
+  },
+  "reset_amp_on_resume": false,
+  "actuator_control_hz": 200,
+  "policy_hz": 50,
+  "hardware_execution": false
+}

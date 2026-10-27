@@ -1,0 +1,1165 @@
+{
+  "captured_at": "2026-10-26T21:03:45.265927+08:00",
+  "read_only": true,
+  "commands_sent": 0,
+  "passed": false,
+  "exclusive_check": false,
+  "failures": [
+    "motor link is not continuously responding: 10002 (send=5577, read=0)",
+    "motor link is not continuously responding: 20006 (send=5577, read=0)",
+    "motor link is not continuously responding: 20005 (send=5577, read=0)",
+    "motor link is not continuously responding: 20004 (send=5577, read=0)",
+    "motor link is not continuously responding: 20003 (send=5577, read=0)",
+    "motor link is not continuously responding: 20002 (send=5577, read=0)",
+    "motor link is not continuously responding: 20001 (send=5577, read=0)",
+    "motor link is not continuously responding: 50001 (send=5577, read=0)"
+  ],
+  "counts": {
+    "robot_state": 60,
+    "low_state": 2437,
+    "imu": 2436,
+    "monitor": 2435
+  },
+  "receive_age_seconds": {
+    "robot_state": 0.07066563199998654,
+    "low_state": 3.6959999988539494e-05,
+    "imu": 0.002096639999990657,
+    "monitor": 0.001133023999955185
+  },
+  "command_publishers": [
+    {
+      "node": "motion_intelligence",
+      "namespace": "/",
+      "type": "interaction_msgs/msg/LowCommand"
+    }
+  ],
+  "command_subscribers": [
+    {
+      "node": "topic_bag_recorder",
+      "namespace": "/",
+      "type": "interaction_msgs/msg/LowCommand"
+    },
+    {
+      "node": "controller_node",
+      "namespace": "/",
+      "type": "interaction_msgs/msg/LowCommand"
+    },
+    {
+      "node": "topic_bag_recorder",
+      "namespace": "/",
+      "type": "interaction_msgs/msg/LowCommand"
+    }
+  ],
+  "motor_link_deltas": {
+    "10006": {
+      "send_delta": 5577,
+      "read_delta": 5576
+    },
+    "10005": {
+      "send_delta": 5577,
+      "read_delta": 5576
+    },
+    "10004": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "10003": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "10002": {
+      "send_delta": 5577,
+      "read_delta": 0
+    },
+    "10001": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "20006": {
+      "send_delta": 5577,
+      "read_delta": 0
+    },
+    "20005": {
+      "send_delta": 5577,
+      "read_delta": 0
+    },
+    "20004": {
+      "send_delta": 5577,
+      "read_delta": 0
+    },
+    "20003": {
+      "send_delta": 5577,
+      "read_delta": 0
+    },
+    "20002": {
+      "send_delta": 5577,
+      "read_delta": 0
+    },
+    "20001": {
+      "send_delta": 5577,
+      "read_delta": 0
+    },
+    "50001": {
+      "send_delta": 5577,
+      "read_delta": 0
+    },
+    "50002": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "50003": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "30007": {
+      "send_delta": 5577,
+      "read_delta": 5576
+    },
+    "30006": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "30005": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "30004": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "30003": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "30002": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "30001": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "40007": {
+      "send_delta": 5577,
+      "read_delta": 5576
+    },
+    "40006": {
+      "send_delta": 5577,
+      "read_delta": 5578
+    },
+    "40005": {
+      "send_delta": 5577,
+      "read_delta": 5576
+    },
+    "40004": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "40003": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "40002": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "40001": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "60001": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    },
+    "60002": {
+      "send_delta": 5577,
+      "read_delta": 5577
+    }
+  },
+  "last": {
+    "robot_state": {
+      "header": {
+        "stamp": {
+          "sec": 1793019825,
+          "nanosec": 191738779
+        },
+        "frame_id": ""
+      },
+      "version": 2,
+      "tick": 0,
+      "mode_machine": 0,
+      "mode_pr": 0,
+      "current_state_id": 10002,
+      "current_motion_id": 0,
+      "last_state_id": 10002,
+      "last_motion_id": 0,
+      "desired_state_id": 10002,
+      "desired_motion_id": 0,
+      "cycle_time": 0.00024125199706759304,
+      "pelvis_euler_zyx": [
+        0.0016543107340112329,
+        -0.002008836017921567,
+        0.004136945586651564
+      ],
+      "reserved": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        11011.0
+      ],
+      "action_id": 11011,
+      "pelvis_quaternion_xyzw": [
+        0.0020693002734333277,
+        -0.001002704375423491,
+        0.0008292307029478252,
+        0.9999970197677612
+      ],
+      "cmd_base_position": [
+        0.0,
+        0.0,
+        0.30000001192092896
+      ],
+      "cmd_base_euler_zyx": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cmd_base_linear_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cmd_base_angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_cmd_base_linear_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "raw_cmd_base_angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "est_base_linear_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "est_base_angular_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "motor_enabled": true,
+      "is_sim": false,
+      "status_flags": 0,
+      "forward_direction": 1
+    },
+    "low_state": {
+      "header": {
+        "stamp": {
+          "sec": 1793019825,
+          "nanosec": 259341255
+        },
+        "frame_id": "low_state"
+      },
+      "version": 1,
+      "tick": 603944,
+      "mode_pr": 0,
+      "mode_machine": 0,
+      "motor_state": [
+        {
+          "joint_id": 10006,
+          "mode": 1,
+          "pos_fb": -1.1525037288665771,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.04395604133605957,
+          "temp_fb": [
+            27.0,
+            24.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10005,
+          "mode": 1,
+          "pos_fb": 2.673123836517334,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.03907203674316406,
+          "temp_fb": [
+            27.0,
+            24.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10004,
+          "mode": 1,
+          "pos_fb": -2.5838375091552734,
+          "vel_fb": 0.03296703100204468,
+          "tau_fb": 0.026862025260925293,
+          "temp_fb": [
+            27.0,
+            23.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10003,
+          "mode": 1,
+          "pos_fb": -0.9586809873580933,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.03907203674316406,
+          "temp_fb": [
+            26.0,
+            23.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10002,
+          "mode": 0,
+          "pos_fb": -0.17815537750720978,
+          "vel_fb": 0.003743184497579932,
+          "tau_fb": -0.01727212965488434,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 10001,
+          "mode": 0,
+          "pos_fb": -0.25811681151390076,
+          "vel_fb": 0.005936957895755768,
+          "tau_fb": -0.011715751141309738,
+          "temp_fb": [
+            26.0,
+            23.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20006,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20005,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20004,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20003,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20002,
+          "mode": 0,
+          "pos_fb": 0.001393284066580236,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 20001,
+          "mode": 0,
+          "pos_fb": 0.0013893404975533485,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 50001,
+          "mode": 0,
+          "pos_fb": 0.0,
+          "vel_fb": 0.0,
+          "tau_fb": 0.0,
+          "temp_fb": [
+            0.0,
+            0.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 50002,
+          "mode": 1,
+          "pos_fb": -0.02965508960187435,
+          "vel_fb": 0.02506936714053154,
+          "tau_fb": 0.02138269506394863,
+          "temp_fb": [
+            30.0,
+            29.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 50003,
+          "mode": 1,
+          "pos_fb": -0.010806300677359104,
+          "vel_fb": 0.012065320275723934,
+          "tau_fb": 5.41317458555568e-05,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30007,
+          "mode": 1,
+          "pos_fb": 0.09181571006774902,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            34.0,
+            33.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30006,
+          "mode": 1,
+          "pos_fb": 0.08076119422912598,
+          "vel_fb": -0.03296703100204468,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            32.0,
+            30.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30005,
+          "mode": 1,
+          "pos_fb": 0.0651082992553711,
+          "vel_fb": -0.010991692543029785,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            31.0,
+            29.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30004,
+          "mode": 1,
+          "pos_fb": 1.4595420360565186,
+          "vel_fb": 0.03296971321105957,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30003,
+          "mode": 1,
+          "pos_fb": -0.0065765380859375,
+          "vel_fb": 0.010991692543029785,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30002,
+          "mode": 1,
+          "pos_fb": 0.1216665506362915,
+          "vel_fb": 0.01221001148223877,
+          "tau_fb": 0.017094016075134277,
+          "temp_fb": [
+            28.0000057220459,
+            27.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 30001,
+          "mode": 1,
+          "pos_fb": -0.0015511512756347656,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": 0.007326602935791016,
+          "temp_fb": [
+            29.0000057220459,
+            27.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40007,
+          "mode": 0,
+          "pos_fb": 0.06778240203857422,
+          "vel_fb": -0.010991692543029785,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            30.0,
+            28.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40006,
+          "mode": 0,
+          "pos_fb": -0.07008004188537598,
+          "vel_fb": 0.010991692543029785,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40005,
+          "mode": 1,
+          "pos_fb": -0.1471250057220459,
+          "vel_fb": -0.054947733879089355,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            30.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40004,
+          "mode": 0,
+          "pos_fb": 1.5160009860992432,
+          "vel_fb": -0.010991692543029785,
+          "tau_fb": 0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40003,
+          "mode": 1,
+          "pos_fb": -0.516045093536377,
+          "vel_fb": -0.010989010334014893,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            29.0,
+            27.0
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40002,
+          "mode": 1,
+          "pos_fb": 0.23038697242736816,
+          "vel_fb": -0.03663003444671631,
+          "tau_fb": -0.002442002296447754,
+          "temp_fb": [
+            30.0000057220459,
+            28.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 40001,
+          "mode": 1,
+          "pos_fb": 0.09119725227355957,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": -0.01221001148223877,
+          "temp_fb": [
+            30.0000057220459,
+            28.0000057220459
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 60001,
+          "mode": 1,
+          "pos_fb": -0.0009037256240844727,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": -0.007326006889343262,
+          "temp_fb": [
+            35.000003814697266,
+            33.000003814697266
+          ],
+          "error_code": 0
+        },
+        {
+          "joint_id": 60002,
+          "mode": 1,
+          "pos_fb": 0.15470832586288452,
+          "vel_fb": -0.01221001148223877,
+          "tau_fb": 0.007326602935791016,
+          "temp_fb": [
+            35.000003814697266,
+            32.000003814697266
+          ],
+          "error_code": 0
+        }
+      ]
+    },
+    "imu": {
+      "header": {
+        "stamp": {
+          "sec": 1793019825,
+          "nanosec": 257205802
+        },
+        "frame_id": "body_imu"
+      },
+      "orientation": {
+        "x": 0.0030449999030679464,
+        "y": -0.0039160000160336494,
+        "z": 0.0008079999824985862,
+        "w": 0.999987006187439
+      },
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": {
+        "x": -0.0023242374882102013,
+        "y": 0.0007535109762102365,
+        "z": -0.003223413834348321
+      },
+      "angular_velocity_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "linear_acceleration": {
+        "x": 0.0901930034160614,
+        "y": 0.05463799834251404,
+        "z": 9.924927711486816
+      },
+      "linear_acceleration_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "monitor": {
+      "header": {
+        "stamp": {
+          "sec": 1793019825,
+          "nanosec": 258274553
+        },
+        "frame_id": "low_state"
+      },
+      "tick": 603943,
+      "cycle_interval": 1060,
+      "cycle_cost": 278,
+      "link_state": [
+        {
+          "joint_id": 10006,
+          "response_cost": 835,
+          "response_interval": 1068,
+          "send_counter": 603942,
+          "read_counter": 603930
+        },
+        {
+          "joint_id": 10005,
+          "response_cost": 834,
+          "response_interval": 1068,
+          "send_counter": 603942,
+          "read_counter": 603933
+        },
+        {
+          "joint_id": 10004,
+          "response_cost": 824,
+          "response_interval": 1059,
+          "send_counter": 603942,
+          "read_counter": 603940
+        },
+        {
+          "joint_id": 10003,
+          "response_cost": 823,
+          "response_interval": 1060,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 10002,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 603942,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 10001,
+          "response_cost": 821,
+          "response_interval": 1069,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 20006,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 603942,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20005,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 603942,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20004,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 603942,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20003,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 603942,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20002,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 603942,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 20001,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 603942,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 50001,
+          "response_cost": 0,
+          "response_interval": 0,
+          "send_counter": 603942,
+          "read_counter": 0
+        },
+        {
+          "joint_id": 50002,
+          "response_cost": 821,
+          "response_interval": 1069,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 50003,
+          "response_cost": 821,
+          "response_interval": 1069,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 30007,
+          "response_cost": 836,
+          "response_interval": 1069,
+          "send_counter": 603942,
+          "read_counter": 603930
+        },
+        {
+          "joint_id": 30006,
+          "response_cost": 835,
+          "response_interval": 1071,
+          "send_counter": 603942,
+          "read_counter": 603931
+        },
+        {
+          "joint_id": 30005,
+          "response_cost": 824,
+          "response_interval": 1061,
+          "send_counter": 603942,
+          "read_counter": 603936
+        },
+        {
+          "joint_id": 30004,
+          "response_cost": 822,
+          "response_interval": 1056,
+          "send_counter": 603942,
+          "read_counter": 603941
+        },
+        {
+          "joint_id": 30003,
+          "response_cost": 821,
+          "response_interval": 1060,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 30002,
+          "response_cost": 820,
+          "response_interval": 1070,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 30001,
+          "response_cost": 819,
+          "response_interval": 1070,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 40007,
+          "response_cost": 812,
+          "response_interval": 1069,
+          "send_counter": 603942,
+          "read_counter": 603929
+        },
+        {
+          "joint_id": 40006,
+          "response_cost": 832,
+          "response_interval": 21,
+          "send_counter": 603942,
+          "read_counter": 603931
+        },
+        {
+          "joint_id": 40005,
+          "response_cost": 832,
+          "response_interval": 22,
+          "send_counter": 603942,
+          "read_counter": 603934
+        },
+        {
+          "joint_id": 40004,
+          "response_cost": 834,
+          "response_interval": 1072,
+          "send_counter": 603942,
+          "read_counter": 603939
+        },
+        {
+          "joint_id": 40003,
+          "response_cost": 822,
+          "response_interval": 1055,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 40002,
+          "response_cost": 819,
+          "response_interval": 1058,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 40001,
+          "response_cost": 818,
+          "response_interval": 1069,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 60001,
+          "response_cost": 820,
+          "response_interval": 1069,
+          "send_counter": 603942,
+          "read_counter": 603942
+        },
+        {
+          "joint_id": 60002,
+          "response_cost": 821,
+          "response_interval": 1069,
+          "send_counter": 603942,
+          "read_counter": 603942
+        }
+      ],
+      "power_state": [
+        {
+          "joint_id": 10006,
+          "temp_mos": 27.0,
+          "temp_rotor": 24.0,
+          "dc_voltage": 46.92082214355469,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10005,
+          "temp_mos": 27.0,
+          "temp_rotor": 24.0,
+          "dc_voltage": 47.31182861328125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10004,
+          "temp_mos": 27.0,
+          "temp_rotor": 23.0,
+          "dc_voltage": 46.627567291259766,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10003,
+          "temp_mos": 26.0,
+          "temp_rotor": 23.0,
+          "dc_voltage": 46.82307052612305,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 10002,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 10001,
+          "temp_mos": 26.0,
+          "temp_rotor": 23.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 20006,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20005,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20004,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20003,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20002,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 20001,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 50001,
+          "temp_mos": 0.0,
+          "temp_rotor": 0.0,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 50002,
+          "temp_mos": 30.0,
+          "temp_rotor": 29.0,
+          "dc_voltage": 46.432064056396484,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 50003,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30007,
+          "temp_mos": 34.0,
+          "temp_rotor": 32.0,
+          "dc_voltage": 46.432064056396484,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30006,
+          "temp_mos": 32.0,
+          "temp_rotor": 30.0,
+          "dc_voltage": 46.334312438964844,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30005,
+          "temp_mos": 31.0,
+          "temp_rotor": 29.0,
+          "dc_voltage": 46.627567291259766,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30004,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.432064056396484,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30003,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.432064056396484,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 30002,
+          "temp_mos": 28.0000057220459,
+          "temp_rotor": 27.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 30001,
+          "temp_mos": 29.0000057220459,
+          "temp_rotor": 27.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 40007,
+          "temp_mos": 30.0,
+          "temp_rotor": 28.0,
+          "dc_voltage": 46.82307052612305,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40006,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40005,
+          "temp_mos": 30.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40004,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.529815673828125,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40003,
+          "temp_mos": 29.0,
+          "temp_rotor": 27.0,
+          "dc_voltage": 46.627567291259766,
+          "dc_current": -0.09775161743164062
+        },
+        {
+          "joint_id": 40002,
+          "temp_mos": 30.0000057220459,
+          "temp_rotor": 28.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 40001,
+          "temp_mos": 30.0000057220459,
+          "temp_rotor": 28.0000057220459,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 60001,
+          "temp_mos": 35.000003814697266,
+          "temp_rotor": 33.000003814697266,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        },
+        {
+          "joint_id": 60002,
+          "temp_mos": 35.000003814697266,
+          "temp_rotor": 32.000003814697266,
+          "dc_voltage": 0.0,
+          "dc_current": 0.0
+        }
+      ]
+    }
+  },
+  "scope": "short-window checks only; not certification of balance, calibration, physical support or emergency stop"
+}

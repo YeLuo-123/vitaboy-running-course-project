@@ -1,0 +1,52 @@
+{
+  "hostname": "omiga-brain",
+  "architecture": "aarch64",
+  "kernel": "5.15.136-tegra",
+  "user": "hihonor",
+  "factory_service": {
+    "returncode": 0,
+    "stdout": "MainPID=0\nWorkingDirectory=\nActiveState=inactive\nFragmentPath=\nDropInPaths=\nUnitFileState=",
+    "stderr": ""
+  },
+  "factory_processes": [],
+  "factory_file_sha256": {
+    "/opt/build_dist/common/share/interaction_msgs/msg/LowCommand.msg": "498d743b6a1a34641a351d260a054d75e7b678b5ea9c6c24fd216e2b7a51f6a3",
+    "/opt/build_dist/common/share/interaction_msgs/msg/LowState.msg": "669aca465111fc950a842b46751013d9846fb0c9f419de62c5cc86fc6ce83dd8",
+    "/opt/build_dist/common/share/interaction_msgs/msg/MotorCommand.msg": "1fe2bd8da0d32eac1b69aebf69ff4debb1fd191d619004e5d37e05201964b2c1",
+    "/opt/build_dist/common/share/interaction_msgs/msg/MotorState.msg": "93a922a6e4515015ec0321b57f728fde66476744da0d052952a785d474f0509b",
+    "/opt/build_dist/common/share/interaction_msgs/msg/RobotState.msg": "bd3ce7d54fc741805e3aeab7f5876ce04ef1ee738f6c113efd131b53dc35aca2"
+  },
+  "native_messages": {
+    "LowCommand": "std_msgs/Header header\n\nuint32 mode_pr # Parallel Joint Mode: 0 for PR mode, 1 for raw motor mode\nuint32 MODE_PR = 0\nuint32 MODE_RAW = 1\n\nuint32 mode_machine\nuint32 MACHINE_NORMAL = 0\n\nMotorCommand[] motor_cmd\n",
+    "LowState": "std_msgs/Header header\n\nuint32 version\nuint32 tick\n\nuint32 mode_pr # Parallel Joint Mode: 0 for PR mode, 1 for raw motor mode\nuint32 MODE_PR = 0\nuint32 MODE_RAW = 1\n\nuint32 mode_machine\nuint32 MACHINE_NORMAL = 0\n\nMotorState[] motor_state\n",
+    "MotorCommand": "uint32 joint_id\n\n# Command Mode: combination of each command bit\n# 0x01 for pos, 0x02 for vel, 0x04 for tau, 0x08 for kp, 0x10 for kd\nuint32 cmd_mode\nuint32 CMD_MODE_DISABLE = 0x0\nuint32 CMD_MODE_POS = 0x01\nuint32 CMD_MODE_VEL = 0x02\nuint32 CMD_MODE_TAU = 0x04\nuint32 CMD_MODE_KP = 0x08\nuint32 CMD_MODE_KD = 0x10\n\nfloat32 pos # unit: rad\nfloat32 vel # unit: rad/s\nfloat32 tau # unit: Nm\nfloat32 kp\nfloat32 kd\n",
+    "MotorState": "uint32 joint_id\n\nuint32 mode # 0: Disable 1: Enable\nfloat32 pos_fb # unit: rad\nfloat32 vel_fb # unit: rad/s\nfloat32 tau_fb # unit: Nm\nfloat32[2] temp_fb # unit: \u00b0C; [0] T_MOS, [1] T_Rotor\nuint32 error_code\n",
+    "RobotState": "std_msgs/Header header\n\nuint32 version\nuint32 tick\n\nuint32 mode_machine\nuint32 mode_pr\nuint32 current_state_id\nuint32 current_motion_id\nuint32 last_state_id\nuint32 last_motion_id\nuint32 desired_state_id\nuint32 desired_motion_id\nfloat32 cycle_time\nfloat32[3] pelvis_euler_zyx\nfloat32[10] reserved\n\n# Extended robot state (version >= 2)\nuint32 action_id\n\n# Quaternion component order: x, y, z, w\nfloat32[4] pelvis_quaternion_xyzw\n\nfloat32[3] cmd_base_position\nfloat32[3] cmd_base_euler_zyx\nfloat32[3] cmd_base_linear_velocity\nfloat32[3] cmd_base_angular_velocity\n\nfloat32[3] raw_cmd_base_linear_velocity\nfloat32[3] raw_cmd_base_angular_velocity\nfloat32[3] est_base_linear_velocity\nfloat32[3] est_base_angular_velocity\n\nbool motor_enabled\nbool is_sim\nuint32 status_flags\n\n# Logical forward direction along the base-frame X axis.\n# +X and -X may be swapped for a head-tail symmetric robot.\nint8 FORWARD_DIRECTION_UNKNOWN=0\nint8 FORWARD_DIRECTION_POSITIVE_X=1\nint8 FORWARD_DIRECTION_NEGATIVE_X=-1\nint8 forward_direction\n"
+  },
+  "compilers": {
+    "cmake": "/usr/bin/cmake",
+    "g++": "/usr/bin/g++",
+    "make": "/usr/bin/make",
+    "python3": "/usr/bin/python3",
+    "readelf": "/usr/bin/readelf"
+  },
+  "disk": {
+    "returncode": 0,
+    "stdout": "Filesystem       Size  Used Avail Use% Mounted on\n/dev/nvme0n1p1    44G   39G  3.5G  92% /\n/dev/nvme0n1p20  810G   27G  742G   4% /data",
+    "stderr": ""
+  },
+  "memory": {
+    "returncode": 0,
+    "stdout": "total        used        free      shared  buff/cache   available\nMem:            61Gi       3.7Gi        56Gi        59Mi       1.1Gi        57Gi\nSwap:           30Gi          0B        30Gi",
+    "stderr": ""
+  },
+  "dependency_packages": {
+    "returncode": 0,
+    "stdout": "libcurl4-openssl-dev install ok installed 7.81.0-1ubuntu1.20\nlibeigen3-dev install ok installed 3.4.0-2ubuntu2\nlibgoogle-glog-dev install ok installed 0.5.0+really0.4.0-2\nlibopencv-dev install ok installed 4.8.0-1-g6371ee1\nlibyaml-cpp-dev install ok installed 0.7.0+dfsg-8build1\nzlib1g-dev install ok installed 1:1.2.11.dfsg-2ubuntu9.2",
+    "stderr": ""
+  },
+  "native_cmake_configs": [
+    "/opt/build_dist/common/share/interaction_msgs/cmake/interaction_msgsConfig.cmake"
+  ],
+  "safety": "read-only process/file/service inspection; no ROS initialization, mode changes, control publishing or service mutations"
+}

@@ -1,0 +1,18 @@
+{
+  "hardware_execution": false,
+  "display": "independent Xvfb :109, terminal keyboard forwarding exercised",
+  "keys": [
+    "l",
+    "q",
+    "r",
+    "w"
+  ],
+  "keyboard_events": 24,
+  "free_simulation_s": 11.56200000000053,
+  "min_root_z_m": 0.7623398216550569,
+  "max_tilt_rad": 0.05541509088983777,
+  "max_body_vx_mps": 0.579501010899184,
+  "errors": [],
+  "owned_sim_processes_remaining": "",
+  "clean_ctrl_c_exit": true
+}

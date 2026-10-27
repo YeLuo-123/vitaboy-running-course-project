@@ -1,0 +1,13 @@
+{
+  "official_policy_sim/build_ubuntu.sh": "f2535a5fe3caffcbe1c2c023b85df82fd637c2c6d58d67ffdb0aadf3ac70f193",
+  "official_policy_sim/sim_env.sh": "1acd72fbb1a57d4c1e0f002c8d511c8ba06485c803ac4cc33a27b0636609f607",
+  "official_policy_sim/run_controller_sim.sh": "f0b86e008a82661d256f53d9903424126d5855ea5d1bafb97fe68fbc88999416",
+  "official_policy_sim/localhost_dds.xml": "193ceeaa1bc3e0312b72bb0e32ea965e81abb31c7dd7ffc3481b515a2cfe4e82",
+  "official_policy_sim/smoke_keyboard.py": "511379e43c73cb26b3095c8ebe14564ea3db2403be3525e5d076d4b631e819c3",
+  "official_policy_sim/run_smoke.sh": "c7a6efe6d17ceb3a1ec99662612724fbd748a9ef4fb54d232f4aae2729c9ce36",
+  "official_policy_sim/render_trial.py": "88847969707b1cbfcbb5a84071dd11bf2856582b52357e1e136483a9ea9ebf43",
+  "official_policy_sim/prepare_sources.py": "9b2d8186c685d9f9570dc9052f43ee43489e8cd5cc1a890dcd51846f041902d9",
+  "python": "3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]",
+  "numpy": "1.21.5",
+  "mujoco": "3.3.7"
+}

@@ -1,0 +1,23 @@
+{
+  "sha256": {
+    "honor_rl_deploy/source/build/motion_intelligence": "32b9e8c1c3b97f101e3191d98d894deba9e5c734462c3c9ad56434b727dafa73",
+    "tools/onnx_cpu_probe": "e2afe3ab9c02d8c8b5f54418345ba5ed5586a4199ed24e70701a559965e0967c",
+    "honor_rl_deploy/source/config/vita_boy/ONBOARD_WALK/base.yaml": "5a48fbee234d6671cf701b5929874182f1c6e22a0931644b332b8b8917f21e5e",
+    "honor_rl_deploy/source/config/vita_boy/ONBOARD_WALK/command.yaml": "1f1c429b58aa80439403689aa4d742b6a92396f07294db79ad030b7456768b71",
+    "honor_rl_deploy/source/config/vita_boy/ONBOARD_WALK/rl_locomotion/rl_locomotion.yaml": "8154faf8eae7382ab6dbc4e8e220444cd468c1115500208129d8689bc5174c3b",
+    "honor_rl_deploy/source/config/vita_boy/ONBOARD_WALK/recovery_stand/recovery_stand.yaml": "d0ae2499b1a5e4a6f1cb4623ab6b344a9ca58c66cbadd971c8530c845e0fbe89",
+    "honor_rl_deploy/source/config/vita_boy/ONBOARD_WALK/rl_tracking/rl_tracking.yaml": "eb1e8a74468832e5a38f3802f2fbc0b903a6a39e255f4d4ed324703bc684ca36",
+    "honor_rl_deploy/source/config/vita_boy/ONBOARD_WALK/rl_base/rl_base.yaml": "b5ec9766393cf4f96e55d3e3da107f73a2041ffce3538b286d0101bfee7a7451",
+    "honor_rl_deploy/source/config/vita_boy/ONBOARD_WALK/damper/damper.yaml": "111c0756f56cc1972f1fec0c5036b27d00a36d5090adb1bc3fb6edbf37b51fbf",
+    "honor_rl_deploy/source/config/vita_boy/ONBOARD_WALK/rl_locomotion/vita_boy_loco.onnx": "c8978c07a7ce2cd85370ff1010cc23a1b2ec0a0686b024fc7533e947852d19a7",
+    "onboard/preflight_readonly.py": "9fc9e0224e8ac406578b3852071e8f7f57bd98f60d7105a06e2f4c2c14f6a102",
+    "onboard/test_preflight.py": "dfbb6ed5c1312d79cf02c3c7203ac94ca558982bb30624935acc9ea63cc321e1",
+    "onboard/prepare_onboard.py": "d2323400ac1d023273dcaca73fe49d4aa7ed300a878a3d209d0733303c619903",
+    "onboard/start_build_detached.py": "542b8565090cf6ea3736be46e7315e00de5536918d72cabbc8f49012f20f07ca",
+    "onboard/verify_deployment.py": "e8de36665f0c761806461eff80febc1f51dd4c0ead953a1402eacffe10b5e435",
+    "onboard/build_onboard.sh": "1a5b147cd366b728d2793dc6c44afcdcbc15730c741d8ccedb91b22f059f250b",
+    "onboard/keyboard.sh": "1fe9f44d5a7bf4d380166101c816cfdedaa758add1398ab5d86e53ac176a54c1",
+    "onboard/native_env.sh": "cb48c9cc071f0ce8417d04a90da1ce3092cec972af15af6668deca0c7f5a3fbc",
+    "honor_rl_deploy/source/thirdparty/onnxruntime-linux-aarch64-1.22.0/lib/libonnxruntime.so.1.22.0": "0afd69a0ae38c5099fd0e8604dda398ac43dee67cd9c6394b5142b19e82528de"
+  }
+}

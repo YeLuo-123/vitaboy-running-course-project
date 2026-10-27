@@ -1,0 +1,44 @@
+{
+  "formal_updates": 800,
+  "first_iteration_label": 4600,
+  "last_iteration_label": 5399,
+  "logged_wall_span_s": 502.00148844718933,
+  "training_process": {
+    "argv": [
+      "/home/robotit/honor_ws/running_sim_pipeline/train.py",
+      "--stage",
+      "rough",
+      "--expert-source",
+      "dynamic",
+      "--transition-focus",
+      "--fixed-learning-rate",
+      "2e-05",
+      "--num-envs",
+      "1024",
+      "--seed",
+      "42",
+      "--resume",
+      "/home/robotit/honor_ws/running_sim_pipeline/logs/rough_precision_seed42/model_4600.pt",
+      "--save-interval",
+      "200",
+      "--iterations",
+      "800",
+      "--log-dir",
+      "/home/robotit/honor_ws/running_sim_pipeline/logs/transition_20261025_v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 508.5496006011963
+  },
+  "num_envs": 1024,
+  "steps_per_env_per_update": 24,
+  "policy_hz": 50,
+  "control_transitions": 19660800,
+  "source_checkpoint": "/home/robotit/honor_ws/running_sim_pipeline/logs/rough_precision_seed42/model_4600.pt",
+  "source_checkpoint_sha256": "6714a4221051033c6fb2900d554c213b66aca1e3152cef83333fc40a44922053",
+  "optimizer_lrs": [
+    2e-05
+  ],
+  "amp_expert_sha256": "bbe92fd632723a8e8076689e2066d4b1db848d1fb7e85eec4b0db02b554f5975",
+  "smoke_updates_excluded": 2,
+  "hardware_execution": false
+}
