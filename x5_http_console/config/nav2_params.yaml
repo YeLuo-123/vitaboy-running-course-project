@@ -82,7 +82,15 @@ controller_server:
       xy_goal_tolerance: 0.15
       yaw_goal_tolerance: 0.2
     FollowPath:
-      plugin: dwb_core::DWBLocalPlanner
+      # Align with the path ahead before handing motion back to DWB.
+      # Parameters match the Rotation Shim version installed on this vehicle.
+      plugin: nav2_rotation_shim_controller::RotationShimController
+      primary_controller: dwb_core::DWBLocalPlanner
+      angular_dist_threshold: 0.26
+      forward_sampling_distance: 0.40
+      rotate_to_heading_angular_vel: 0.30
+      max_angular_accel: 1.0
+      simulate_ahead_time: 1.0
       debug_trajectory_details: false
       min_vel_x: -0.05
       max_vel_x: 0.15
@@ -186,7 +194,9 @@ global_costmap:
         map_subscribe_transient_local: true
       obstacle_layer:
         plugin: nav2_costmap_2d::ObstacleLayer
-        enabled: true
+        # Use the saved geometry for stable global routing. The local costmap
+        # retains live scan obstacles and full footprint collision checking.
+        enabled: false
         observation_sources: scan
         scan:
           topic: /scan
@@ -201,8 +211,9 @@ global_costmap:
           raytrace_max_range: 4.0
       inflation_layer:
         plugin: nav2_costmap_2d::InflationLayer
-        inflation_radius: 0.05
-        cost_scaling_factor: 5.0
+        # A soft cost gradient across doorways attracts NavFn to their centres.
+        inflation_radius: 0.40
+        cost_scaling_factor: 4.0
       always_send_full_costmap: true
 
 planner_server:

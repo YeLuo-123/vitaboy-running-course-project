@@ -2,7 +2,7 @@
   "schema_version": 1,
   "snapshot_scope": "Selected local project files; remote-only checkpoints and logs excluded",
   "hash_algorithm": "SHA-256 over original file bytes; manifest does not hash itself",
-  "total_bytes": 16702826,
+  "total_bytes": 16705675,
   "file_count_excluding_manifest": 335,
   "files": [
     {
@@ -1602,8 +1602,8 @@
     },
     {
       "path": "x5_http_console/README.md",
-      "bytes": 12456,
-      "sha256": "11bb4bbacb03a867c3a1cd36cbb20f65db8ef3b537868f80717f9178f7ee6e8a"
+      "bytes": 14667,
+      "sha256": "a2ac056edeb248da7e9d195301d4cd3b0795c38a929fec9d529d90a9a1f69526"
     },
     {
       "path": "x5_http_console/areas.py",
@@ -1617,8 +1617,8 @@
     },
     {
       "path": "x5_http_console/config/nav2_params.yaml",
-      "bytes": 8153,
-      "sha256": "cffb7a1bbc930022dcad465569add147499d04ff501a0706b04eb1596ae85260"
+      "bytes": 8791,
+      "sha256": "f1033cd47977d3de7bca3a8b59e19454696b647265631f70131bfacee434a37c"
     },
     {
       "path": "x5_http_console/core.py",
