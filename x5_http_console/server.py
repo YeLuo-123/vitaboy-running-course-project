@@ -177,17 +177,16 @@ class Console(Node):
         if self.mode != 'navigation' or not self.initialized or self.pose is None or self.amcl_covariance is None:
             return {'fresh':False,'age_sec':None,'estimate':self.amcl_estimate,'sigma_x':None,'sigma_y':None,
                     'sigma_yaw_deg':None,'sampling':self.sampling_active(),
-                    'sample_count':self.sampling_count,'uncertain':True}
+                    'sample_count':self.sampling_count,'uncertain':True,'reason':'等待初始位姿或 AMCL 估计'}
         age=time.monotonic()-self.amcl_time
         fresh=age<3
         sx,sy,sa=(math.sqrt(value) for value in self.amcl_covariance)
-        moving_without_update=age>3 and self.last_odom_motion>self.amcl_time and time.monotonic()-self.last_odom_motion<3
-        active_goal_without_update=self.armed and age>5 and time.monotonic()-self.goal_time>8
+        reason=('AMCL 静止更新中' if self.sampling_active() else
+                'AMCL 不确定度过大' if max(sx,sy)>.35 or math.degrees(sa)>25 else None)
         return {'fresh':fresh,'age_sec':round(age,1),'estimate':self.amcl_estimate,'sigma_x':sx,'sigma_y':sy,
                 'sigma_yaw_deg':math.degrees(sa),
                 'sampling':self.sampling_active(),'sample_count':self.sampling_count,
-                'uncertain':self.sampling_active() or moving_without_update or active_goal_without_update
-                            or max(sx,sy)>.35 or math.degrees(sa)>25}
+                'uncertain':reason is not None,'reason':reason}
 
     def on_scan(self, msg):
         ranges=np.asarray(msg.ranges,dtype=np.float64)
@@ -275,9 +274,24 @@ class Console(Node):
             self.message = 'Cartographer 地图就绪：可启用键盘控制'
         if self.ready() and (self.message.startswith('正在启动 ROS') or self.message.startswith('Cartographer 地图就绪')):
             self.message = '建图和导航就绪：可启用键盘控制或自主探索' if self.mode == 'mapping' else '导航就绪：可以在地图上选择目标'
-        if self.armed and (now-self.lease > 3 or not (self.manual_ready() if self.manual else self.ready())
-                           or (self.mode == 'navigation' and self.localization_uncertainty()['uncertain'])):
-            self.stop(); self.message = '已停止：控制页面断连或传感器/定位未就绪、不稳定'
+        if self.armed:
+            localization=self.localization_uncertainty() if self.mode=='navigation' else None
+            if now-self.lease>3:
+                reason='控制页面心跳超时'
+            elif not (self.manual_ready() if self.manual else self.ready()):
+                checks=self.diagnostics()
+                missing=[name for name,key in [('雷达','scan_ok'),('里程计','odom_ok'),('地图','map_ok'),
+                                                ('定位 TF','pose_ok'),('导航服务','nav_ok')] if not checks[key]]
+                reason='导航未就绪：'+('、'.join(missing) if missing else 'ROS 进程或初始位姿')
+            elif localization and localization['uncertain']:
+                reason=localization['reason']
+            else:
+                reason=None
+            if reason:
+                route_active=self.route_phase in ('announcing','running','dwell')
+                self.get_logger().warning(f'运动许可撤销：{reason}；AMCL age={localization["age_sec"] if localization else None}')
+                self.stop(); self.message='已停止：'+reason
+                if route_active:self.route_note=self.message
         if self.manual:
             self.vel.publish(self.manual_twist if now-self.manual_time < .4 else Twist())
         elif self.armed and now-self.last_nav < .5:
@@ -352,6 +366,7 @@ class Console(Node):
         self.scan_points = []; self.scan_points_time = 0.
         self.amcl_covariance = None; self.amcl_time = 0.;self.amcl_estimate=None;self.initial_pose=None
         self.initial_range = None
+        self.last_odom_motion = 0.
         self.amcl_history=[];self.amcl_particles=[];self.sampling_count=0
         self.active_map = None
         self.initialized = False; self.tf.clear()
@@ -384,6 +399,7 @@ class Console(Node):
         self.active_map = name if mode == 'navigation' else None
         self.amcl_covariance = None; self.amcl_time = 0.;self.amcl_estimate=None;self.initial_pose=None
         self.initial_range = None
+        self.last_odom_motion = 0.
         self.scan_points = []; self.scan_points_time = 0.
         self.amcl_history=[];self.amcl_particles=[];self.sampling_count=0;self.sampling_until=0.
         self.route_steps=[];self.route_index=-1;self.route_phase='idle';self.route_note=''

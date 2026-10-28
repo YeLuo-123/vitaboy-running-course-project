@@ -124,8 +124,27 @@ class RosTests(unittest.TestCase):
         self.assertTrue(n.armed)
         n.amcl_covariance=[.36,.04,.03]
         self.assertTrue(n.localization_uncertainty()['uncertain'])
-        n.amcl_covariance=[.04,.04,.03];n.amcl_time-=30;n.goal_time-=10
-        self.assertTrue(n.localization_uncertainty()['uncertain'])
+        n.amcl_covariance=[.04,.04,.03];n.amcl_time-=30
+        self.assertFalse(n.localization_uncertainty()['uncertain'])
+    def test_stale_amcl_message_does_not_cancel_with_live_tf(self):
+        from nav_msgs.msg import Odometry
+        from geometry_msgs.msg import TransformStamped
+        n=self.configure();n.mode='navigation';n.initialized=True;n.armed=True
+        n.amcl_covariance=[.04,.04,.03];n.amcl_time=time.monotonic()-60
+        n.goal_time=time.monotonic()-10;n.lease=time.monotonic()
+        moving=Odometry();moving.twist.twist.linear.x=.05
+        n.on_odom(moving)
+        self.assertFalse(n.localization_uncertainty()['uncertain'])
+        transform=TransformStamped();transform.header.stamp=n.get_clock().now().to_msg()
+        transform.transform.rotation.w=1.
+        n.tf.lookup_transform=Mock(return_value=transform)
+        n.tick()
+        self.assertTrue(n.armed)
+        self.assertFalse(n.localization_uncertainty()['fresh'])
+        transform.header.stamp.sec-=4
+        n.tick()
+        self.assertFalse(n.armed)
+        self.assertIn('定位 TF',n.message)
     def test_live_scan_points_use_map_transform(self):
         from sensor_msgs.msg import LaserScan
         n=self.configure();n.mode='navigation';n.initialized=True;n.pose=[.5,.5,0.]
