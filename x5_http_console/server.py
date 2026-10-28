@@ -18,7 +18,6 @@ from urllib.parse import parse_qs, urlparse
 
 import numpy as np
 import yaml
-from scipy import ndimage as ndi
 import rclpy
 from rclpy.node import Node
 from rclpy.executors import SingleThreadedExecutor
@@ -61,7 +60,7 @@ class Console(Node):
         self.stack_started = 0.; self.recovery_started = 0.; self.recovery_sequence = 0
         self.recovery_busy = False
         self.grid = None; self.info = None; self.map_time = 0.; self.map_version = 0
-        self.obstacle_distance = None; self.scan_match = None; self.scan_match_time = 0.
+        self.scan_points = []; self.scan_points_time = 0.
         self.scan_time = 0.; self.odom_time = 0.; self.lease = 0.
         self.odom_linear = 0.; self.odom_angular = 0.; self.power_voltage = None
         self.base_linear = 0.; self.base_angular = 0.; self.base_command_time = 0.
@@ -112,10 +111,7 @@ class Console(Node):
         self.info = {'width':msg.info.width,'height':msg.info.height,'resolution':msg.info.resolution,
                      'origin':[msg.info.origin.position.x,msg.info.origin.position.y,yaw(msg.info.origin.orientation)]}
         self.map_time = time.monotonic(); self.map_version += 1
-        obstacles = self.grid.reshape(msg.info.height,msg.info.width) >= 65
-        self.obstacle_distance = (ndi.distance_transform_edt(~obstacles)*msg.info.resolution
-                                  if np.any(obstacles) else None)
-        self.scan_match = None; self.scan_match_time = 0.
+        self.scan_points = []; self.scan_points_time = 0.
 
     def on_amcl_pose(self, msg):
         if self.mode != 'navigation' or not self.initialized or msg.header.frame_id != 'map': return
@@ -128,6 +124,9 @@ class Console(Node):
             sx,sy,sa=(math.sqrt(value) for value in self.amcl_covariance)
             self.amcl_history.append([self.amcl_time,*self.amcl_estimate,sx,sy,math.degrees(sa)])
             self.amcl_history=self.amcl_history[-180:]
+            if self.sampling_active() and self.sampling_count>=3 and max(sx,sy)<=.35 and math.degrees(sa)<=25:
+                self.sampling_until=0.
+                self.message='AMCL 估计已集中；请核对地图上的激光点、机器人位置与实体小车'
 
     def on_particle_cloud(self, msg):
         if self.mode != 'navigation' or not self.initialized or msg.header.frame_id != 'map': return
@@ -147,7 +146,7 @@ class Console(Node):
             raise ValueError('请保持小车静止再采样')
         if not self.nomotion_client.service_is_ready():
             raise ValueError('AMCL 静止更新服务尚未就绪')
-        self.sampling_until=time.monotonic()+20
+        self.sampling_until=time.monotonic()+8
         self.sampling_next=time.monotonic()
         self.sampling_count=0;self.sampling_future=None
         self.localization_epoch+=1
@@ -177,19 +176,17 @@ class Console(Node):
     def localization_uncertainty(self):
         if self.mode != 'navigation' or not self.initialized or self.pose is None or self.amcl_covariance is None:
             return {'fresh':False,'age_sec':None,'estimate':self.amcl_estimate,'sigma_x':None,'sigma_y':None,
-                    'sigma_yaw_deg':None,'scan_match':self.scan_match,'sampling':self.sampling_active(),
+                    'sigma_yaw_deg':None,'sampling':self.sampling_active(),
                     'sample_count':self.sampling_count,'uncertain':True}
         age=time.monotonic()-self.amcl_time
         fresh=age<3
         sx,sy,sa=(math.sqrt(value) for value in self.amcl_covariance)
         moving_without_update=age>3 and self.last_odom_motion>self.amcl_time and time.monotonic()-self.last_odom_motion<3
         active_goal_without_update=self.armed and age>5 and time.monotonic()-self.goal_time>8
-        map_mismatch=(self.scan_match is None or time.monotonic()-self.scan_match_time>=2
-                      or self.scan_match<.70)
         return {'fresh':fresh,'age_sec':round(age,1),'estimate':self.amcl_estimate,'sigma_x':sx,'sigma_y':sy,
-                'sigma_yaw_deg':math.degrees(sa),'scan_match':self.scan_match,
+                'sigma_yaw_deg':math.degrees(sa),
                 'sampling':self.sampling_active(),'sample_count':self.sampling_count,
-                'uncertain':self.sampling_active() or moving_without_update or active_goal_without_update or map_mismatch
+                'uncertain':self.sampling_active() or moving_without_update or active_goal_without_update
                             or max(sx,sy)>.35 or math.degrees(sa)>25}
 
     def on_scan(self, msg):
@@ -197,30 +194,23 @@ class Console(Node):
         valid=np.isfinite(ranges)&(ranges>=max(.2,msg.range_min))&(ranges<=min(6.,msg.range_max))
         if not np.any(valid): return
         self.scan_time = time.monotonic()
-        if (self.mode!='navigation' or not self.initialized or self.pose is None
-                or self.obstacle_distance is None or self.info is None): return
-        try: laser=self.tf.lookup_transform('base_footprint',msg.header.frame_id,Time()).transform
-        except Exception: return
-        indices=np.flatnonzero(valid)[::3]
-        if len(indices)<30:return
+        if self.mode!='navigation' or not self.initialized:
+            self.scan_points=[]
+            return
+        try: laser=self.tf.lookup_transform('map',msg.header.frame_id,Time.from_msg(msg.header.stamp)).transform
+        except Exception:
+            try: laser=self.tf.lookup_transform('map',msg.header.frame_id,Time()).transform
+            except Exception:
+                self.scan_points=[]
+                return
+        indices=np.flatnonzero(valid)[::3][:240]
         angle=msg.angle_min+indices*msg.angle_increment
         distance=ranges[indices]
-        x,y,heading=self.pose
-        laser_heading=heading+yaw(laser.rotation)
-        x+=math.cos(heading)*laser.translation.x-math.sin(heading)*laser.translation.y
-        y+=math.sin(heading)*laser.translation.x+math.cos(heading)*laser.translation.y
-        endpoint_x=x+distance*np.cos(laser_heading+angle)
-        endpoint_y=y+distance*np.sin(laser_heading+angle)
-        ox,oy,map_yaw=self.info['origin']; resolution=self.info['resolution']
-        dx,dy=endpoint_x-ox,endpoint_y-oy
-        col=np.floor((math.cos(map_yaw)*dx+math.sin(map_yaw)*dy)/resolution).astype(int)
-        row=np.floor((-math.sin(map_yaw)*dx+math.cos(map_yaw)*dy)/resolution).astype(int)
-        inside=(col>=0)&(col<self.info['width'])&(row>=0)&(row<self.info['height'])
-        matches=np.zeros(len(indices),dtype=bool)
-        matches[inside]=self.obstacle_distance[row[inside],col[inside]]<.15
-        score=float(np.mean(matches))
-        self.scan_match=score if self.scan_match is None else .7*self.scan_match+.3*score
-        self.scan_match_time=self.scan_time
+        heading=yaw(laser.rotation)
+        endpoint_x=laser.translation.x+distance*np.cos(heading+angle)
+        endpoint_y=laser.translation.y+distance*np.sin(heading+angle)
+        self.scan_points=np.column_stack((endpoint_x,endpoint_y)).tolist()
+        self.scan_points_time=self.scan_time
 
     def on_odom(self, msg):
         self.odom_time = time.monotonic()
@@ -359,7 +349,7 @@ class Console(Node):
             self.process = None
         if self.logfile: self.logfile.close(); self.logfile = None
         self.mode = 'idle'; self.grid = None; self.info = None; self.plan = []; self.pose = None
-        self.obstacle_distance = None; self.scan_match = None; self.scan_match_time = 0.
+        self.scan_points = []; self.scan_points_time = 0.
         self.amcl_covariance = None; self.amcl_time = 0.;self.amcl_estimate=None;self.initial_pose=None
         self.initial_range = None
         self.amcl_history=[];self.amcl_particles=[];self.sampling_count=0
@@ -394,7 +384,7 @@ class Console(Node):
         self.active_map = name if mode == 'navigation' else None
         self.amcl_covariance = None; self.amcl_time = 0.;self.amcl_estimate=None;self.initial_pose=None
         self.initial_range = None
-        self.scan_match = None; self.scan_match_time = 0.
+        self.scan_points = []; self.scan_points_time = 0.
         self.amcl_history=[];self.amcl_particles=[];self.sampling_count=0;self.sampling_until=0.
         self.route_steps=[];self.route_index=-1;self.route_phase='idle';self.route_note=''
         self.stack_started = time.monotonic(); self.recovery_busy = False
@@ -453,7 +443,7 @@ class Console(Node):
         if not all(math.isfinite(v) for v in (x,y,theta)): raise ValueError('坐标必须是有限数值')
         if not self.ready(): raise ValueError('导航尚未就绪：检查地图、雷达、里程计及初始位姿')
         if self.mode == 'navigation' and self.localization_uncertainty()['uncertain']:
-            raise ValueError('定位不可靠：请核对激光与地图匹配度、实际位置和车头朝向，等待定位收敛')
+            raise ValueError('AMCL 尚未收敛：请核对地图上的激光点、实际位置和车头朝向')
         if self.pending or self.goal_handle: raise ValueError('已有导航任务，请先停止任务')
         col,row = world_to_cell(x,y,self.info)
         if not (0<=col<self.info['width'] and 0<=row<self.info['height']): raise ValueError('目标超出地图')
@@ -644,7 +634,8 @@ class Console(Node):
         if task == 'localization':
             return {'epoch':self.localization_epoch,'history':[[round(t-self.amcl_history[0][0],2),*values]
                     for t,*values in self.amcl_history] if self.amcl_history else [],
-                    'particles':self.amcl_particles,'initial_pose':self.initial_pose,'initial_range':self.initial_range,
+                    'particles':self.amcl_particles,'laser_points':self.scan_points if time.monotonic()-self.scan_points_time<2 else [],
+                    'initial_pose':self.initial_pose,'initial_range':self.initial_range,
                     'quality':self.localization_uncertainty()}
         if task == 'maps': return {'maps':sorted(p.parent.name for p in MAPS.glob('*/map.yaml') if not p.parent.name.startswith('.'))}
         if task == 'areas':
@@ -694,8 +685,8 @@ class Console(Node):
             if self.mode != 'navigation': raise ValueError('仅在已加载地图的导航模式下设置初始位姿')
             x,y,theta = float(data['x']),float(data['y']),float(data.get('yaw',0))
             if not all(math.isfinite(v) for v in (x,y,theta)): raise ValueError('坐标必须为有限数值')
-            radius = float(data.get('radius',1.5))
-            heading_range = float(data.get('heading_range_deg',90.))
+            radius = float(data.get('radius',1.))
+            heading_range = float(data.get('heading_range_deg',30.))
             if not math.isfinite(radius) or not .3<=radius<=3.:
                 raise ValueError('位置范围须为 0.3–3 米')
             if not math.isfinite(heading_range) or not 15.<=heading_range<=180.:
@@ -719,7 +710,7 @@ class Console(Node):
             msg.pose.covariance[7]=sigma_xy**2
             msg.pose.covariance[35]=sigma_yaw**2
             self.amcl_covariance = None; self.amcl_time = 0.
-            self.scan_match = None; self.scan_match_time = 0.
+            self.scan_points = []; self.scan_points_time = 0.
             self.initial_pub.publish(msg); self.initialized=True; self.message='初始位姿已发送，请确认地图位置和朝向'
             self.amcl_estimate=None;self.amcl_history=[];self.amcl_particles=[];self.initial_pose=[x,y,theta]
             self.initial_range={'radius':radius,'heading_range_deg':heading_range}

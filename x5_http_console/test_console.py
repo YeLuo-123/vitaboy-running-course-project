@@ -72,7 +72,6 @@ class RosTests(unittest.TestCase):
         n.scan_time=n.odom_time=n.map_time=n.lease=time.monotonic();n.pose=[1.,1.,0.]
         n.info={'width':100,'height':100,'resolution':.05,'origin':[0.,0.,0.]}
         n.grid=np.zeros(10000,dtype=np.int8)
-        n.scan_match=.9;n.scan_match_time=time.monotonic()
         return n
     def test_idle_cannot_move(self):
         with self.assertRaises(ValueError):self.node.send_goal(1.,1.,0.)
@@ -100,7 +99,7 @@ class RosTests(unittest.TestCase):
         self.assertIn('时钟刚发生跳变',n.message)
     def test_navigation_rejects_uncertain_localization(self):
         n=self.configure();n.mode='navigation';n.initialized=True
-        with self.assertRaisesRegex(ValueError,'定位不可靠'):
+        with self.assertRaisesRegex(ValueError,'AMCL 尚未收敛'):
             n.send_goal(1.,1.,0.)
         n.amcl_covariance=[.04,.04,.03];n.amcl_time=time.monotonic()
         self.assertFalse(n.localization_uncertainty()['uncertain'])
@@ -110,37 +109,24 @@ class RosTests(unittest.TestCase):
         self.assertTrue(n.localization_uncertainty()['uncertain'])
         n.amcl_covariance=[.04,.04,.03];n.amcl_time-=30;n.goal_time-=10
         self.assertTrue(n.localization_uncertainty()['uncertain'])
-    def test_navigation_requires_recent_scan_match(self):
-        n=self.configure();n.mode='navigation';n.initialized=True
-        n.amcl_covariance=[.04,.04,.03];n.amcl_time=time.monotonic()
-        n.scan_match=None
-        self.assertTrue(n.localization_uncertainty()['uncertain'])
-        with self.assertRaises(ValueError):n.send_goal(1.,1.,0.)
-        n.scan_match=.9;n.scan_match_time=time.monotonic()-3
-        self.assertTrue(n.localization_uncertainty()['uncertain'])
-        with self.assertRaises(ValueError):n.send_goal(1.,1.,0.)
-        n.scan_match_time=time.monotonic()
-        self.assertFalse(n.localization_uncertainty()['uncertain'])
-    def test_live_scan_mismatch_blocks_navigation(self):
+    def test_live_scan_points_use_map_transform(self):
         from sensor_msgs.msg import LaserScan
         n=self.configure();n.mode='navigation';n.initialized=True;n.pose=[.5,.5,0.]
         n.amcl_covariance=[.04,.04,.03];n.amcl_time=time.monotonic()
-        n.obstacle_distance=np.ones((100,100));n.obstacle_distance[:,20]=0.
-        n.scan_match=None
         transform=Mock()
-        transform.translation.x=transform.translation.y=0.
+        transform.translation.x=transform.translation.y=.5
         transform.rotation.x=transform.rotation.y=transform.rotation.z=0.
         transform.rotation.w=1.
-        n.tf.lookup_transform=Mock(return_value=Mock(transform=transform))
+        n.tf.lookup_transform=Mock(side_effect=[RuntimeError('scan timestamp not in cache'),Mock(transform=transform)])
         scan=LaserScan();scan.header.frame_id='laser';scan.range_min=.2;scan.range_max=6.
         scan.angle_min=scan.angle_increment=0.;scan.ranges=[.5]*90
         n.on_scan(scan)
-        self.assertAlmostEqual(n.scan_match,1.)
+        self.assertEqual(n.tf.lookup_transform.call_count,2)
+        self.assertEqual(len(n.scan_points),30)
+        self.assertAlmostEqual(n.scan_points[0][0],1.)
+        self.assertAlmostEqual(n.scan_points[0][1],.5)
+        self.assertEqual(n.dispatch('localization',{})['laser_points'],n.scan_points)
         self.assertFalse(n.localization_uncertainty()['uncertain'])
-        scan.ranges=[.2]*90
-        for _ in range(4):n.on_scan(scan)
-        self.assertLess(n.scan_match,.70)
-        self.assertTrue(n.localization_uncertainty()['uncertain'])
     def test_stationary_amcl_estimate_and_nomotion_sampling(self):
         n=self.configure();n.mode='navigation';n.initialized=True
         n.nomotion_client=Mock();n.nomotion_client.service_is_ready.return_value=True
@@ -160,7 +146,10 @@ class RosTests(unittest.TestCase):
         n.on_particle_cloud(cloud)
         self.assertLessEqual(len(n.dispatch('localization',{})['particles']),240)
         self.assertTrue(n.localization_uncertainty()['uncertain'])  # Sampling is still running.
-        n.sampling_until=0.;n.amcl_time-=30
+        n.sampling_count=3;n.amcl_history[-1][0]-=1.
+        n.on_amcl_pose(msg)
+        self.assertFalse(n.sampling_active())  # Native AMCL covariance converged early.
+        n.amcl_time-=30
         self.assertFalse(n.localization_uncertainty()['uncertain'])  # No new AMCL sample while stationary.
     def test_stalled_localization_is_activated(self):
         from lifecycle_msgs.msg import State, Transition
@@ -196,9 +185,9 @@ class RosTests(unittest.TestCase):
         n.initial_pub.publish.assert_called_once()
         self.assertTrue(n.initialized)
         msg=n.initial_pub.publish.call_args.args[0]
-        self.assertAlmostEqual(msg.pose.covariance[0],(.75)**2)
-        self.assertAlmostEqual(msg.pose.covariance[35],math.radians(45)**2)
-        self.assertEqual(n.initial_range,{'radius':1.5,'heading_range_deg':90.})
+        self.assertAlmostEqual(msg.pose.covariance[0],(.5)**2)
+        self.assertAlmostEqual(msg.pose.covariance[35],math.radians(15)**2)
+        self.assertEqual(n.initial_range,{'radius':1.,'heading_range_deg':30.})
         with self.assertRaisesRegex(ValueError,'位置范围'):
             n.dispatch('initialpose',{'x':1.,'y':1.,'yaw':0.,'radius':4.})
         with self.assertRaisesRegex(ValueError,'朝向范围'):
