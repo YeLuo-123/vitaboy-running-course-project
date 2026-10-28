@@ -2,7 +2,7 @@
   "schema_version": 1,
   "snapshot_scope": "Selected local project files; remote-only checkpoints and logs excluded",
   "hash_algorithm": "SHA-256 over original file bytes; manifest does not hash itself",
-  "total_bytes": 16681275,
+  "total_bytes": 16687040,
   "file_count_excluding_manifest": 333,
   "files": [
     {
@@ -1602,8 +1602,8 @@
     },
     {
       "path": "x5_http_console/README.md",
-      "bytes": 8701,
-      "sha256": "beedc5968a90bf2e7dc0d7a03d1eb9db6076c6fbda0cdf782a2cb197e01e986c"
+      "bytes": 9852,
+      "sha256": "ea2a38a1c4814a626246531620a45344b717b604290d071ef85a7b0802b119fe"
     },
     {
       "path": "x5_http_console/areas.py",
@@ -1622,8 +1622,8 @@
     },
     {
       "path": "x5_http_console/index.html",
-      "bytes": 41240,
-      "sha256": "76574132d0ed42bb54bc296e3ff8cc0a34946a00f5081ea1eefdaf88f680ece7"
+      "bytes": 43262,
+      "sha256": "5ac1ad8ef13b339de6d97da0422c4b67a564b5889caf6b2454692f6699b7cf35"
     },
     {
       "path": "x5_http_console/run.sh",
@@ -1632,8 +1632,8 @@
     },
     {
       "path": "x5_http_console/server.py",
-      "bytes": 48279,
-      "sha256": "5cdddee5072cfadaa37f09e8ff8b859f1097583e6c3c8413ba344db894e0110e"
+      "bytes": 49028,
+      "sha256": "1d1d30137f3f533d7f2019569dd731adab400919463164c90771d2ae8e348ae2"
     },
     {
       "path": "x5_http_console/speech.py",
@@ -1647,8 +1647,8 @@
     },
     {
       "path": "x5_http_console/test_console.py",
-      "bytes": 15662,
-      "sha256": "b71386d2923a9db4bb3bcdcbf53348ab5e1dcdc6c3dbaf2e94ea2f9909e30bc6"
+      "bytes": 17505,
+      "sha256": "45c119217244687362bbebd1c32231ff0219b8c3df88433bc932d9d586a85245"
     },
     {
       "path": "x5_http_console/velocity_guard.py",

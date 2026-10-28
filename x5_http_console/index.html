@@ -85,9 +85,9 @@
   </aside>
   <main>
     <div class="toolbar"><span id="mode" class="badge">待机</span><select id="tool" aria-label="地图操作"><option value="goal">导航目标</option><option value="initialpose">初始位姿</option><option value="area">绘制区域</option><option value="target">区域目标点</option></select><button id="fit">适应地图</button><span class="hint">点击选点，拖动指定朝向；滚轮缩放，Shift 拖动平移</span></div>
-    <div id="localize_help" role="status"><strong>定位需要校正</strong><div id="localize_detail">先放大地图，在小车实际所在房间点击车体中心，按住鼠标拖出车头方向，再发送初始位姿。发送后等待地图上的机器人箭头回到实车位置。</div><button id="localize_send" disabled>选点并指定朝向后重新定位</button></div>
+    <div id="localize_help" role="status"><strong>定位需要校正</strong><div id="localize_detail">在实体车大致所在区域点击中心；若知道车头方向，可拖出大致朝向。选择位置与朝向范围后，让 AMCL 在范围内匹配。</div><button id="localize_send" disabled>用当前范围重新定位</button></div>
     <div id="viewport"><canvas id="map" aria-label="机器人地图" tabindex="0"></canvas><div id="empty"><b>等待地图</b><span>启动建图，或加载一张已有地图</span></div></div>
-    <div id="localization_panel"><h2>AMCL 收敛过程</h2><p id="localization_metrics">等待初始位姿</p><button id="localization_sample">静止采样 12 秒</button><canvas id="localization_chart" aria-label="AMCL 位置与朝向不确定度曲线"></canvas><p>地图上的紫色点是定位粒子，紫色线是估计轨迹，虚线圈表示约 2 倍位置标准差；橙色箭头是你设置的初始位姿。小车移动时，轨迹也会包含实际运动。激光匹配率低于 70% 时会暂停导航；数值收敛仍需和实体位置核对。</p></div>
+    <div id="localization_panel"><h2>AMCL 粗定位与收敛</h2><div class="row"><div><label for="initial_radius">大致位置范围</label><select id="initial_radius"><option value="0.5">约 0.5 米</option><option value="1">约 1 米</option><option value="1.5" selected>约 1.5 米</option><option value="2">约 2 米</option><option value="3">约 3 米</option></select></div><div><label for="initial_heading_range">朝向误差范围</label><select id="initial_heading_range"><option value="30">约 ±30°</option><option value="90" selected>约 ±90°</option><option value="180">约 ±180°</option></select></div></div><p>点击你认为车所在区域的中心；车头大致已知时拖出方向。地图上的橙色圈表示初始位置范围，AMCL 会在该范围附近散布粒子并用激光更新。范围是概率分布，超出圈仍可能有少量粒子。</p><p id="localization_metrics">等待初始位姿</p><button id="localization_sample">静止采样 20 秒</button><canvas id="localization_chart" aria-label="AMCL 位置与朝向不确定度曲线"></canvas><p>紫色点是定位粒子，紫色线是估计轨迹，虚线圈表示约 2 倍位置标准差。激光匹配率低于 70% 或未取得有效匹配时会暂停导航；数值收敛仍需和实体位置核对。</p></div>
     <div class="legend"><span><i class="dot" style="background:#46c8f3"></i>机器人</span><span><i class="dot" style="background:#ffbd59"></i>目标或初始位姿</span><span><i class="dot" style="background:#4de0ad"></i>路径</span><span><i class="dot" style="background:#ba93ff"></i>区域轮廓</span><span>浅色为空闲 · 深色为障碍 · 灰色为未知</span></div>
     <div id="notice" role="status">正在连接小车</div>
     <div id="checks" class="checks" aria-label="系统状态"></div>
@@ -103,7 +103,7 @@ const canvas=$('map'),ctx=canvas.getContext('2d'),bitmap=document.createElement(
 let token='',client='',state={},map=null,version=-1,selection=null,drag=null,connected=false,working=false;
 let headingConfirmed=false;
 let areas=[],draftPolygon=[],editingAreaId=null,routeIds=[],loadedAreasFor='';
-let localizationData={history:[],particles:[],initial_pose:null,epoch:-1};
+let localizationData={history:[],particles:[],initial_pose:null,initial_range:null,epoch:-1};
 let batteryLevel='unknown';
 let view={scale:1,x:0,y:0};
 
@@ -144,10 +144,11 @@ function controls(){
   $('save').disabled=working||!connected||mode!=='mapping'||!checks.map_ok||state.armed;
   $('refreshmaps').disabled=working||!connected;
   const initial=$('tool').value==='initialpose';
+  const initialHeadingOk=headingConfirmed||$('initial_heading_range').value==='180';
   const target=$('tool').value==='target';
   $('send').textContent=initial?'设置初始位姿':target?'保存区域目标点':'发送导航目标';
-  $('send').disabled=working||!connected||!selection||$('tool').value==='area'||(initial?(mode!=='navigation'||!checks.map_ok||!checks.initialpose_ok||!headingConfirmed||state.localization?.sampling):target?(!editingLoadedMap()||!$('areas').value||routeActive()):(!state.ready||state.localization?.uncertain||state.manual||state.exploring||activeGoal()||routeActive()));
-  $('localize_send').disabled=working||!connected||!selection||!headingConfirmed||mode!=='navigation'||!checks.map_ok||!checks.initialpose_ok||state.localization?.sampling;
+  $('send').disabled=working||!connected||!selection||$('tool').value==='area'||(initial?(mode!=='navigation'||!checks.map_ok||!checks.initialpose_ok||!initialHeadingOk||state.localization?.sampling):target?(!editingLoadedMap()||!$('areas').value||routeActive()):(!state.ready||state.localization?.uncertain||state.manual||state.exploring||activeGoal()||routeActive()));
+  $('localize_send').disabled=working||!connected||!selection||!initialHeadingOk||mode!=='navigation'||!checks.map_ok||!checks.initialpose_ok||state.localization?.sampling;
   $('localization_sample').disabled=working||!connected||mode!=='navigation'||!checks.localized||!checks.scan_ok||!checks.odom_ok||state.armed||state.localization?.sampling;
   const editable=editingLoadedMap()&&!working&&!routeActive();
   $('area_new').disabled=!editable;$('area_redraw').disabled=!editable||!$('areas').value;
@@ -179,13 +180,14 @@ bind('refreshmaps',async()=>{try{await loadMaps()}catch(error){toast(error)}});
 async function sendSelection(){
   if(!selection)return;
   const target={x:selection.x,y:selection.y,yaw:Number($('yaw').value)*Math.PI/180};
+  if($('tool').value==='initialpose')Object.assign(target,{radius:Number($('initial_radius').value),heading_range_deg:Number($('initial_heading_range').value)});
   if($('tool').value==='target'){
     const result=await act('areas/target',{name:state.active_map,id:$('areas').value,target});
     if(result){await loadAreas();clearSelection();toast('目标点已保存到 '+result.area.name)}
   }else await act($('tool').value,target);
 }
 bind('send',sendSelection);
-bind('localize_send',async()=>{if(!selection||!headingConfirmed)return;const target={x:selection.x,y:selection.y,yaw:Number($('yaw').value)*Math.PI/180};await act('initialpose',target)});
+bind('localize_send',async()=>{if(!selection||(!headingConfirmed&&$('initial_heading_range').value!=='180'))return;const target={x:selection.x,y:selection.y,yaw:Number($('yaw').value)*Math.PI/180,radius:Number($('initial_radius').value),heading_range_deg:Number($('initial_heading_range').value)};await act('initialpose',target)});
 bind('localization_sample',()=>act('localization/sample'));
 bind('fit',fit);
 $('maps').addEventListener('change',async()=>{localStorage.setItem('x5SelectedMap',$('maps').value);await loadAreas();controls();draw()});
@@ -201,6 +203,7 @@ bind('route_start',()=>act('route/start',{ids:routeIds}));
 bind('route_stop',()=>act('route/stop'));
 $('tool').addEventListener('change',()=>{clearSelection();controls()});
 $('yaw').addEventListener('input',()=>{if(selection){selection.yaw=Number($('yaw').value)*Math.PI/180;headingConfirmed=true;controls();draw()}});
+for(const id of ['initial_radius','initial_heading_range'])$(id).addEventListener('change',()=>{controls();draw()});
 
 async function loadAreas(){
   const name=$('maps').value;
@@ -286,10 +289,12 @@ new ResizeObserver(()=>{const width=Math.round(canvas.clientWidth*devicePixelRat
 function worldPixel(x,y){const [ox,oy,a]=map.info.origin,dx=x-ox,dy=y-oy;return [(Math.cos(a)*dx+Math.sin(a)*dy)/map.info.resolution,map.info.height-(-Math.sin(a)*dx+Math.cos(a)*dy)/map.info.resolution]}
 function pixelWorld(px,py){const [ox,oy,a]=map.info.origin,x=(px-view.x)/view.scale*map.info.resolution,y=(map.info.height-(py-view.y)/view.scale)*map.info.resolution;return{x:ox+Math.cos(a)*x-Math.sin(a)*y,y:oy+Math.sin(a)*x+Math.cos(a)*y,yaw:Number($('yaw').value)*Math.PI/180}}
 function arrow(x,y,a,color){const p=worldPixel(x,y);ctx.save();ctx.translate(view.x+p[0]*view.scale,view.y+p[1]*view.scale);ctx.rotate(-(a-map.info.origin[2]));ctx.fillStyle=color;ctx.strokeStyle='#0b1422';ctx.lineWidth=2;const s=11*devicePixelRatio;ctx.beginPath();ctx.moveTo(s,0);ctx.lineTo(-s*.7,-s*.6);ctx.lineTo(-s*.4,0);ctx.lineTo(-s*.7,s*.6);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore()}
+function initialArea(x,y,radius){const p=worldPixel(x,y),px=radius/map.info.resolution*view.scale;ctx.save();ctx.beginPath();ctx.arc(view.x+p[0]*view.scale,view.y+p[1]*view.scale,px,0,Math.PI*2);ctx.fillStyle='rgba(255,189,89,.08)';ctx.fill();ctx.setLineDash([7*devicePixelRatio,5*devicePixelRatio]);ctx.strokeStyle='#ffbd59';ctx.lineWidth=2*devicePixelRatio;ctx.stroke();ctx.restore()}
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);$('empty').style.display=map?'none':'grid';if(!map)return;
   ctx.imageSmoothingEnabled=false;ctx.drawImage(bitmap,view.x,view.y,map.info.width*view.scale,map.info.height*view.scale);
   if(state.mode==='navigation'){
+    if(localizationData.initial_pose&&localizationData.initial_range)initialArea(localizationData.initial_pose[0],localizationData.initial_pose[1],localizationData.initial_range.radius);
     ctx.save();ctx.fillStyle='rgba(194,139,255,.38)';
     for(const [x,y] of localizationData.particles||[]){const p=worldPixel(x,y);ctx.beginPath();ctx.arc(view.x+p[0]*view.scale,view.y+p[1]*view.scale,1.5*devicePixelRatio,0,Math.PI*2);ctx.fill()}
     const trail=localizationData.history||[];
@@ -323,7 +328,7 @@ function draw(){
     }
   }
   if(state.plan?.length){ctx.beginPath();state.plan.forEach(([x,y],i)=>{const p=worldPixel(x,y);ctx[i?'lineTo':'moveTo'](view.x+p[0]*view.scale,view.y+p[1]*view.scale)});ctx.strokeStyle='#4de0ad';ctx.lineWidth=2*devicePixelRatio;ctx.stroke()}
-  if(state.pose)arrow(...state.pose,'#46c8f3');if(state.goal&&activeGoal())arrow(...state.goal,'#ffbd59');if(selection)arrow(selection.x,selection.y,selection.yaw,'#ffd485');
+  if(state.pose)arrow(...state.pose,'#46c8f3');if(state.goal&&activeGoal())arrow(...state.goal,'#ffbd59');if(selection){if(state.mode==='navigation'&&$('tool').value==='initialpose')initialArea(selection.x,selection.y,Number($('initial_radius').value));arrow(selection.x,selection.y,selection.yaw,'#ffd485')}
 }
 function drawConvergence(){
   const canvas=$('localization_chart'),ctx=canvas.getContext('2d'),w=Math.max(300,Math.round(canvas.clientWidth*devicePixelRatio)),h=Math.round(165*devicePixelRatio);
@@ -383,10 +388,12 @@ async function refresh(){
   $('localize_help').style.display=state.mode==='navigation'&&(!state.checks?.localized||state.localization?.uncertain)?'block':'none';
   const uncertainty=state.localization;
   $('localize_detail').textContent=uncertainty?.scan_match!=null&&uncertainty.scan_match<.70
-    ?`实时激光与地图墙面匹配仅 ${(uncertainty.scan_match*100).toFixed(0)}%。当前箭头可能落在相似但错误的位置；请按实体小车相对墙壁的准确位置重新设定初始位姿，或检查地图是否已与现场环境不符。`
+    ?`实时激光与地图墙面匹配仅 ${(uncertainty.scan_match*100).toFixed(0)}%。在实体车所在区域选中心和大致朝向，适当扩大范围让 AMCL 搜索；若仍不匹配，请检查地图与现场是否一致。`
+    :state.checks?.localized&&uncertainty?.scan_match==null
+    ?'正在等待有效的实时激光匹配，暂不能导航。请检查雷达和地图，或在实体车所在区域重新设置粗略初始位姿。'
     :uncertainty?.fresh&&uncertainty.uncertain
-    ?`当前定位不确定度约 X ±${uncertainty.sigma_x.toFixed(2)} m、Y ±${uncertainty.sigma_y.toFixed(2)} m、朝向 ±${uncertainty.sigma_yaw_deg.toFixed(0)}°。先停止导航，放大地图，在小车实际所在房间点击车体中心，按住鼠标拖出车头方向，再发送初始位姿。`
-    :'先放大地图，在小车实际所在房间点击车体中心，按住鼠标拖出车头方向，再发送初始位姿。发送后等待地图上的机器人箭头回到实车位置。';
+    ?`当前标准差 X ${uncertainty.sigma_x.toFixed(2)} m、Y ${uncertainty.sigma_y.toFixed(2)} m、朝向 ${uncertainty.sigma_yaw_deg.toFixed(0)}°。在实体车所在区域选中心和位置范围，AMCL 会用粒子与激光细化。`
+    :'在实体车大致所在区域点击中心并选择范围；车头大致已知时拖出方向。发送后观察粒子和激光匹配。';
   if(previousMode&&previousMode!==state.mode){
     clearSelection();
     if(state.mode==='navigation')$('tool').value='initialpose';
@@ -396,7 +403,7 @@ async function refresh(){
   if(state.mode==='idle'||state.mode==='error'){map=null;version=-1}
   else if(state.map_version!==version){const data=await api('map');if(data.info)paintMap(data)}
   if(state.mode==='navigation')localizationData=await api('localization');
-  else localizationData={history:[],particles:[],initial_pose:null,epoch:-1};
+  else localizationData={history:[],particles:[],initial_pose:null,initial_range:null,epoch:-1};
   const checks=state.checks||{},items=[['雷达',checks.scan_ok],['里程计',checks.odom_ok],['地图',checks.map_ok],['定位',checks.pose_ok],['导航',checks.nav_ok]];
   if(state.mode==='navigation')items.push(['初始位姿',checks.localized]);
   $('checks').replaceChildren(...items.map(([name,ok])=>{const item=document.createElement('span');const uncertain=name==='定位'&&state.mode==='navigation'&&state.localization?.uncertain;item.className='badge '+(ok&&!uncertain?'good':'bad');item.textContent=name+' '+(uncertain?checks.localized?'不稳定':'需设置初始位姿':ok?'就绪':'等待');return item}));

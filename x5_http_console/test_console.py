@@ -72,6 +72,7 @@ class RosTests(unittest.TestCase):
         n.scan_time=n.odom_time=n.map_time=n.lease=time.monotonic();n.pose=[1.,1.,0.]
         n.info={'width':100,'height':100,'resolution':.05,'origin':[0.,0.,0.]}
         n.grid=np.zeros(10000,dtype=np.int8)
+        n.scan_match=.9;n.scan_match_time=time.monotonic()
         return n
     def test_idle_cannot_move(self):
         with self.assertRaises(ValueError):self.node.send_goal(1.,1.,0.)
@@ -109,11 +110,23 @@ class RosTests(unittest.TestCase):
         self.assertTrue(n.localization_uncertainty()['uncertain'])
         n.amcl_covariance=[.04,.04,.03];n.amcl_time-=30;n.goal_time-=10
         self.assertTrue(n.localization_uncertainty()['uncertain'])
+    def test_navigation_requires_recent_scan_match(self):
+        n=self.configure();n.mode='navigation';n.initialized=True
+        n.amcl_covariance=[.04,.04,.03];n.amcl_time=time.monotonic()
+        n.scan_match=None
+        self.assertTrue(n.localization_uncertainty()['uncertain'])
+        with self.assertRaises(ValueError):n.send_goal(1.,1.,0.)
+        n.scan_match=.9;n.scan_match_time=time.monotonic()-3
+        self.assertTrue(n.localization_uncertainty()['uncertain'])
+        with self.assertRaises(ValueError):n.send_goal(1.,1.,0.)
+        n.scan_match_time=time.monotonic()
+        self.assertFalse(n.localization_uncertainty()['uncertain'])
     def test_live_scan_mismatch_blocks_navigation(self):
         from sensor_msgs.msg import LaserScan
         n=self.configure();n.mode='navigation';n.initialized=True;n.pose=[.5,.5,0.]
         n.amcl_covariance=[.04,.04,.03];n.amcl_time=time.monotonic()
         n.obstacle_distance=np.ones((100,100));n.obstacle_distance[:,20]=0.
+        n.scan_match=None
         transform=Mock()
         transform.translation.x=transform.translation.y=0.
         transform.rotation.x=transform.rotation.y=transform.rotation.z=0.
@@ -182,6 +195,22 @@ class RosTests(unittest.TestCase):
         n.dispatch('initialpose',{'x':1.,'y':1.,'yaw':0.})
         n.initial_pub.publish.assert_called_once()
         self.assertTrue(n.initialized)
+        msg=n.initial_pub.publish.call_args.args[0]
+        self.assertAlmostEqual(msg.pose.covariance[0],(.75)**2)
+        self.assertAlmostEqual(msg.pose.covariance[35],math.radians(45)**2)
+        self.assertEqual(n.initial_range,{'radius':1.5,'heading_range_deg':90.})
+        with self.assertRaisesRegex(ValueError,'位置范围'):
+            n.dispatch('initialpose',{'x':1.,'y':1.,'yaw':0.,'radius':4.})
+        with self.assertRaisesRegex(ValueError,'朝向范围'):
+            n.dispatch('initialpose',{'x':1.,'y':1.,'yaw':0.,'heading_range_deg':190.})
+    def test_broad_initial_pose_covariance(self):
+        n=self.configure();n.mode='navigation';n.initial_pub=Mock()
+        n.dispatch('initialpose',{'x':1.,'y':1.,'yaw':0.,'radius':2.,'heading_range_deg':180.})
+        msg=n.initial_pub.publish.call_args.args[0]
+        self.assertAlmostEqual(msg.pose.covariance[0],1.)
+        self.assertAlmostEqual(msg.pose.covariance[7],1.)
+        self.assertAlmostEqual(msg.pose.covariance[35],(math.pi/2)**2)
+        self.assertEqual(n.dispatch('localization',{})['initial_range']['radius'],2.)
     def test_sensor_stale(self):
         n=self.configure();self.assertTrue(n.ready());n.scan_time-=5;self.assertFalse(n.ready())
     def test_stop_cancels_pending_acceptance(self):

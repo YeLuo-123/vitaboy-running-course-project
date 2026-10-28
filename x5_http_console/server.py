@@ -73,6 +73,7 @@ class Console(Node):
         self.pose = None; self.plan = []; self.message = '等待启动建图或加载地图'
         self.amcl_covariance = None; self.amcl_time = 0.; self.amcl_estimate = None; self.initial_pose = None
         self.amcl_history = []; self.amcl_particles = []; self.localization_epoch = 0
+        self.initial_range = None
         self.last_odom_motion = 0.; self.sampling_until = 0.; self.sampling_next = 0.
         self.sampling_count = 0; self.sampling_future = None
         self.speaker = Speaker()
@@ -146,7 +147,7 @@ class Console(Node):
             raise ValueError('请保持小车静止再采样')
         if not self.nomotion_client.service_is_ready():
             raise ValueError('AMCL 静止更新服务尚未就绪')
-        self.sampling_until=time.monotonic()+12
+        self.sampling_until=time.monotonic()+20
         self.sampling_next=time.monotonic()
         self.sampling_count=0;self.sampling_future=None
         self.localization_epoch+=1
@@ -183,8 +184,8 @@ class Console(Node):
         sx,sy,sa=(math.sqrt(value) for value in self.amcl_covariance)
         moving_without_update=age>3 and self.last_odom_motion>self.amcl_time and time.monotonic()-self.last_odom_motion<3
         active_goal_without_update=self.armed and age>5 and time.monotonic()-self.goal_time>8
-        map_mismatch=(self.scan_match is not None and time.monotonic()-self.scan_match_time<2
-                      and self.scan_match<.70)
+        map_mismatch=(self.scan_match is None or time.monotonic()-self.scan_match_time>=2
+                      or self.scan_match<.70)
         return {'fresh':fresh,'age_sec':round(age,1),'estimate':self.amcl_estimate,'sigma_x':sx,'sigma_y':sy,
                 'sigma_yaw_deg':math.degrees(sa),'scan_match':self.scan_match,
                 'sampling':self.sampling_active(),'sample_count':self.sampling_count,
@@ -360,6 +361,7 @@ class Console(Node):
         self.mode = 'idle'; self.grid = None; self.info = None; self.plan = []; self.pose = None
         self.obstacle_distance = None; self.scan_match = None; self.scan_match_time = 0.
         self.amcl_covariance = None; self.amcl_time = 0.;self.amcl_estimate=None;self.initial_pose=None
+        self.initial_range = None
         self.amcl_history=[];self.amcl_particles=[];self.sampling_count=0
         self.active_map = None
         self.initialized = False; self.tf.clear()
@@ -391,6 +393,7 @@ class Console(Node):
         self.mode = mode; self.message = '正在启动 ROS，请等待地图、传感器和定位就绪'
         self.active_map = name if mode == 'navigation' else None
         self.amcl_covariance = None; self.amcl_time = 0.;self.amcl_estimate=None;self.initial_pose=None
+        self.initial_range = None
         self.scan_match = None; self.scan_match_time = 0.
         self.amcl_history=[];self.amcl_particles=[];self.sampling_count=0;self.sampling_until=0.
         self.route_steps=[];self.route_index=-1;self.route_phase='idle';self.route_note=''
@@ -641,7 +644,7 @@ class Console(Node):
         if task == 'localization':
             return {'epoch':self.localization_epoch,'history':[[round(t-self.amcl_history[0][0],2),*values]
                     for t,*values in self.amcl_history] if self.amcl_history else [],
-                    'particles':self.amcl_particles,'initial_pose':self.initial_pose,
+                    'particles':self.amcl_particles,'initial_pose':self.initial_pose,'initial_range':self.initial_range,
                     'quality':self.localization_uncertainty()}
         if task == 'maps': return {'maps':sorted(p.parent.name for p in MAPS.glob('*/map.yaml') if not p.parent.name.startswith('.'))}
         if task == 'areas':
@@ -691,6 +694,12 @@ class Console(Node):
             if self.mode != 'navigation': raise ValueError('仅在已加载地图的导航模式下设置初始位姿')
             x,y,theta = float(data['x']),float(data['y']),float(data.get('yaw',0))
             if not all(math.isfinite(v) for v in (x,y,theta)): raise ValueError('坐标必须为有限数值')
+            radius = float(data.get('radius',1.5))
+            heading_range = float(data.get('heading_range_deg',90.))
+            if not math.isfinite(radius) or not .3<=radius<=3.:
+                raise ValueError('位置范围须为 0.3–3 米')
+            if not math.isfinite(heading_range) or not 15.<=heading_range<=180.:
+                raise ValueError('朝向范围须为 15–180 度')
             if self.grid is None or self.info is None: raise ValueError('请等待地图加载完成')
             if self.initial_pub.get_subscription_count() == 0: raise ValueError('定位节点尚未就绪，请稍后重试')
             col,row = world_to_cell(x,y,self.info)
@@ -702,17 +711,22 @@ class Console(Node):
             msg = PoseWithCovarianceStamped(); msg.header.frame_id = 'map'; msg.header.stamp = self.get_clock().now().to_msg()
             msg.pose.pose.position.x=x; msg.pose.pose.position.y=y
             msg.pose.pose.orientation.z=math.sin(theta/2); msg.pose.pose.orientation.w=math.cos(theta/2)
-            # The operator selects the robot centre and heading on the map.
-            # Keep particles near that room instead of spreading them across adjacent rooms.
-            msg.pose.covariance[0]=.04; msg.pose.covariance[7]=.04; msg.pose.covariance[35]=.03
+            # /initialpose is a Gaussian prior, not an exact pose or a hard polygon.
+            # The chosen range is approximately two standard deviations per axis.
+            sigma_xy=radius/2
+            sigma_yaw=math.radians(heading_range)/2
+            msg.pose.covariance[0]=sigma_xy**2
+            msg.pose.covariance[7]=sigma_xy**2
+            msg.pose.covariance[35]=sigma_yaw**2
             self.amcl_covariance = None; self.amcl_time = 0.
             self.scan_match = None; self.scan_match_time = 0.
             self.initial_pub.publish(msg); self.initialized=True; self.message='初始位姿已发送，请确认地图位置和朝向'
             self.amcl_estimate=None;self.amcl_history=[];self.amcl_particles=[];self.initial_pose=[x,y,theta]
+            self.initial_range={'radius':radius,'heading_range_deg':heading_range}
             self.sampling_count=0;self.sampling_until=0.
             try:self.start_sampling()
             except ValueError as exc:self.message='初始位姿已发送；静止采样暂不可用：'+str(exc)
-            self.amcl_history.insert(0,[time.monotonic(),x,y,theta,.2,.2,math.degrees(math.sqrt(.03))])
+            self.amcl_history.insert(0,[time.monotonic(),x,y,theta,sigma_xy,sigma_xy,math.degrees(sigma_yaw)])
         elif task == 'maps/save': return self.save_map(data.get('name'))
         else: raise ValueError('未知接口')
         return {'ok':True}
