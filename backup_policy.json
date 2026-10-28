@@ -155,6 +155,8 @@
     "x5_http_console/config/cartographer.lua",
     "x5_http_console/x5-http-console.service",
     "x5_http_console/x5-vision.service",
-    "x5_http_console/vision_requirements.txt"
+    "x5_http_console/vision_requirements.txt",
+    "x5_http_console/x5-voice-greeting.service",
+    "x5_http_console/asr_requirements.txt"
   ]
 }

@@ -89,11 +89,23 @@ class RosTests(unittest.TestCase):
         n.scan_time=n.odom_time=n.map_time=n.lease=time.monotonic();n.pose=[1.,1.,0.]
         n.info={'width':100,'height':100,'resolution':.05,'origin':[0.,0.,0.]}
         n.grid=np.zeros(10000,dtype=np.int8)
+        n.smoother_active=True;n.smoother_state_time=time.monotonic()
         return n
     def test_idle_cannot_move(self):
         with self.assertRaises(ValueError):self.node.send_goal(1.,1.,0.)
         self.assertFalse(self.node.armed)
         with self.assertRaises(ValueError):self.node.manual_start('tab')
+    def test_greeting_uses_shared_speaker_without_driving(self):
+        n=self.node;n.speaker=Mock();n.speaker.busy.return_value=False
+        result=n.dispatch('voice/greet',{'text':'你好'})
+        self.assertTrue(result['accepted']);n.speaker.say.assert_called_once_with('你好')
+        self.assertFalse(n.armed);n.action.send_goal_async.assert_not_called()
+        self.assertEqual(n.dispatch('voice/greet',{'text':'你好'})['reason'],'cooldown')
+    def test_greeting_does_not_interrupt_navigation_announcement(self):
+        n=self.node;n.speaker=Mock();n.speaker.busy.return_value=True
+        self.assertEqual(n.dispatch('voice/greet',{'text':'你好'})['reason'],'speaker_busy')
+        n.speaker.say.assert_not_called()
+        with self.assertRaisesRegex(ValueError,'仅支持'):n.dispatch('voice/greet',{'text':'不要说你好'})
     def test_unknown_and_outside_goal_rejected(self):
         n=self.configure();n.grid[:]=-1
         for x,y in [(1.,1.),(-1.,0.),(100.,100.),(math.nan,1.)]:
@@ -191,7 +203,7 @@ class RosTests(unittest.TestCase):
         from lifecycle_msgs.msg import State, Transition
         n=self.configure();n.mode='navigation';n.stack_started=time.monotonic()-20
         lifecycle={}
-        for name in ('map_server','amcl'):
+        for name in ('map_server','amcl','velocity_smoother'):
             get_state=Mock();change_state=Mock()
             get_state.service_is_ready.return_value=True
             change_state.service_is_ready.return_value=True
@@ -204,9 +216,36 @@ class RosTests(unittest.TestCase):
         n.lifecycle=lifecycle
         n.recover_localization()
         self.assertFalse(n.recovery_busy)
+        self.assertTrue(n.velocity_ready())
         for _,change_state in lifecycle.values():
             self.assertEqual(change_state.call_async.call_args.args[0].transition.id,
                              Transition.TRANSITION_ACTIVATE)
+    def test_navigation_requires_active_velocity_smoother(self):
+        n=self.configure();n.mode='navigation';n.initialized=True
+        n.smoother_active=False
+        self.assertFalse(n.ready());self.assertFalse(n.diagnostics()['smoother_ok'])
+        with self.assertRaisesRegex(ValueError,'导航尚未就绪'):n.send_goal(1.,1.,0.)
+        n.smoother_active=True;n.smoother_state_time=time.monotonic()
+        self.assertTrue(n.ready())
+        n.smoother_state_time-=21
+        self.assertFalse(n.ready())
+    def test_mapping_recovers_velocity_without_localization_nodes(self):
+        from lifecycle_msgs.msg import State,Transition
+        n=self.configure();n.stack_started=time.monotonic()-20;n.smoother_active=False
+        state_client=Mock();change_client=Mock()
+        state=concurrent.futures.Future();state.set_result(Mock(current_state=Mock(id=State.PRIMARY_STATE_INACTIVE)))
+        changed=concurrent.futures.Future();changed.set_result(Mock(success=True))
+        state_client.call_async.return_value=state;change_client.call_async.return_value=changed
+        n.lifecycle={'velocity_smoother':(state_client,change_client)}
+        n.recover_localization()
+        self.assertTrue(n.velocity_ready());self.assertFalse(n.recovery_busy)
+        self.assertEqual(change_client.call_async.call_args.args[0].transition.id,Transition.TRANSITION_ACTIVATE)
+    def test_missing_smoother_service_revokes_cached_readiness(self):
+        n=self.configure();n.stack_started=time.monotonic()-20
+        state_client=Mock();state_client.service_is_ready.return_value=False
+        n.lifecycle={'velocity_smoother':(state_client,Mock())}
+        n.recover_localization()
+        self.assertFalse(n.velocity_ready());self.assertFalse(n.ready())
     def test_initialpose_requires_map_and_localization_subscriber(self):
         n=self.configure();n.mode='navigation';n.initial_pub=Mock()
         n.initial_pub.get_subscription_count.return_value=0

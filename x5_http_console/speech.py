@@ -49,7 +49,12 @@ class Speaker:
     def _execute(self, args, generation):
         with self.lock:
             if generation!=self.generation: return
-            process=subprocess.Popen(args,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
+            environment=None
+            if args[:4] == ['aplay','-q','-D','pulse']:
+                environment=os.environ.copy()
+                environment.setdefault('PULSE_SERVER',f'unix:/run/user/{os.getuid()}/pulse/native')
+                environment.setdefault('PULSE_SINK','alsa_output.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.analog-stereo')
+            process=subprocess.Popen(args,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,env=environment)
             self.process=process
         try:
             _,error=process.communicate(timeout=20)
@@ -67,7 +72,11 @@ class Speaker:
         os.close(fd)
         try:
             self._execute(['espeak-ng','-v','zh','-s','150','-w',path,text],generation)
-            self._execute(['aplay','-q','-D',self.device,path],generation)
+            try:
+                self._execute(['aplay','-q','-D',self.device,path],generation)
+            except RuntimeError as exc:
+                if 'Device or resource busy' not in str(exc) or self.device == 'pulse': raise
+                self._execute(['aplay','-q','-D','pulse',path],generation)
         except Exception as exc:
             with self.lock:
                 if generation==self.generation:self.error=str(exc)

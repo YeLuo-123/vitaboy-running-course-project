@@ -434,7 +434,7 @@ async function refresh(){
   else if(state.map_version!==version){const data=await api('map');if(data.info)paintMap(data)}
   if(state.mode==='navigation')localizationData=await api('localization');
   else localizationData={history:[],particles:[],laser_points:[],initial_pose:null,initial_range:null,epoch:-1};
-  const checks=state.checks||{},items=[['雷达',checks.scan_ok],['里程计',checks.odom_ok],['地图',checks.map_ok],['定位',checks.pose_ok],['导航',checks.nav_ok]];
+  const checks=state.checks||{},items=[['雷达',checks.scan_ok],['里程计',checks.odom_ok],['地图',checks.map_ok],['定位',checks.pose_ok],['导航',checks.nav_ok],['速度输出',checks.smoother_ok]];
   if(state.mode==='navigation')items.push(['初始位姿',checks.localized]);
   $('checks').replaceChildren(...items.map(([name,ok])=>{const item=document.createElement('span');const uncertain=name==='定位'&&state.mode==='navigation'&&state.localization?.uncertain;item.className='badge '+(ok&&!uncertain?'good':'bad');item.textContent=name+' '+(uncertain?checks.localized?'不稳定':'需设置初始位姿':ok?'就绪':'等待');return item}));
   const task=document.createElement('span');task.className='badge';task.textContent='任务 '+(({'idle':'无','pending':'等待接收','executing':'执行中','succeeded':'已完成','failed':'失败','rejected':'已拒绝','canceled':'已取消','stopped':'已停止'})[state.goal_status]||state.goal_status);

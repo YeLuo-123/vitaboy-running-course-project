@@ -1,0 +1,21 @@
+[Unit]
+Description=Offline microphone hello response
+After=x5-http-console.service sound.target
+Wants=x5-http-console.service
+
+[Service]
+Type=simple
+User=wheeltec
+SupplementaryGroups=audio
+WorkingDirectory=/home/wheeltec/x5_http_console
+ExecStart=/home/wheeltec/x5_asr_venv/bin/python /home/wheeltec/x5_http_console/voice_greeting.py
+Environment=PYTHONUNBUFFERED=1
+Nice=10
+CPUQuota=100%
+MemoryMax=700M
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

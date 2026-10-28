@@ -2,8 +2,8 @@
   "schema_version": 1,
   "snapshot_scope": "Selected local project files; remote-only checkpoints and logs excluded",
   "hash_algorithm": "SHA-256 over original file bytes; manifest does not hash itself",
-  "total_bytes": 16761768,
-  "file_count_excluding_manifest": 345,
+  "total_bytes": 16781139,
+  "file_count_excluding_manifest": 352,
   "files": [
     {
       "path": ".gitattributes",
@@ -12,8 +12,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 21883,
-      "sha256": "24faf183ca1fcc00ffa0b499fd83a3046987e67faacfd5d921c10973ab92f953"
+      "bytes": 22165,
+      "sha256": "58e85babd5d1aeb526c6cb7757e2e05f2625048f530ec8c57a352f4f8bcc437e"
     },
     {
       "path": "README.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "backup_policy.json",
-      "bytes": 7534,
-      "sha256": "184dbf249e6d0556b89eb871c8b259df3842dc4a53c1511f4b1008427921144f"
+      "bytes": 7627,
+      "sha256": "1245a7de377b9d1a8a369c4828a26d0d8a9623923b104c2fc64764ec20460f81"
     },
     {
       "path": "honor_diagnostics/evaluate_locomotion.py",
@@ -1602,8 +1602,8 @@
     },
     {
       "path": "x5_http_console/README.md",
-      "bytes": 19216,
-      "sha256": "c7d56c250d183ea2e553b0a60ef651eada2ddc671e5fcd0622482cec868885a6"
+      "bytes": 22441,
+      "sha256": "6434a698fda8ff8e2f1ccdfffb1100ee7a23900d50983bb8dfc11dea59f05beb"
     },
     {
       "path": "x5_http_console/areas.py",
@@ -1611,9 +1611,19 @@
       "sha256": "ba2f4ab26098244935d75146f903ae6e1d275b859fc89c3a630a9b6584bb51dc"
     },
     {
+      "path": "x5_http_console/asr_requirements.txt",
+      "bytes": 27,
+      "sha256": "baa1d8344b480b621f47c840bd6e3b109c3b1d327a0bb35d729eac4319e0e109"
+    },
+    {
       "path": "x5_http_console/config/cartographer.lua",
       "bytes": 2043,
       "sha256": "e2a75d88ce5ad21bc94667a39a6cc26fcb2c674bdd51e2befc20125c818b635c"
+    },
+    {
+      "path": "x5_http_console/config/greeting_acceptance.json",
+      "bytes": 788,
+      "sha256": "48d933b88cb444a260f9c62b9c47a194b3f35dc352ff33a3c6b00eb4dfa9536a"
     },
     {
       "path": "x5_http_console/config/nav2_params.yaml",
@@ -1636,14 +1646,24 @@
       "sha256": "ceadfbc01548191665b32f552cdd94b14850d4ddf33c58b9638fb7d87ee923c0"
     },
     {
+      "path": "x5_http_console/fetch_greeting_model.py",
+      "bytes": 1323,
+      "sha256": "0c692e6cfd1b541a06f22d0d03f383cf1c5cf2d46ab414781aeaca094aad2ee8"
+    },
+    {
       "path": "x5_http_console/fetch_vision_models.py",
       "bytes": 1195,
       "sha256": "ac665f766800eed01a137a98e4cc8104dbbf2c98d9ec5ef062e09730390d9dbd"
     },
     {
+      "path": "x5_http_console/greeting_rules.py",
+      "bytes": 822,
+      "sha256": "1f150a82d070c9c4bad6e21714eb3e7c96f3d90f6049f2fd4ebeebe42b33621d"
+    },
+    {
       "path": "x5_http_console/index.html",
-      "bytes": 48327,
-      "sha256": "c0a703be6efaf69010d139c01d2f146fec70ca0cf6aa6e7769ee8f87debcb34c"
+      "bytes": 48363,
+      "sha256": "1c33f5ff964bf363e06f432ce26de7b0ede62d01dde5da9c8893884e715a23f9"
     },
     {
       "path": "x5_http_console/normalize_existing_maps.py",
@@ -1667,13 +1687,13 @@
     },
     {
       "path": "x5_http_console/server.py",
-      "bytes": 51095,
-      "sha256": "0463176d8b01af3cd10809aa5cc47473c63cf00095d52037ded9fe91d7c44521"
+      "bytes": 52720,
+      "sha256": "e3ef39ea1caca25e5567434a908e1b626f22c4bfa0bfb46b1dc4c82dfd4bda7b"
     },
     {
       "path": "x5_http_console/speech.py",
-      "bytes": 2834,
-      "sha256": "f0427ac333975f06c7ca0e286440d97912b29a609b38525636ba5f62f0c6dd1a"
+      "bytes": 3441,
+      "sha256": "e48ae06c21deea9ec149528b219eebd0719c78bd3f024df956cec2b176efb769"
     },
     {
       "path": "x5_http_console/stack.launch.py",
@@ -1682,8 +1702,13 @@
     },
     {
       "path": "x5_http_console/test_console.py",
-      "bytes": 19088,
-      "sha256": "4606ac4968cf251ee396c67b2293d77ed18dc914ee077d621131352db4fdb7d1"
+      "bytes": 21824,
+      "sha256": "46e8352bb68c43225507ab234b14cbef4bd7a127444e50ca5a5c7005e66505af"
+    },
+    {
+      "path": "x5_http_console/test_greeting.py",
+      "bytes": 1732,
+      "sha256": "61db40dfbcff2bd4b06fb59e514a07182a7b915b030c1ae2500446bdd1afbe79"
     },
     {
       "path": "x5_http_console/test_object_search.py",
@@ -1711,6 +1736,11 @@
       "sha256": "23044ce6ae7f3943ab19d6c8d17c2c801f8f9847a54fddb7d4148961e73d6ce3"
     },
     {
+      "path": "x5_http_console/voice_greeting.py",
+      "bytes": 5586,
+      "sha256": "1b50dcddcb3b25edc05d0cecd7b9b8d62b7aead7ea28dad7a8533a64757c72e6"
+    },
+    {
       "path": "x5_http_console/x5-http-console.service",
       "bytes": 330,
       "sha256": "4dd4339ccd54aee8211ef23aab3145feef13e005f9130fbbfa12d34dad709df3"
@@ -1719,6 +1749,11 @@
       "path": "x5_http_console/x5-vision.service",
       "bytes": 485,
       "sha256": "29e2af3d8fa09d044c7fcb8bfbf7defeed53c47112825ae0ca7288410951a3aa"
+    },
+    {
+      "path": "x5_http_console/x5-voice-greeting.service",
+      "bytes": 489,
+      "sha256": "1fed8434ef747e609d71e7a2a129d3712bf25e9bc40f9d4dee363f817c0759c1"
     },
     {
       "path": "另一台主机部署与开展步骤.md",

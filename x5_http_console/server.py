@@ -39,6 +39,7 @@ from core import FREE_LIMIT, amcl_map_pixels, valid_name, world_to_cell, frontie
 from areas import load_areas, save_area, set_target, delete_area, validate_target
 from speech import Speaker
 from object_search import VisionClient, RoomSearch
+from greeting_rules import is_greeting
 
 ROOT = Path(__file__).resolve().parent
 MAPS = ROOT/'maps'
@@ -78,12 +79,14 @@ class Console(Node):
         self.last_odom_motion = 0.; self.sampling_until = 0.; self.sampling_next = 0.
         self.sampling_count = 0; self.sampling_future = None
         self.speaker = Speaker()
+        self.last_greeting = float('-inf')
         self.vision = VisionClient(enabled=not dry_run)
         self.search_maps = MAPS
         self.search = RoomSearch(self, self.vision)
         self.route_steps = []; self.route_index = -1; self.route_phase = 'idle'
         self.route_due = 0.; self.route_note = ''
         self.initialized = False; self.last_nav = 0.; self.nav_twist = Twist()
+        self.smoother_active = False; self.smoother_state_time = 0.
         self.tf = Buffer(); self.listener = TransformListener(self.tf, self)
         map_qos = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL, reliability=ReliabilityPolicy.RELIABLE)
         self.create_subscription(OccupancyGrid, '/map', self.on_map, map_qos)
@@ -102,7 +105,7 @@ class Console(Node):
         self.lifecycle = {
             name: (self.create_client(GetState, f'/{name}/get_state'),
                    self.create_client(ChangeState, f'/{name}/change_state'))
-            for name in ('map_server', 'amcl')
+            for name in ('map_server', 'amcl', 'velocity_smoother')
         }
         self.create_timer(.1, self.tick)
         self.create_timer(.25, self.search.tick)
@@ -240,9 +243,12 @@ class Console(Node):
         now = time.monotonic()
         return (self.mode in ('mapping','navigation') and self.process is not None and self.process.poll() is None
                 and now-self.scan_time < 1.5 and now-self.odom_time < 1.5 and self.pose is not None
-                and self.grid is not None and self.action.server_is_ready()
+                and self.grid is not None and self.action.server_is_ready() and self.velocity_ready()
                 and (self.mode != 'navigation' or self.initialized)
                 and (self.mode != 'mapping' or now-self.map_time < 5))
+
+    def velocity_ready(self):
+        return self.smoother_active and time.monotonic()-self.smoother_state_time < 20
 
     def manual_ready(self):
         now = time.monotonic()
@@ -259,6 +265,7 @@ class Console(Node):
             'map_ok': self.grid is not None and (self.mode != 'mapping' or now-self.map_time < 5),
             'pose_ok': self.pose is not None,
             'nav_ok': self.action.server_is_ready(),
+            'smoother_ok': self.velocity_ready(),
             'initialpose_ok': self.initial_pub.get_subscription_count() > 0,
             'localized': self.initialized if self.mode == 'navigation' else True,
         }
@@ -294,7 +301,7 @@ class Console(Node):
             elif not (self.manual_ready() if self.manual else self.ready()):
                 checks=self.diagnostics()
                 missing=[name for name,key in [('雷达','scan_ok'),('里程计','odom_ok'),('地图','map_ok'),
-                                                ('定位 TF','pose_ok'),('导航服务','nav_ok')] if not checks[key]]
+                                                ('定位 TF','pose_ok'),('导航服务','nav_ok'),('速度输出','smoother_ok')] if not checks[key]]
                 reason='导航未就绪：'+('、'.join(missing) if missing else 'ROS 进程或初始位姿')
             elif localization and localization['uncertain']:
                 reason=localization['reason']
@@ -390,6 +397,7 @@ class Console(Node):
         self.amcl_history=[];self.amcl_particles=[];self.sampling_count=0
         self.active_map = None
         self.initialized = False; self.tf.clear()
+        self.smoother_active = False; self.smoother_state_time = 0.
         self.last_stop = time.monotonic()
         self.recovery_sequence += 1; self.recovery_busy = False
 
@@ -398,7 +406,7 @@ class Console(Node):
         if self.mode != 'idle': raise ValueError('请先停止当前模式，再切换模式')
         if time.time()<1700000000:
             raise ValueError('小车系统时钟尚未同步，请联网等待正确时间后再启动 ROS')
-        owned_nodes = {'wheeltec_robot','wheeltec_robot_node','cartographer_node','amcl','controller_server','lslidar_driver_node'}
+        owned_nodes = {'wheeltec_robot','wheeltec_robot_node','cartographer_node','amcl','controller_server','lslidar_driver_node','velocity_smoother'}
         conflicts = owned_nodes.intersection(name for name, _ in self.get_node_names_and_namespaces())
         # DDS discovery can briefly retain nodes after ros2 launch exits.
         if conflicts and time.monotonic()-self.last_stop < 15:
@@ -425,13 +433,14 @@ class Console(Node):
         self.amcl_history=[];self.amcl_particles=[];self.sampling_count=0;self.sampling_until=0.
         self.route_steps=[];self.route_index=-1;self.route_phase='idle';self.route_note=''
         self.stack_started = time.monotonic(); self.recovery_busy = False
+        self.smoother_active = False; self.smoother_state_time = 0.
         self.excluded = []; self.empty_count = 0; self.goal = None
         self.goal_status = 'idle'; self.scan_time = 0.; self.odom_time = 0.
 
     def recover_localization(self):
-        """Complete Nav2 localization activation if its startup manager stalled."""
+        """Check localization/velocity lifecycle nodes and recover stalled bringup."""
         now = time.monotonic()
-        if (self.mode != 'navigation' or self.process is None or self.process.poll() is not None
+        if (self.mode not in ('mapping','navigation') or self.process is None or self.process.poll() is not None
                 or now-self.stack_started < 12):
             return
         if self.recovery_busy and now-self.recovery_started < 15: return
@@ -441,32 +450,39 @@ class Console(Node):
         self._recover_node(0, self.recovery_sequence)
 
     def _recover_node(self, index, sequence):
-        if sequence != self.recovery_sequence or self.mode != 'navigation': return
-        names = ('map_server', 'amcl')
+        if sequence != self.recovery_sequence or self.mode not in ('mapping','navigation'): return
+        names = ('map_server', 'amcl', 'velocity_smoother') if self.mode == 'navigation' else ('velocity_smoother',)
         if index == len(names):
             self.recovery_busy = False
             return
         name = names[index]
         state_client, change_client = self.lifecycle[name]
         if not state_client.service_is_ready():
+            if name == 'velocity_smoother': self.smoother_active = False
             self._recover_node(index+1, sequence)
             return
         future = state_client.call_async(GetState.Request())
         def got_state(result):
-            if sequence != self.recovery_sequence or self.mode != 'navigation': return
+            if sequence != self.recovery_sequence or self.mode not in ('mapping','navigation'): return
             try: state = result.result().current_state.id
             except Exception as exc:
+                if name == 'velocity_smoother': self.smoother_active = False
                 self.get_logger().warning(f'{name} 状态查询失败：{exc}')
                 self._recover_node(index+1, sequence); return
+            if name == 'velocity_smoother':
+                self.smoother_active = state == State.PRIMARY_STATE_ACTIVE
+                self.smoother_state_time = time.monotonic()
             if state != State.PRIMARY_STATE_INACTIVE or not change_client.service_is_ready():
                 self._recover_node(index+1, sequence); return
             request = ChangeState.Request()
             request.transition.id = Transition.TRANSITION_ACTIVATE
             change = change_client.call_async(request)
             def activated(done):
-                if sequence != self.recovery_sequence or self.mode != 'navigation': return
+                if sequence != self.recovery_sequence or self.mode not in ('mapping','navigation'): return
                 try:
                     if done.result().success:
+                        if name == 'velocity_smoother':
+                            self.smoother_active = True; self.smoother_state_time = time.monotonic()
                         self.get_logger().info(f'{name} 已自动激活')
                     else:
                         self.get_logger().warning(f'{name} 自动激活失败')
@@ -680,7 +696,13 @@ class Console(Node):
             map_name=valid_name(data.get('name'))
             if not (MAPS/map_name/'map.yaml').is_file(): raise ValueError('地图不存在')
             return {'name':map_name,'areas':load_areas(MAPS/map_name)}
-        if task == 'search/start':
+        if task == 'voice/greet':
+            if not is_greeting(data.get('text')): raise ValueError('仅支持你好问候')
+            if self.speaker.busy(): return {'accepted':False,'reason':'speaker_busy'}
+            if time.monotonic()-self.last_greeting < 6: return {'accepted':False,'reason':'cooldown'}
+            self.speaker.say('你好');self.last_greeting=time.monotonic()
+            return {'accepted':True}
+        elif task == 'search/start':
             self.search.start(data,data.get('_client'))
         elif task == 'search/check':
             self.search.start(data,data.get('_client'),check_only=True)
@@ -820,7 +842,7 @@ def main():
                 if not isinstance(data,dict): raise ValueError('需要 JSON 对象')
                 data['_client'] = self.headers.get('X-Control-Client','api')
                 path=urlparse(self.path).path
-                allowed={'heartbeat','mapping/start','navigation/start','localization/sample','mode/stop','stop','manual/start','manual/drive','manual/stop','explore/start','goal','initialpose','maps/save','areas/save','areas/target','areas/delete','route/start','route/stop','search/start','search/check','search/stop'}
+                allowed={'heartbeat','mapping/start','navigation/start','localization/sample','mode/stop','stop','manual/start','manual/drive','manual/stop','explore/start','goal','initialpose','maps/save','areas/save','areas/target','areas/delete','route/start','route/stop','search/start','search/check','search/stop','voice/greet'}
                 if not path.startswith('/api/') or path[5:] not in allowed: return self.reply(404,{'error':'不存在'})
                 self.reply(200,command(path[5:],data))
             except Exception as e:self.reply(400,{'error':str(e)})

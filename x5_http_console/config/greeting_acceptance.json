@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "microphone": "iflytek XFM-DP-V0.0.18 USB Audio",
+  "sample_rate": 16000,
+  "channels": 1,
+  "model": "vosk-model-small-cn-0.22",
+  "model_archive_sha256": "3af8b0e7e0f835ae9d414ce5df580237a3cfb08d586c9fbbb0f7ff29ad5b14ba",
+  "offline_recognition": true,
+  "grammar_restricted": false,
+  "static_microphone_test_hello_count": 2,
+  "continuous_listener_verified_response_count": 1,
+  "operator_confirmed_automatic_reply": true,
+  "echo_loop_observed": false,
+  "cooldown_seconds": 6,
+  "playback_echo_tail_seconds": 1.5,
+  "recognition_confidence_threshold": 0.65,
+  "startup_service_enabled": true,
+  "control_and_greeting_tests_passed": 39,
+  "raw_audio_stored_by_continuous_service": false,
+  "far_field_recognition_verified": false
+}
