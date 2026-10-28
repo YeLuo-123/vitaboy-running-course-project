@@ -153,6 +153,8 @@
     "official_policy_sim/onboard/evidence/leg_posture_readonly.json",
     "x5_http_console/index.html",
     "x5_http_console/config/cartographer.lua",
-    "x5_http_console/x5-http-console.service"
+    "x5_http_console/x5-http-console.service",
+    "x5_http_console/x5-vision.service",
+    "x5_http_console/vision_requirements.txt"
   ]
 }

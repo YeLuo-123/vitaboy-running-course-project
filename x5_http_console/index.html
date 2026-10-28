@@ -37,6 +37,9 @@
     .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
     #notice{margin-top:15px;padding:12px;background:#192d42;border-left:3px solid #51bae3;border-radius:5px;min-height:45px}
     #drive_diag{margin-top:12px;padding:10px 12px;background:#14283a;border-radius:6px;color:#bcd1e0;font-size:12px;line-height:1.65}
+    #vision_panel{margin-top:16px;padding:14px;border:1px solid #39546e;border-radius:10px;background:#122337}
+    #vision_frame{display:block;max-width:100%;max-height:360px;margin:10px auto;border-radius:8px;object-fit:contain}
+    #search_status{white-space:pre-line}#vision_panel h2{font-size:15px;color:#e6eff8}
     .position{max-width:600px;margin-top:16px;align-items:end}.position>div:first-child{flex:0 0 145px}
     #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:13px 20px;background:#9f3045;border-radius:8px;display:none;z-index:3;max-width:90vw}
     @media(max-width:820px){.shell{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid #294057;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}section{margin:0}#viewport{height:55vh}}
@@ -81,7 +84,18 @@
       <div class="area-actions"><button id="route_start" class="primary">按顺序开始导航</button><button id="route_stop">取消多点任务</button></div>
       <p id="route_status" class="help">路线尚未设置</p>
     </section>
-    <section><h2>04 / 模式管理</h2><button id="shutdown" class="full">关闭当前模式</button><p class="help">切换模式前关闭当前模式。导航模式启动后，在地图上设置初始位姿，再发送目标。页面心跳中断超过 3 秒会停车；软件停止不能替代实体急停。</p></section>
+    <section>
+      <h2>04 / 房间视觉寻物</h2>
+      <label for="search_room">要去的房间</label><select id="search_room"></select>
+      <label for="search_item">要找的物品</label><input id="search_item" maxlength="32" value="纸杯" placeholder="例如 纸杯、水瓶、背包">
+      <details><summary class="help">英文识别提示（可选）</summary><input id="search_english" maxlength="96" placeholder="例如 red paper cup"><p class="help">常见中文物品可直接输入；其他物品可补充英文描述，名称仍用中文播报。</p></details>
+      <label for="search_budget">进入房间后的搜索时限</label><select id="search_budget"><option value="120">2 分钟</option><option value="180" selected>3 分钟</option><option value="300">5 分钟</option></select>
+      <button id="search_start" class="primary full">前往房间并寻找物品</button>
+      <div class="area-actions"><button id="search_check">原地识别测试</button><button id="search_stop">停止寻物</button></div>
+      <p id="search_status" class="help" role="status">寻物任务尚未开始</p>
+      <p class="help">进入房间后，在安全观察点停稳拍照并转向，连续两帧确认后播报。搜索结束仍未发现会播报“未找到”；相机、导航异常会提示任务失败。</p>
+    </section>
+    <section><h2>05 / 模式管理</h2><button id="shutdown" class="full">关闭当前模式</button><p class="help">切换模式前关闭当前模式。导航模式启动后，在地图上设置初始位姿，再发送目标。页面心跳中断超过 3 秒会停车；软件停止不能替代实体急停。</p></section>
   </aside>
   <main>
     <div class="toolbar"><span id="mode" class="badge">待机</span><select id="tool" aria-label="地图操作"><option value="goal">导航目标</option><option value="initialpose">初始位姿</option><option value="area">绘制区域</option><option value="target">区域目标点</option></select><button id="fit">适应地图</button><span class="hint">点击选点，拖动指定朝向；滚轮缩放，Shift 拖动平移</span></div>
@@ -92,6 +106,7 @@
     <div id="notice" role="status">正在连接小车</div>
     <div id="checks" class="checks" aria-label="系统状态"></div>
     <div id="drive_diag" role="status">底盘运动诊断等待连接</div>
+    <div id="vision_panel"><h2>YOLO-World v2 视觉识别</h2><p id="vision_status" class="help">正在连接视觉服务</p><img id="vision_frame" alt="相机最近识别画面" hidden><p id="vision_result" class="help">检测结果会显示物品、置信度和检测框；未找到仅表示本轮视野内未确认。</p></div>
     <div class="row position"><div><label for="yaw">朝向（度）</label><input id="yaw" type="number" value="0" step="5"></div><div><label id="selected">尚未选择地图位置</label><button id="send" class="primary full" disabled>发送导航目标</button></div></div>
   </main>
 </div>
@@ -131,13 +146,14 @@ function updateBattery(voltage,live){
 }
 function activeGoal(){return state.goal_status==='pending'||state.goal_status==='executing'}
 function routeActive(){return ['announcing','running','dwell'].includes(state.route?.phase)}
+function searchActive(){return !!state.search?.active}
 function editingLoadedMap(){return state.mode==='navigation'&&state.active_map===$('maps').value&&!!map}
 function controls(){
   const mode=state.mode||'idle',checks=state.checks||{};
-  $('mapping').disabled=working||!connected||mode!=='idle';
-  $('navigation').disabled=working||!connected||mode!=='idle'||!$('maps').value;
+  $('mapping').disabled=working||!connected||searchActive()||mode!=='idle';
+  $('navigation').disabled=working||!connected||searchActive()||mode!=='idle'||!$('maps').value;
   $('shutdown').disabled=working||!connected||mode==='idle';
-  $('manual').disabled=working||!connected||mode!=='mapping'||(!state.manual&&(!state.manual_ready||state.exploring||activeGoal()));
+  $('manual').disabled=working||!connected||searchActive()||mode!=='mapping'||(!state.manual&&(!state.manual_ready||state.exploring||activeGoal()));
   $('manual').textContent=state.manual?'结束键盘控制':'启用键盘控制';
   $('drive_state').textContent=state.manual?'键盘控制已启用：按住方向键移动':'键盘控制未启用';
   $('explore').disabled=working||!connected||mode!=='mapping'||!state.ready||state.manual||state.exploring||activeGoal();
@@ -147,10 +163,10 @@ function controls(){
   const initialHeadingOk=headingConfirmed||$('initial_heading_range').value==='180';
   const target=$('tool').value==='target';
   $('send').textContent=initial?'设置初始位姿':target?'保存区域目标点':'发送导航目标';
-  $('send').disabled=working||!connected||!selection||$('tool').value==='area'||(initial?(mode!=='navigation'||!checks.map_ok||!checks.initialpose_ok||!initialHeadingOk||state.localization?.sampling):target?(!editingLoadedMap()||!$('areas').value||routeActive()):(!state.ready||state.localization?.uncertain||state.manual||state.exploring||activeGoal()||routeActive()));
-  $('localize_send').disabled=working||!connected||!selection||!initialHeadingOk||mode!=='navigation'||!checks.map_ok||!checks.initialpose_ok||state.localization?.sampling;
-  $('localization_sample').disabled=working||!connected||mode!=='navigation'||!checks.localized||!checks.scan_ok||!checks.odom_ok||state.armed||state.localization?.sampling;
-  const editable=editingLoadedMap()&&!working&&!routeActive();
+  $('send').disabled=working||!connected||searchActive()||!selection||$('tool').value==='area'||(initial?(mode!=='navigation'||!checks.map_ok||!checks.initialpose_ok||!initialHeadingOk||state.localization?.sampling):target?(!editingLoadedMap()||!$('areas').value||routeActive()):(!state.ready||state.localization?.uncertain||state.manual||state.exploring||activeGoal()||routeActive()));
+  $('localize_send').disabled=working||!connected||searchActive()||!selection||!initialHeadingOk||mode!=='navigation'||!checks.map_ok||!checks.initialpose_ok||state.localization?.sampling;
+  $('localization_sample').disabled=working||!connected||searchActive()||mode!=='navigation'||!checks.localized||!checks.scan_ok||!checks.odom_ok||state.armed||state.localization?.sampling;
+  const editable=editingLoadedMap()&&!working&&!routeActive()&&!searchActive();
   $('area_new').disabled=!editable;$('area_redraw').disabled=!editable||!$('areas').value;
   $('area_undo').disabled=!editable||draftPolygon.length===0;
   $('area_save').disabled=!editable||draftPolygon.length<3;
@@ -159,6 +175,12 @@ function controls(){
   $('route_add').disabled=!editable||!areas.find(a=>a.id===$('areas').value)?.target;
   $('route_start').disabled=!editable||!state.ready||state.localization?.uncertain||routeIds.length===0||activeGoal();
   $('route_stop').disabled=!connected||!routeActive();
+  const visualReady=!!state.vision?.ready&&!!state.vision?.camera_ready;
+  const searchBlocked=working||!connected||searchActive()||routeActive()||state.manual||state.exploring||activeGoal()||!visualReady;
+  $('search_start').disabled=searchBlocked||mode!=='navigation'||!state.ready||state.localization?.uncertain||!$('search_room').value||!$('search_item').value.trim();
+  $('search_check').disabled=searchBlocked||state.armed||!$('search_item').value.trim();
+  $('search_stop').disabled=!connected||!searchActive();
+  for(const id of ['search_room','search_item','search_english','search_budget'])$(id).disabled=searchActive();
   $('stop').disabled=!connected;
 }
 async function act(path,data={}){
@@ -200,6 +222,11 @@ bind('area_target',()=>{$('tool').value='target';clearSelection();$('area_hint')
 bind('area_delete',async()=>{const area=areas.find(a=>a.id===$('areas').value);if(!area||!confirm('删除区域“'+area.name+'”及其目标点？'))return;const result=await act('areas/delete',{name:state.active_map,id:area.id});if(result){routeIds=routeIds.filter(id=>id!==area.id);await loadAreas();draw()}});
 bind('route_add',()=>{const id=$('areas').value;if(id&&!routeIds.includes(id)){routeIds.push(id);renderRoute();controls()}});
 bind('route_start',()=>act('route/start',{ids:routeIds}));
+function searchPayload(){return {area_id:$('search_room').value,item:$('search_item').value.trim(),english_hint:$('search_english').value.trim(),timeout_sec:Number($('search_budget').value)}}
+bind('search_start',()=>act('search/start',searchPayload()));
+bind('search_check',()=>act('search/check',searchPayload()));
+bind('search_stop',()=>act('search/stop'));
+$('search_item').addEventListener('input',controls);
 bind('route_stop',()=>act('route/stop'));
 $('tool').addEventListener('change',()=>{clearSelection();controls()});
 $('yaw').addEventListener('input',()=>{if(selection){selection.yaw=Number($('yaw').value)*Math.PI/180;headingConfirmed=true;controls();draw()}});
@@ -207,13 +234,16 @@ for(const id of ['initial_radius','initial_heading_range'])$(id).addEventListene
 
 async function loadAreas(){
   const name=$('maps').value;
-  if(!name){areas=[];loadedAreasFor='';routeIds=[];renderAreas();return}
+  if(!name){areas=[];loadedAreasFor='';routeIds=[];$('search_room').replaceChildren();renderAreas();return}
   const old=loadedAreasFor===name?$('areas').value:'';
   const result=await api('areas?name='+encodeURIComponent(name));
   if(loadedAreasFor!==name){routeIds=[];draftPolygon=[];editingAreaId=null}
   loadedAreasFor=name;areas=result.areas;
   renderAreas();if(areas.some(area=>area.id===old))$('areas').value=old;
   const current=areas.find(area=>area.id===$('areas').value);$('areaname').value=current?.name||'';
+  const selectedRoom=$('search_room').value;
+  $('search_room').replaceChildren(...areas.filter(a=>a.target).map(a=>{const option=document.createElement('option');option.value=a.id;option.textContent=a.name;return option}));
+  if(areas.some(a=>a.id===selectedRoom&&a.target))$('search_room').value=selectedRoom;
   routeIds=routeIds.filter(id=>areas.some(area=>area.id===id));renderRoute();controls();draw();
 }
 function renderAreas(){
@@ -331,6 +361,7 @@ function draw(){
     }
   }
   if(state.plan?.length){ctx.beginPath();state.plan.forEach(([x,y],i)=>{const p=worldPixel(x,y);ctx[i?'lineTo':'moveTo'](view.x+p[0]*view.scale,view.y+p[1]*view.scale)});ctx.strokeStyle='#4de0ad';ctx.lineWidth=2*devicePixelRatio;ctx.stroke()}
+  if(state.search?.active){for(const [x,y] of state.search.points||[]){const p=worldPixel(x,y);ctx.beginPath();ctx.arc(view.x+p[0]*view.scale,view.y+p[1]*view.scale,6*devicePixelRatio,0,Math.PI*2);ctx.strokeStyle='#ffe27b';ctx.lineWidth=2*devicePixelRatio;ctx.stroke()}}
   if(state.pose)arrow(...state.pose,'#46c8f3');if(state.goal&&activeGoal())arrow(...state.goal,'#ffbd59');if(selection){if(state.mode==='navigation'&&$('tool').value==='initialpose')initialArea(selection.x,selection.y,Number($('initial_radius').value));arrow(selection.x,selection.y,selection.yaw,'#ffd485')}
 }
 function drawConvergence(){
@@ -415,6 +446,7 @@ async function refresh(){
   const sensed=Math.abs(drive.measured_linear||0)>.015||Math.abs(drive.measured_angular||0)>.04;
   $('drive_diag').textContent=`底盘指令：前后 ${fmt(drive.command_linear,'m/s')}，转向 ${fmt(drive.command_angular,'rad/s')}；里程计反馈：前后 ${fmt(drive.measured_linear,'m/s')}，转向 ${fmt(drive.measured_angular,'rad/s')}；电源电压 ${fmt(drive.power_voltage,'V')}`+(moving&&!sensed?(batteryLevel==='low'||batteryLevel==='critical'?'。已收到运动指令，但底盘未报告运动；当前电压偏低，请先充电，再检查电机电源、急停和底盘使能。':'。已收到非零指令，但底盘未报告运动；请检查电机电源、急停和底盘使能状态。'):'');
   const route=state.route||{};
+  renderSearch();
   renderRoute();
   if(route.phase&&route.phase!=='idle'){
     const label={announcing:'正在播报',running:'正在导航',dwell:'到站停留',complete:'任务完成',failed:'任务失败',stopped:'任务已取消'}[route.phase]||route.phase;
@@ -423,6 +455,17 @@ async function refresh(){
   controls();renderLocalization();draw();
 }
 let polling=false;
+let visionFrameAt=0;
+function renderSearch(){
+  const search=state.search||{},vision=state.vision||{};
+  const names={idle:'尚未开始',preparing:'准备模型',navigating:'前往观察位置',settling:'等待停稳',scanning:'视觉检测',found:'已找到',not_found:'本轮未找到',failed:'任务失败',stopped:'已取消'};
+  $('search_status').textContent=`${names[search.phase]||'尚未开始'}${search.room?' · '+search.room:''}${search.item?' · '+search.item:''}\n${search.note||''}`+(search.total_views?`\n已观察 ${search.observed_views||0}/${search.total_views} 个方向`:'');
+  $('vision_status').textContent=vision.ready?`${vision.model} · ${vision.camera_ready?'相机就绪':'相机未就绪'} · 停稳后识别`:`视觉未就绪：${vision.error||'等待模型服务'}`;
+  const result=search.last_result;
+  if(result){const hits=result.detections||[];$('vision_result').textContent=`最近识别：${hits.length?hits.map(x=>x.label+' '+Math.round(x.score*100)+'%').join('，'):'当前画面未确认目标'} · 推理 ${Number(result.inference_sec).toFixed(2)} 秒`}
+  else $('vision_result').textContent=search.active?'等待本次任务的识别结果':'尚无本次任务的识别结果';
+  if(vision.camera_ready&&Date.now()-visionFrameAt>2000){$('vision_frame').src='/api/vision/frame?t='+Date.now();$('vision_frame').hidden=false;visionFrameAt=Date.now()}
+}
 setInterval(async()=>{if(polling||!token)return;polling=true;try{await api('heartbeat',{});await refresh()}catch(error){connected=false;$('connection').textContent='连接中断';$('connection').className='badge bad';$('notice').textContent='连接中断；车端心跳超时后会停止运动';updateBattery(null,false);controls()}finally{polling=false}},1000);
 (async()=>{try{const session=await api('session');token=session.token;client=session.client;const now=new Date(),pad=n=>String(n).padStart(2,'0');$('mapname').value='map_'+now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+pad(now.getHours())+pad(now.getMinutes())+pad(now.getSeconds());await loadMaps();await refresh()}catch(error){toast(error);controls()}})();
 </script>

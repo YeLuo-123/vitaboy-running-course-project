@@ -15,6 +15,7 @@ import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
+from urllib.request import urlopen
 
 import numpy as np
 import yaml
@@ -37,6 +38,7 @@ from tf2_ros import Buffer, TransformListener
 from core import FREE_LIMIT, amcl_map_pixels, valid_name, world_to_cell, frontier_goal
 from areas import load_areas, save_area, set_target, delete_area, validate_target
 from speech import Speaker
+from object_search import VisionClient, RoomSearch
 
 ROOT = Path(__file__).resolve().parent
 MAPS = ROOT/'maps'
@@ -76,6 +78,9 @@ class Console(Node):
         self.last_odom_motion = 0.; self.sampling_until = 0.; self.sampling_next = 0.
         self.sampling_count = 0; self.sampling_future = None
         self.speaker = Speaker()
+        self.vision = VisionClient(enabled=not dry_run)
+        self.search_maps = MAPS
+        self.search = RoomSearch(self, self.vision)
         self.route_steps = []; self.route_index = -1; self.route_phase = 'idle'
         self.route_due = 0.; self.route_note = ''
         self.initialized = False; self.last_nav = 0.; self.nav_twist = Twist()
@@ -100,6 +105,7 @@ class Console(Node):
             for name in ('map_server', 'amcl')
         }
         self.create_timer(.1, self.tick)
+        self.create_timer(.25, self.search.tick)
         self.create_timer(2., self.explore_tick)
         self.create_timer(2., self.recover_localization)
         self.create_timer(.25, self.route_tick)
@@ -138,6 +144,7 @@ class Console(Node):
         return self.mode == 'navigation' and self.sampling_until > time.monotonic()
 
     def start_sampling(self):
+        if self.search.active(): raise ValueError('请先停止寻物任务，再更新初始定位')
         if self.mode != 'navigation' or not self.initialized or self.grid is None:
             raise ValueError('请先加载地图并设置初始位姿')
         if self.armed or self.pending or self.goal_handle or self.manual or self.exploring:
@@ -217,10 +224,16 @@ class Console(Node):
         self.odom_angular = msg.twist.twist.angular.z
         if abs(self.odom_linear)>.015 or abs(self.odom_angular)>.03:self.last_odom_motion=self.odom_time
     def on_voltage(self, msg): self.power_voltage = float(msg.data)
+
+    def destroy_node(self):
+        self.vision.close()
+        return super().destroy_node()
     def on_base_command(self, msg):
         self.base_linear = msg.linear.x; self.base_angular = msg.angular.z
         self.base_command_time = time.monotonic()
-    def on_plan(self, msg): self.plan = [[p.pose.position.x,p.pose.position.y] for p in msg.poses][::2]
+    def on_plan(self, msg):
+        self.plan = [[p.pose.position.x,p.pose.position.y] for p in msg.poses][::2]
+        self.search.accept_plan(self.plan)
     def on_velocity(self, msg): self.nav_twist = msg; self.last_nav = time.monotonic()
 
     def ready(self):
@@ -289,16 +302,21 @@ class Console(Node):
                 reason=None
             if reason:
                 route_active=self.route_phase in ('announcing','running','dwell')
+                search_active=self.search.active()
                 self.get_logger().warning(f'运动许可撤销：{reason}；AMCL age={localization["age_sec"] if localization else None}')
                 self.stop(); self.message='已停止：'+reason
                 if route_active:self.route_note=self.message
+                if search_active:self.search.note=self.message
         if self.manual:
             self.vel.publish(self.manual_twist if now-self.manual_time < .4 else Twist())
         elif self.armed and now-self.last_nav < .5:
             v = Twist()
-            v.linear.x = max(-.15,min(.15,self.nav_twist.linear.x))
-            v.linear.y = max(-.10,min(.10,self.nav_twist.linear.y))
+            v.linear.x = max(-.15,min(.20,self.nav_twist.linear.x))
+            v.linear.y = max(-.02,min(.02,self.nav_twist.linear.y))
             v.angular.z = max(-.4,min(.4,self.nav_twist.angular.z))
+            if self.search.active() and self.search.search_started:
+                scale=min(1.,.12/max(abs(v.linear.x),1e-6),.25/max(abs(v.angular.z),1e-6))
+                v.linear.x*=scale;v.linear.y*=scale;v.angular.z*=scale
             self.vel.publish(v)
         elif self.mode != 'idle': self.vel.publish(Twist())
         for _ in range(8):
@@ -310,6 +328,7 @@ class Console(Node):
                 self.get_logger().warning(str(exc)); future.set_exception(exc)
 
     def stop(self):
+        self.search.cancel()
         self.armed = False; self.exploring = False; self.manual = False; self.generation += 1
         self.sampling_until = 0.
         if self.goal_handle: self.goal_handle.cancel_goal_async()
@@ -322,6 +341,7 @@ class Console(Node):
         self.speaker.cancel()
 
     def manual_start(self, client):
+        if self.search.active(): raise ValueError('请先停止寻物任务')
         if not self.manual_ready():
             raise ValueError('请先启动 Cartographer 建图并等待传感器和地图就绪')
         if self.exploring or self.pending or self.goal_handle:
@@ -374,6 +394,7 @@ class Console(Node):
         self.recovery_sequence += 1; self.recovery_busy = False
 
     def start_stack(self, mode, map_name=None):
+        if self.search.active(): raise ValueError('请先停止寻物任务')
         if self.mode != 'idle': raise ValueError('请先停止当前模式，再切换模式')
         if time.time()<1700000000:
             raise ValueError('小车系统时钟尚未同步，请联网等待正确时间后再启动 ROS')
@@ -531,6 +552,7 @@ class Console(Node):
         self.route_phase='failed';self.route_note=reason;self.message=reason
 
     def start_route(self, ids, client):
+        if self.search.active(): raise ValueError('请先停止寻物任务')
         if self.mode != 'navigation' or not self.active_map or not self.ready():
             raise ValueError('请先加载地图、设置初始位姿并等待导航就绪')
         if self.localization_uncertainty()['uncertain']:
@@ -640,6 +662,7 @@ class Console(Node):
                          'measured_angular':self.odom_angular if diagnostics['odom_ok'] else None,
                          'power_voltage':self.power_voltage},
                 'active_map':self.active_map,
+                'vision':self.vision.health,'search':self.search.status(),
                 'localization':self.localization_uncertainty(),
                 'route':{'phase':self.route_phase,'index':self.route_index,'steps':[{'id':step['id'],'name':step['name']} for step in self.route_steps],
                          'note':self.route_note},'speech':self.speaker.status()}
@@ -657,7 +680,13 @@ class Console(Node):
             map_name=valid_name(data.get('name'))
             if not (MAPS/map_name/'map.yaml').is_file(): raise ValueError('地图不存在')
             return {'name':map_name,'areas':load_areas(MAPS/map_name)}
-        if task == 'heartbeat':
+        if task == 'search/start':
+            self.search.start(data,data.get('_client'))
+        elif task == 'search/check':
+            self.search.start(data,data.get('_client'),check_only=True)
+        elif task == 'search/stop':
+            if self.search.active(): self.stop();self.message='寻物任务已取消'
+        elif task == 'heartbeat':
             if self.owner is None or data.get('_client') == self.owner: self.lease = time.monotonic()
         elif task == 'mapping/start': self.start_stack('mapping')
         elif task == 'navigation/start': self.start_stack('navigation',data.get('name'))
@@ -672,6 +701,7 @@ class Console(Node):
                     raise ValueError('键盘控制正由另一页面使用')
                 self.stop(); self.message = '键盘控制已结束，小车已停止'
         elif task in ('areas/save','areas/target','areas/delete'):
+            if self.search.active(): raise ValueError('寻物进行中，不能修改房间区域')
             if self.mode != 'navigation' or self.active_map != data.get('name') or self.info is None or self.grid is None:
                 raise ValueError('请先加载要标注的地图')
             if self.route_phase in ('announcing','running','dwell'):
@@ -687,10 +717,12 @@ class Console(Node):
             if self.route_phase in ('announcing','running','dwell'):
                 self.stop();self.message='多点导航已取消'
         elif task == 'explore/start':
+            if self.search.active(): raise ValueError('请先停止寻物任务')
             if self.mode != 'mapping' or not self.ready(): raise ValueError('请先启动建图并等待导航就绪')
             if self.goal_handle or self.pending or self.manual: raise ValueError('请先停止键盘控制或当前导航任务')
             self.owner = data.get('_client'); self.exploring = True; self.armed = True; self.lease = time.monotonic(); self.empty_count = 0
         elif task == 'goal':
+            if self.search.active(): raise ValueError('请先停止寻物任务')
             if self.exploring: raise ValueError('请先停止自主探索')
             if self.manual: raise ValueError('请先结束键盘控制')
             if self.route_phase in ('announcing','running','dwell'): raise ValueError('请先停止多点导航任务')
@@ -763,6 +795,11 @@ def main():
             parsed=urlparse(self.path);path=parsed.path
             if path=='/': self.reply(200,(ROOT/'index.html').read_bytes(),'text/html; charset=utf-8')
             elif path=='/api/session': self.reply(200,{'token':token,'client':secrets.token_urlsafe(18)})
+            elif path=='/api/vision/frame':
+                try:
+                    with urlopen('http://127.0.0.1:8091/frame',timeout=3) as result:
+                        self.reply(200,result.read(),'image/jpeg')
+                except Exception as exc:self.reply(503,{'error':'相机预览不可用：'+str(exc)})
             elif path in ('/api/status','/api/map','/api/maps','/api/localization'):
                 try:self.reply(200,command(path[5:],{}))
                 except Exception as e:self.reply(503,{'error':str(e)})
@@ -783,7 +820,7 @@ def main():
                 if not isinstance(data,dict): raise ValueError('需要 JSON 对象')
                 data['_client'] = self.headers.get('X-Control-Client','api')
                 path=urlparse(self.path).path
-                allowed={'heartbeat','mapping/start','navigation/start','localization/sample','mode/stop','stop','manual/start','manual/drive','manual/stop','explore/start','goal','initialpose','maps/save','areas/save','areas/target','areas/delete','route/start','route/stop'}
+                allowed={'heartbeat','mapping/start','navigation/start','localization/sample','mode/stop','stop','manual/start','manual/drive','manual/stop','explore/start','goal','initialpose','maps/save','areas/save','areas/target','areas/delete','route/start','route/stop','search/start','search/check','search/stop'}
                 if not path.startswith('/api/') or path[5:] not in allowed: return self.reply(404,{'error':'不存在'})
                 self.reply(200,command(path[5:],data))
             except Exception as e:self.reply(400,{'error':str(e)})

@@ -1,0 +1,21 @@
+[Unit]
+Description=YOLO-World v2 camera detection worker
+After=network.target
+
+[Service]
+Type=simple
+User=wheeltec
+SupplementaryGroups=video
+WorkingDirectory=/home/wheeltec/x5_http_console
+ExecStart=/home/wheeltec/x5_vision_venv/bin/python /home/wheeltec/x5_http_console/vision_worker.py
+Environment=PYTHONUNBUFFERED=1
+Environment=TOKENIZERS_PARALLELISM=false
+Nice=10
+CPUQuota=200%
+MemoryMax=1800M
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

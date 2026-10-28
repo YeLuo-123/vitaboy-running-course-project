@@ -1,0 +1,31 @@
+{
+  "detector": "YOLO-World v2 Small",
+  "runtime": "ONNX Runtime CPU",
+  "license": "YOLO-World export: AGPL-3.0; CLIP: MIT",
+  "files": [
+    {
+      "file": "yolov8s-worldv2.onnx",
+      "repository": "Instemic/yolo-world-onnx",
+      "revision": "7e1d02c9467c32b141df81890737490764776785",
+      "source": "yolov8s-worldv2.onnx",
+      "sha256": "381ced485b23ed8f06de3e82bb2745e1420c181c64f0a176784c34a959d550a1",
+      "bytes": 51142204
+    },
+    {
+      "file": "clip_text_quantized.onnx",
+      "repository": "Xenova/clip-vit-base-patch32",
+      "revision": "d15189d7028b43f1d3e65039190477f6af591c2a",
+      "source": "onnx/text_model_quantized.onnx",
+      "sha256": "73baab855d406190da9faa498cfedf65f15cf309f4cc7385b7b032e6d08e5c3a",
+      "bytes": 64504507
+    },
+    {
+      "file": "clip_tokenizer.json",
+      "repository": "Xenova/clip-vit-base-patch32",
+      "revision": "d15189d7028b43f1d3e65039190477f6af591c2a",
+      "source": "tokenizer.json",
+      "sha256": "f7f3b7af117d467b58374797691a6438d3e6b9e9cef800dfd5dced7f697a90cd",
+      "bytes": 2224119
+    }
+  ]
+}
