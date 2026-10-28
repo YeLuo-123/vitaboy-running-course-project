@@ -93,14 +93,14 @@ controller_server:
       simulate_ahead_time: 1.0
       debug_trajectory_details: false
       min_vel_x: -0.05
-      max_vel_x: 0.15
+      max_vel_x: 0.20
       # Prefer forward tracking; retain only small lateral corrections.
       min_vel_y: -0.02
       max_vel_y: 0.02
       max_vel_theta: 0.4
       # Avoid commands below the observed wheel deadband at the narrow doorway.
       min_speed_xy: 0.04
-      max_speed_xy: 0.15
+      max_speed_xy: 0.20
       min_speed_theta: 0.08
       acc_lim_x: 0.3
       acc_lim_y: 0.15
@@ -277,7 +277,7 @@ velocity_smoother:
     smoothing_frequency: 20.0
     scale_velocities: true
     feedback: OPEN_LOOP
-    max_velocity: [0.15, 0.02, 0.4]
+    max_velocity: [0.20, 0.02, 0.4]
     min_velocity: [-0.10, -0.02, -0.4]
     max_accel: [0.3, 0.15, 0.6]
     max_decel: [-0.3, -0.15, -0.6]
