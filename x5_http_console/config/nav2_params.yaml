@@ -84,24 +84,25 @@ controller_server:
     FollowPath:
       plugin: dwb_core::DWBLocalPlanner
       debug_trajectory_details: false
-      min_vel_x: -0.10
+      min_vel_x: -0.05
       max_vel_x: 0.15
-      min_vel_y: -0.10
-      max_vel_y: 0.10
+      # Prefer forward tracking; retain only small lateral corrections.
+      min_vel_y: -0.02
+      max_vel_y: 0.02
       max_vel_theta: 0.4
       # Avoid commands below the observed wheel deadband at the narrow doorway.
       min_speed_xy: 0.04
       max_speed_xy: 0.15
       min_speed_theta: 0.08
       acc_lim_x: 0.3
-      acc_lim_y: 0.3
+      acc_lim_y: 0.15
       acc_lim_theta: 0.6
       decel_lim_x: -0.3
-      decel_lim_y: -0.3
+      decel_lim_y: -0.15
       decel_lim_theta: -0.6
       vx_samples: 8
-      vy_samples: 5
-      vtheta_samples: 12
+      vy_samples: 3
+      vtheta_samples: 13
       sim_time: 1.7
       linear_granularity: 0.025
       angular_granularity: 0.025
@@ -110,14 +111,19 @@ controller_server:
       trans_stopped_velocity: 0.02
       short_circuit_trajectory_evaluation: true
       stateful: true
-      critics: [RotateToGoal, Oscillation, ObstacleFootprint, Twirling, GoalAlign, PathAlign, PathDist, GoalDist]
+      critics: [RotateToGoal, Oscillation, ObstacleFootprint, PreferForward, Twirling, GoalAlign, PathAlign, PathDist, GoalDist]
       ObstacleFootprint.scale: 1.0
-      Twirling.scale: 10.0
-      PathAlign.scale: 24.0
+      PreferForward.scale: 4.0
+      PreferForward.penalty: 2.0
+      PreferForward.strafe_x: 0.03
+      PreferForward.strafe_theta: 0.15
+      PreferForward.theta_scale: 1.0
+      Twirling.scale: 2.0
+      PathAlign.scale: 32.0
       PathAlign.forward_point_distance: 0.1
-      GoalAlign.scale: 18.0
+      GoalAlign.scale: 12.0
       GoalAlign.forward_point_distance: 0.1
-      PathDist.scale: 24.0
+      PathDist.scale: 32.0
       GoalDist.scale: 18.0
       RotateToGoal.scale: 24.0
       RotateToGoal.slowing_factor: 5.0
@@ -260,10 +266,10 @@ velocity_smoother:
     smoothing_frequency: 20.0
     scale_velocities: true
     feedback: OPEN_LOOP
-    max_velocity: [0.15, 0.10, 0.4]
-    min_velocity: [-0.10, -0.10, -0.4]
-    max_accel: [0.3, 0.3, 0.6]
-    max_decel: [-0.3, -0.3, -0.6]
+    max_velocity: [0.15, 0.02, 0.4]
+    min_velocity: [-0.10, -0.02, -0.4]
+    max_accel: [0.3, 0.15, 0.6]
+    max_decel: [-0.3, -0.15, -0.6]
     odom_topic: /odom
     odom_duration: 0.1
     deadband_velocity: [0.0, 0.0, 0.0]
