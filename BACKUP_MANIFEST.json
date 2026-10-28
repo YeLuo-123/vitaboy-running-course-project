@@ -2,8 +2,8 @@
   "schema_version": 1,
   "snapshot_scope": "Selected local project files; remote-only checkpoints and logs excluded",
   "hash_algorithm": "SHA-256 over original file bytes; manifest does not hash itself",
-  "total_bytes": 16684466,
-  "file_count_excluding_manifest": 333,
+  "total_bytes": 16690537,
+  "file_count_excluding_manifest": 334,
   "files": [
     {
       "path": ".gitattributes",
@@ -12,8 +12,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 21399,
-      "sha256": "960d9806634c9b2457ed1caafb9426e6b0d94edfd76c3ac5eb775f18f675084b"
+      "bytes": 21444,
+      "sha256": "756ee4affa70df42ae269209e7aaebd2266be7386e39804bef37aadcdac9fafc"
     },
     {
       "path": "README.md",
@@ -1602,8 +1602,8 @@
     },
     {
       "path": "x5_http_console/README.md",
-      "bytes": 8832,
-      "sha256": "1c986241a57cb8026d019d5f55207b6be20a7d26570663c5344879d5efd2e939"
+      "bytes": 10162,
+      "sha256": "ec76181fb2d08a6061d279408fd6a7b8624301551b8254e3b7c1a3973b680165"
     },
     {
       "path": "x5_http_console/areas.py",
@@ -1617,13 +1617,18 @@
     },
     {
       "path": "x5_http_console/core.py",
-      "bytes": 2588,
-      "sha256": "89e157fc8223d56230ebf61986f097158c2e29ab6d719644ec3801c0c320d2c3"
+      "bytes": 2905,
+      "sha256": "ceadfbc01548191665b32f552cdd94b14850d4ddf33c58b9638fb7d87ee923c0"
     },
     {
       "path": "x5_http_console/index.html",
       "bytes": 43089,
       "sha256": "a497bd6210ea2010f8eac18017bc50bebef014a765a64466e6f406a384e9d5d6"
+    },
+    {
+      "path": "x5_http_console/normalize_existing_maps.py",
+      "bytes": 3264,
+      "sha256": "996b6904a9c68c837a7e969934d3ff31f3974c0dd5ae6520c919348b42c5bc41"
     },
     {
       "path": "x5_http_console/run.sh",
@@ -1632,8 +1637,8 @@
     },
     {
       "path": "x5_http_console/server.py",
-      "bytes": 48192,
-      "sha256": "801a98c91f666d9e1ad2a859ce308e9002fcdcba984d7e2aeb50278258d98c01"
+      "bytes": 48135,
+      "sha256": "339b0fa0932f2af368e60b28961b385310bc1a00361c13fec9c504b7400ac9cd"
     },
     {
       "path": "x5_http_console/speech.py",
@@ -1647,8 +1652,8 @@
     },
     {
       "path": "x5_http_console/test_console.py",
-      "bytes": 16960,
-      "sha256": "b42952a3ea19575a4e8eea9db17cd2e394baba0171c7e7cd22dec3f1de3d0bfb"
+      "bytes": 18132,
+      "sha256": "b397819cb14c1a738375ee8b12a83409121989ae646de17b82a24b0e5a9c5007"
     },
     {
       "path": "x5_http_console/velocity_guard.py",

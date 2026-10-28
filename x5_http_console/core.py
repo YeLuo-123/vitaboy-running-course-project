@@ -6,6 +6,16 @@ import numpy as np
 from scipy import ndimage as ndi
 
 FREE_LIMIT = 40
+OCCUPIED_LIMIT = 65
+
+
+def amcl_map_pixels(grid):
+    """Encode a raw PGM whose OccupancyGrid contains only -1, 0 and 100."""
+    a = np.asarray(grid)
+    pixels = np.full(a.shape, 255, dtype=np.uint8)
+    pixels[(a >= 0) & (a <= FREE_LIMIT)] = 0
+    pixels[(a >= OCCUPIED_LIMIT) & (a <= 100)] = 100
+    return pixels
 
 
 def valid_name(name):

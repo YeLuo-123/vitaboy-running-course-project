@@ -396,6 +396,7 @@
 !/x5_http_console/config/cartographer.lua
 !/x5_http_console/core.py
 !/x5_http_console/index.html
+!/x5_http_console/normalize_existing_maps.py
 !/x5_http_console/run.sh
 !/x5_http_console/server.py
 !/x5_http_console/speech.py

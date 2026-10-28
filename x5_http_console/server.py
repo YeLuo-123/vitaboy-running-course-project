@@ -34,7 +34,7 @@ from std_srvs.srv import Empty
 from lifecycle_msgs.msg import State, Transition
 from lifecycle_msgs.srv import ChangeState, GetState
 from tf2_ros import Buffer, TransformListener
-from core import FREE_LIMIT, valid_name, world_to_cell, frontier_goal
+from core import FREE_LIMIT, amcl_map_pixels, valid_name, world_to_cell, frontier_goal
 from areas import load_areas, save_area, set_target, delete_area, validate_target
 from speech import Speaker
 
@@ -600,10 +600,9 @@ class Console(Node):
         # Snapshot serialization; directory rename exposes a complete pair atomically.
         tmp = MAPS/('.tmp-'+secrets.token_hex(6)); tmp.mkdir()
         a = self.grid.reshape(self.info['height'],self.info['width'])
-        # Nav2 raw mode preserves Cartographer's -1/0..100 occupancy values.
-        # Trinary thresholds discarded its common free value (about 31), and
-        # the old 205 "unknown" pixel was read back as free with free_thresh=.25.
-        pixels = a.astype(np.uint8)
+        # The installed Nav2 AMCL only treats exact 0 / 100 as free / occupied.
+        # Keep raw PGM encoding so 255 remains unknown, but normalize the values.
+        pixels = amcl_map_pixels(a)
         with (tmp/'map.pgm').open('wb') as f:
             f.write(f'P5\n{self.info["width"]} {self.info["height"]}\n255\n'.encode()); f.write(np.flipud(pixels).tobytes())
         metadata = {'image':'map.pgm','mode':'raw','resolution':self.info['resolution'],'origin':self.info['origin'],'negate':0,'occupied_thresh':.65,'free_thresh':.25}

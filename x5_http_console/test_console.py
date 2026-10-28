@@ -6,13 +6,30 @@ import unittest
 from pathlib import Path
 from unittest.mock import Mock, patch
 import numpy as np
-from core import valid_name, cell_to_world, world_to_cell, frontier_goal
+from core import amcl_map_pixels, valid_name, cell_to_world, world_to_cell, frontier_goal
 from areas import save_area, set_target, load_areas, validate_polygon, validate_target
+from normalize_existing_maps import normalize, read_pgm
 
 
 class GeometryTests(unittest.TestCase):
     def setUp(self):
         self.info={'width':100,'height':100,'resolution':.05,'origin':[-2.,-3.,.7]}
+    def test_amcl_map_encoding_preserves_unknown_and_real_walls(self):
+        source=np.array([-1,0,31,40,41,64,65,98,100],dtype=np.int16)
+        np.testing.assert_array_equal(amcl_map_pixels(source),[255,0,0,0,255,255,100,100,100])
+    def test_legacy_raw_map_migration_keeps_backup(self):
+        with tempfile.TemporaryDirectory() as root:
+            directory=Path(root)/'rooms';directory.mkdir()
+            (directory/'map.yaml').write_text('image: map.pgm\nmode: raw\n')
+            original=b'P5\n2 2\n255\n'+bytes([255,31,98,50])
+            (directory/'map.pgm').write_bytes(original)
+            backup=Path(root)/'backups'
+            self.assertEqual(normalize(directory,backup,True)['after']['occupied'],1)
+            self.assertEqual((directory/'map.pgm').read_bytes(),original)
+            self.assertTrue(normalize(directory,backup)['changed'])
+            self.assertEqual((backup/'rooms/map.pgm').read_bytes(),original)
+            self.assertEqual(read_pgm(directory/'map.pgm')[2].tolist(),[255,0,100,255])
+            self.assertFalse(normalize(directory,backup)['changed'])
     def test_rotated_origin_roundtrip(self):
         for col,row in [(0,0),(9,67),(99,99)]:
             self.assertEqual((col,row),world_to_cell(*cell_to_world(col,row,self.info),self.info))
@@ -244,7 +261,7 @@ class RosTests(unittest.TestCase):
         n=self.configure();n.info={'width':2,'height':2,'resolution':.05,'origin':[1.,2.,.5]};n.grid=np.array([0,100,-1,31],dtype=np.int8)
         with tempfile.TemporaryDirectory() as directory,patch.object(self.server,'MAPS',Path(directory)):
             n.save_map('test');data=(Path(directory)/'test/map.pgm').read_bytes()
-            self.assertTrue(data.endswith(bytes([255,31,0,100])))
+            self.assertTrue(data.endswith(bytes([255,0,0,100])))
             self.assertIn('mode: raw',(Path(directory)/'test/map.yaml').read_text())
             with self.assertRaises(ValueError):n.save_map('test')
     def test_goal_result_propagates(self):
