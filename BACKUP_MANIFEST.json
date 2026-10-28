@@ -2,8 +2,8 @@
   "schema_version": 1,
   "snapshot_scope": "Selected local project files; remote-only checkpoints and logs excluded",
   "hash_algorithm": "SHA-256 over original file bytes; manifest does not hash itself",
-  "total_bytes": 16692864,
-  "file_count_excluding_manifest": 334,
+  "total_bytes": 16701869,
+  "file_count_excluding_manifest": 335,
   "files": [
     {
       "path": ".gitattributes",
@@ -12,8 +12,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 21444,
-      "sha256": "756ee4affa70df42ae269209e7aaebd2266be7386e39804bef37aadcdac9fafc"
+      "bytes": 21486,
+      "sha256": "c9c21ef0624299f0fd4d21a203be0da1ad4c4734fa169aa6c0758c8e54700f3d"
     },
     {
       "path": "README.md",
@@ -22,8 +22,8 @@
     },
     {
       "path": "backup_policy.json",
-      "bytes": 7416,
-      "sha256": "4453a5e92f657f279ef082196d924bfba9c175b72f720a7a0939730ebad2d40e"
+      "bytes": 7446,
+      "sha256": "007836e6c7afef1bb966c4b89edc5c99bb51188d410ce04f0c868107d582cde4"
     },
     {
       "path": "honor_diagnostics/evaluate_locomotion.py",
@@ -1602,8 +1602,8 @@
     },
     {
       "path": "x5_http_console/README.md",
-      "bytes": 10729,
-      "sha256": "bf75cb3f169bed4f2c4d7c3c549ed31ea85d24a0356601e741d2ed1ce0071f42"
+      "bytes": 11764,
+      "sha256": "b7f120a226871b57bddf19f775f48d817e6edbc553667ec14e8f35857ff7e4f4"
     },
     {
       "path": "x5_http_console/areas.py",
@@ -1614,6 +1614,11 @@
       "path": "x5_http_console/config/cartographer.lua",
       "bytes": 2043,
       "sha256": "e2a75d88ce5ad21bc94667a39a6cc26fcb2c674bdd51e2befc20125c818b635c"
+    },
+    {
+      "path": "x5_http_console/config/nav2_params.yaml",
+      "bytes": 7888,
+      "sha256": "68f41b1154ea0f1d86f057953b68dbd4df1028a2fa07defe9ed9d69e144e05ab"
     },
     {
       "path": "x5_http_console/core.py",
@@ -1647,8 +1652,8 @@
     },
     {
       "path": "x5_http_console/stack.launch.py",
-      "bytes": 2741,
-      "sha256": "514baf85031775a542845d6a105c87367b2cca85e076f606bc57f36a8de57111"
+      "bytes": 2751,
+      "sha256": "4581b0c8d3736b4d7b14f9afdda1c215d1c9714b0307651ca40e7990d8f776fa"
     },
     {
       "path": "x5_http_console/test_console.py",

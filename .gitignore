@@ -394,6 +394,7 @@
 !/x5_http_console/areas.py
 !/x5_http_console/config/
 !/x5_http_console/config/cartographer.lua
+!/x5_http_console/config/nav2_params.yaml
 !/x5_http_console/core.py
 !/x5_http_console/index.html
 !/x5_http_console/normalize_existing_maps.py

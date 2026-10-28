@@ -28,7 +28,8 @@
     "vitaboy_navigation/config",
     "vitaboy_navigation/launch",
     "vitaboy_navigation/scripts",
-    "vitaboy_navigation/tests"
+    "vitaboy_navigation/tests",
+    "x5_http_console/config"
   ],
   "tree_extensions": [
     ".py",

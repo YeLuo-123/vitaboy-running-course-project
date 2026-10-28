@@ -11,7 +11,7 @@ def setup(context):
     mode = LaunchConfiguration('mode').perform(context)
     def include(package, file, **args):
         return IncludeLaunchDescription(PythonLaunchDescriptionSource(str(Path(share(package))/'launch'/file)), launch_arguments=args.items())
-    params = str(Path(share('robocup_bringup'))/'config/nav2_params.yaml')
+    params = str(Path(__file__).parent/'config/nav2_params.yaml')
     lidar_params = str(Path(share('lslidar_driver'))/'params/lidar_uart_ros2/lsn10p.yaml')
     nodes = [include('turn_on_wheeltec_robot', 'base_serial.launch.py'),
              LifecycleNode(package='lslidar_driver', executable='lslidar_driver_node',
@@ -26,7 +26,7 @@ def setup(context):
             Node(package='nav2_velocity_smoother',executable='velocity_smoother',name='velocity_smoother',parameters=[params],remappings=[('cmd_vel','/cmd_vel_nav'),('cmd_vel_smoothed','/x5/nav_cmd')]),
             Node(package='nav2_lifecycle_manager',executable='lifecycle_manager',name='lifecycle_manager_velocity',parameters=[{'autostart':True,'node_names':['velocity_smoother']}])]
     else:
-        nodes += [include('robocup_bringup','navigation.launch.py',map=LaunchConfiguration('map').perform(context),cmd_vel_topic='/x5/nav_cmd')]
+        nodes += [include('robocup_bringup','navigation.launch.py',map=LaunchConfiguration('map').perform(context),params_file=params,cmd_vel_topic='/x5/nav_cmd')]
     return nodes
 
 
