@@ -8,8 +8,7 @@
     "honor_diagnostics",
     "vitaboy_navigation",
     "official_policy_sim",
-    "official_policy_sim/onboard",
-    "x5_http_console"
+    "official_policy_sim/onboard"
   ],
   "source_extensions": [
     ".py",
@@ -28,8 +27,7 @@
     "vitaboy_navigation/config",
     "vitaboy_navigation/launch",
     "vitaboy_navigation/scripts",
-    "vitaboy_navigation/tests",
-    "x5_http_console/config"
+    "vitaboy_navigation/tests"
   ],
   "tree_extensions": [
     ".py",
@@ -150,13 +148,6 @@
     "official_policy_sim/onboard/evidence/joint_id_names.json",
     "official_policy_sim/onboard/evidence/verified_artifacts.json",
     "official_policy_sim/onboard/evidence/deployment_manifest.json",
-    "official_policy_sim/onboard/evidence/leg_posture_readonly.json",
-    "x5_http_console/index.html",
-    "x5_http_console/config/cartographer.lua",
-    "x5_http_console/x5-http-console.service",
-    "x5_http_console/x5-vision.service",
-    "x5_http_console/vision_requirements.txt",
-    "x5_http_console/x5-voice-greeting.service",
-    "x5_http_console/asr_requirements.txt"
+    "official_policy_sim/onboard/evidence/leg_posture_readonly.json"
   ]
 }
