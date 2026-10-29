@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock
-from greeting_rules import GreetingGate, is_greeting
+from greeting_rules import GreetingGate, is_greeting, parse_voice_command, voice_route_active, navigation_grammar
 from speech import Speaker
 
 
@@ -20,6 +20,25 @@ class GreetingTests(unittest.TestCase):
         self.assertFalse(gate.listening(20., True))
         self.assertFalse(gate.listening(21., False))
         self.assertTrue(gate.listening(21.6, False))
+
+    def test_navigation_requires_wake_phrase_and_exact_room_string(self):
+        for room in ('客厅','厨房','卧室','书房'):
+            self.assertEqual(parse_voice_command('你好，去'+room),{'kind':'navigate','room':room})
+            self.assertEqual(parse_voice_command('你 好 请 去 '+room),{'kind':'navigate','room':room})
+        for text in ('去客厅','你好别去客厅','不要你好去厨房','你好去','你好？我不要去客厅'):
+            self.assertIsNone(parse_voice_command(text),text)
+        self.assertEqual(parse_voice_command('你好去客厅和厨房')['room'],'客厅和厨房')
+
+    def test_only_active_voice_routes_receive_listener_heartbeat(self):
+        self.assertTrue(voice_route_active({'route':{'source':'voice','phase':'announcing'}}))
+        self.assertTrue(voice_route_active({'route':{'source':'voice','phase':'running'}}))
+        self.assertFalse(voice_route_active({'route':{'source':'web','phase':'running'}}))
+        self.assertFalse(voice_route_active({'route':{'source':'voice','phase':'complete'}}))
+
+    def test_grammar_includes_unknown_and_all_saved_rooms(self):
+        grammar=navigation_grammar(['客厅','厨房','卧室','书房'])
+        self.assertIn('[unk]',grammar)
+        for room in ('客厅','厨房','卧室','书房'):self.assertIn('你好 去 '+room,grammar)
 
     def test_busy_sound_card_uses_shared_usb_output(self):
         speaker = Speaker(device='plughw:CARD=Device,DEV=0')

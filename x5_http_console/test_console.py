@@ -1,4 +1,5 @@
 import concurrent.futures
+import json
 import math
 import tempfile
 import time
@@ -42,7 +43,9 @@ class GeometryTests(unittest.TestCase):
         pose=cell_to_world(30,50,self.info)+(0.,)
         goal=frontier_goal(a,self.info,pose)
         self.assertIsNotNone(goal); c,r=world_to_cell(*goal[:2],self.info)
-        self.assertEqual(a[r,c],0);self.assertGreaterEqual(c,54)
+        self.assertEqual(a[r,c],0)
+        from scipy.ndimage import distance_transform_edt
+        self.assertLessEqual(distance_transform_edt(a>=0)[r,c]*self.info['resolution'],.65)
     def test_fully_known_map(self):
         self.assertIsNone(frontier_goal(np.zeros((100,100),dtype=np.int8),self.info,cell_to_world(30,50,self.info)+(0.,)))
     def test_unreachable_unknown_not_selected(self):
@@ -73,7 +76,9 @@ class RosTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         import rclpy
-        rclpy.init()
+        # Never let test nodes share discovery, subscriptions or lifecycle
+        # services with the physical robot's production ROS graph.
+        rclpy.init(domain_id=219)
     @classmethod
     def tearDownClass(cls):
         import rclpy
@@ -95,6 +100,24 @@ class RosTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.node.send_goal(1.,1.,0.)
         self.assertFalse(self.node.armed)
         with self.assertRaises(ValueError):self.node.manual_start('tab')
+    def test_exploration_dispatch_waits_for_speech_then_uses_nav2(self):
+        n=self.configure();n.speaker=Mock();n.speaker.available.return_value=True
+        n.speaker.busy.return_value=False;n.speaker.status.return_value={'busy':True,'error':None}
+        n.dispatch('explore/start',{'_client':'page','name':'explore_test','auto_save':False})
+        self.assertTrue(n.exploring);self.assertFalse(n.armed)
+        n.explore_tick();n.action.send_goal_async.assert_not_called()
+        n.speaker.status.return_value={'busy':False,'error':None}
+        with patch('exploration.frontier_plan',return_value={'goal':(2.,2.,0.),'reason':'goal','frontiers':1}):
+            n.explore_tick()
+        n.action.send_goal_async.assert_called_once();self.assertTrue(n.armed)
+        self.assertEqual(n.dispatch('status',{})['exploration']['phase'],'running')
+    def test_exploration_late_goal_acceptance_cannot_restart_after_stop(self):
+        n=self.configure();n.exploring=True;n.exploration.phase='running'
+        n.send_goal(2.,2.,0.);generation=n.generation;n.stop()
+        handle=Mock();handle.accepted=True;future=concurrent.futures.Future();future.set_result(handle)
+        n.accepted(future,generation);n.explore_tick()
+        handle.cancel_goal_async.assert_called_once();self.assertFalse(n.armed)
+        self.assertEqual(n.exploration.phase,'stopped')
     def test_greeting_uses_shared_speaker_without_driving(self):
         n=self.node;n.speaker=Mock();n.speaker.busy.return_value=False
         result=n.dispatch('voice/greet',{'text':'你好'})
@@ -106,6 +129,66 @@ class RosTests(unittest.TestCase):
         self.assertEqual(n.dispatch('voice/greet',{'text':'你好'})['reason'],'speaker_busy')
         n.speaker.say.assert_not_called()
         with self.assertRaisesRegex(ValueError,'仅支持'):n.dispatch('voice/greet',{'text':'不要说你好'})
+
+    def prepare_voice_rooms(self,root):
+        n=self.configure();n.mode='navigation';n.initialized=True;n.active_map='rooms'
+        n.amcl_covariance=[.04,.04,.03];n.amcl_time=time.monotonic()
+        n.speaker=Mock();n.speaker.busy.return_value=False
+        n.speaker.available.return_value=True;n.speaker.status.return_value={'busy':False,'error':None}
+        rooms=[]
+        for name,(x,y) in zip(('客厅','厨房','卧室','书房'),((1.,1.),(2.,1.),(2.,2.),(1.,2.))):
+            rooms.append({'id':name,'name':name,'polygon':[[.5,.5],[4.5,.5],[4.5,4.5],[.5,4.5]],
+                          'target':{'x':x,'y':y,'yaw':0.}})
+        directory=Path(root)/'rooms';directory.mkdir()
+        (directory/'areas.json').write_text(json.dumps({'version':1,'areas':rooms}),encoding='utf-8')
+        return n,rooms
+
+    def test_four_voice_destinations_speak_before_sending_goal(self):
+        with tempfile.TemporaryDirectory() as root,patch.object(self.server,'MAPS',Path(root)):
+            n,rooms=self.prepare_voice_rooms(root)
+            for area in rooms:
+                n.last_greeting=float('-inf')
+                result=n.dispatch('voice/command',{'text':'你好，去'+area['name']})
+                self.assertTrue(result['accepted']);self.assertFalse(n.armed)
+                self.assertEqual(n.route_source,'voice');self.assertEqual(n.owner,'voice-greeting')
+                n.speaker.say.assert_called_with('收到，正在前往'+area['name'])
+                n.speaker.status.return_value={'busy':True,'error':None}
+                n.route_tick();self.assertFalse(n.armed)
+                n.speaker.status.return_value={'busy':False,'error':None}
+                n.route_tick();self.assertTrue(n.armed)
+                self.assertEqual(n.goal,[area['target']['x'],area['target']['y'],0.])
+                n.stop()
+
+    def test_voice_navigation_rejects_unready_or_unknown_room(self):
+        with tempfile.TemporaryDirectory() as root,patch.object(self.server,'MAPS',Path(root)):
+            n,_=self.prepare_voice_rooms(root);n.smoother_active=False
+            result=n.dispatch('voice/command',{'text':'你好去客厅'})
+            self.assertFalse(result['accepted']);self.assertIn('加载地图',result['reply'])
+            self.assertFalse(n.armed);n.action.send_goal_async.assert_not_called()
+            n.smoother_active=True;n.last_greeting=float('-inf')
+            result=n.dispatch('voice/command',{'text':'你好去客厅和厨房'})
+            self.assertFalse(result['accepted']);self.assertIn('没有名为',result['reply'])
+            n.action.send_goal_async.assert_not_called()
+
+    def test_voice_listener_owns_lease_and_disconnect_stops_navigation(self):
+        with tempfile.TemporaryDirectory() as root,patch.object(self.server,'MAPS',Path(root)):
+            n,_=self.prepare_voice_rooms(root)
+            n.dispatch('voice/command',{'text':'你好去厨房'})
+            n.lease-=4;old=n.lease
+            n.dispatch('heartbeat',{'_client':'web-page'});self.assertEqual(n.lease,old)
+            n.dispatch('heartbeat',{'_client':'voice-greeting'});self.assertGreater(n.lease,old)
+            n.route_tick();self.assertTrue(n.armed)
+            n.lease-=4;n.route_tick();self.assertFalse(n.armed)
+            self.assertEqual(n.route_phase,'failed')
+
+    def test_voice_navigation_does_not_replace_existing_task(self):
+        with tempfile.TemporaryDirectory() as root,patch.object(self.server,'MAPS',Path(root)):
+            n,_=self.prepare_voice_rooms(root)
+            n.dispatch('voice/command',{'text':'你好去客厅'});n.route_tick()
+            first=list(n.goal);n.last_greeting=float('-inf')
+            result=n.dispatch('voice/command',{'text':'你好去书房'})
+            self.assertFalse(result['accepted']);self.assertEqual(n.goal,first)
+            self.assertEqual(n.route_steps[0]['name'],'客厅')
     def test_unknown_and_outside_goal_rejected(self):
         n=self.configure();n.grid[:]=-1
         for x,y in [(1.,1.),(-1.,0.),(100.,100.),(math.nan,1.)]:

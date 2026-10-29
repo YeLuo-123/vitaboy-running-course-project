@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "supported_saved_rooms_tested_in_unit_tests": ["客厅", "厨房", "卧室", "书房"],
+  "navigation_requires_complete_wake_phrase": true,
+  "unknown_grammar_alternative_included": true,
+  "minimum_mean_word_confidence": 0.8,
+  "map_localization_and_velocity_readiness_required": true,
+  "acknowledgement_before_nav_goal": true,
+  "existing_tasks_not_replaced": true,
+  "voice_listener_maintains_own_navigation_heartbeat": true,
+  "physical_voice_command_verified": "你好，去客厅",
+  "observed_recognition_confidence": 0.975,
+  "acknowledgement": "收到，正在前往客厅",
+  "nav2_goal_succeeded": true,
+  "observed_nav2_execution_seconds": 27.7,
+  "stopped_after_completion": true,
+  "all_four_rooms_full_physical_voice_routes_verified": false
+}

@@ -9,9 +9,10 @@ import subprocess
 import time
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
+from urllib.parse import quote
 
 from vosk import Model, KaldiRecognizer, SetLogLevel
-from greeting_rules import GreetingGate, is_greeting
+from greeting_rules import GreetingGate, parse_voice_command, voice_route_active, navigation_grammar
 
 ROOT = Path(__file__).resolve().parent
 
@@ -34,8 +35,9 @@ def main():
     directory = ROOT/'logs'; directory.mkdir(exist_ok=True)
     status_path = directory/'voice_greeting.json'
     state = {'enabled': True, 'listening': False, 'model': 'vosk-model-small-cn-0.22',
-             'device': args.device, 'last_text': '', 'responses': 0, 'error': None}
-    running = True; capture = None; last_write = 0.
+             'device': args.device, 'last_text': '', 'responses': 0, 'navigation_commands':0,
+             'last_reply':'','rooms':[],'error': None}
+    running = True; capture = None; last_write = 0.; token = None; next_heartbeat = 0.
 
     def save(force=False):
         nonlocal last_write
@@ -55,6 +57,7 @@ def main():
     try:
         while running:
             recognizer = KaldiRecognizer(model, 16000); recognizer.SetWords(True)
+            grammar_map = None
             try:
                 capture = subprocess.Popen(['arecord', '-q', '-D', args.device, '-f', 'S16_LE',
                                             '-r', '16000', '-c', '1', '-t', 'raw'],
@@ -70,6 +73,20 @@ def main():
                     if now >= next_status:
                         try:
                             console = request('status'); speaker_busy = console['speech']['busy']
+                            current_map=console.get('active_map')
+                            if current_map!=grammar_map:
+                                areas=request('areas?name='+quote(current_map))['areas'] if current_map else []
+                                state['rooms']=[a['name'] for a in areas if a.get('target')]
+                                grammar=navigation_grammar(state['rooms'])
+                                recognizer=KaldiRecognizer(model,16000,json.dumps(grammar,ensure_ascii=False))
+                                recognizer.SetWords(True);grammar_map=current_map;was_listening=False
+                            if voice_route_active(console) and now >= next_heartbeat:
+                                if token is None: token = request('session')['token']
+                                try: request('heartbeat', {}, token)
+                                except HTTPError as exc:
+                                    if exc.code != 403: raise
+                                    token = request('session')['token']; request('heartbeat', {}, token)
+                                next_heartbeat = now+.7
                             state['error'] = None
                         except Exception as exc:
                             speaker_busy = True; state['error'] = '控制台未连接：'+str(exc)[:160]
@@ -82,18 +99,29 @@ def main():
                     was_listening = True
                     if recognizer.AcceptWaveform(data):
                         result = json.loads(recognizer.Result()); text = result.get('text', '')
+                        if text and any(word in text for word in ('你好','客厅','厨房','卧室','书房')):
+                            state['last_candidate']=text
+                            words=result.get('result',[])
+                            state['last_candidate_confidence']=round(sum(w.get('conf',0.) for w in words)/len(words),3) if words else 0.
                         # Do not log unrelated speech or retain raw audio.
-                        if is_greeting(text):
+                        command = parse_voice_command(text)
+                        if command:
                             words = result.get('result', [])
                             confidence = sum(w.get('conf', 0.) for w in words)/len(words) if words else 0.
-                            if confidence >= .65:
+                            threshold = .80 if command['kind']=='navigate' else .65
+                            if confidence >= threshold:
                                 state['last_text'] = text; state['last_recognized_at'] = time.time()
                                 token = request('session')['token']
-                                response = request('voice/greet', {'text': text}, token)
+                                response = request('voice/command', {'text': text}, token)
+                                state['last_reply'] = response.get('reply', '你好' if response.get('accepted') else response.get('reason',''))
                                 if response.get('accepted'):
                                     state['responses'] += 1; state['last_response_at'] = time.time()
-                                    print(json.dumps({'heard': text, 'response': '你好',
+                                    if command['kind']=='navigate':state['navigation_commands']+=1
+                                    print(json.dumps({'heard': text, 'response': state['last_reply'],
                                                       'confidence': round(confidence, 3)}, ensure_ascii=False), flush=True)
+                                else:
+                                    print(json.dumps({'heard':text,'rejected':state['last_reply'],
+                                                      'confidence':round(confidence,3)},ensure_ascii=False),flush=True)
                                 gate.responded(now); recognizer.Reset(); was_listening = False
                     save()
             except Exception as exc:

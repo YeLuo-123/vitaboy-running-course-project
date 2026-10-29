@@ -37,21 +37,41 @@ def world_to_cell(x, y, info):
 
 
 def frontier_goal(grid, info, pose, excluded=()):
-    """Reachable free-space goals near unknown edges, with 23cm obstacle clearance."""
+    return frontier_plan(grid, info, pose, excluded)['goal']
+
+
+def frontier_plan(grid, info, pose, excluded=()):
+    """Distinguish exhausted reachable frontiers from unsafe/unreachable goals."""
     a = np.asarray(grid, dtype=np.int8).reshape(info['height'], info['width'])
     free = (a >= 0) & (a <= FREE_LIMIT)
-    clearance = ndi.distance_transform_edt(a < 50) * info['resolution']
-    safe = free & (clearance >= .23)
     col, row = world_to_cell(pose[0], pose[1], info)
-    if not (0 <= row < a.shape[0] and 0 <= col < a.shape[1]) or not safe[row, col]:
-        return None
+    result = {'goal':None, 'reason':'blocked', 'frontiers':0}
+    if not (0 <= row < a.shape[0] and 0 <= col < a.shape[1]) or not free[row, col]:
+        return result
     seed = np.zeros(a.shape, bool); seed[row, col] = True
+    reachable_free = ndi.binary_propagation(seed, mask=free)
+    frontier = reachable_free & ndi.binary_dilation(a < 0)
+    frontier_labels, _ = ndi.label(frontier)
+    sizes = np.bincount(frontier_labels.ravel())
+    significant = np.flatnonzero(sizes >= 3); significant = significant[significant != 0]
+    frontier = np.isin(frontier_labels, significant)
+    result['frontiers'] = len(significant)
+    if not np.any(frontier):
+        result['reason'] = 'no_frontiers'
+        return result
+    # Keep a conservative centre clearance; Nav2 checks the full rectangle.
+    clearance = ndi.distance_transform_edt(free) * info['resolution']
+    safe = reachable_free & (clearance >= .18)
+    rows, cols = np.where(safe)
+    if not len(rows): return result
+    nearest = np.argmin((rows-row)**2+(cols-col)**2)
+    if math.hypot(rows[nearest]-row, cols[nearest]-col)*info['resolution'] > .35:
+        return result
+    seed[:] = False; seed[rows[nearest],cols[nearest]] = True
     reachable = ndi.binary_propagation(seed, mask=safe)
-    if not np.any(a < 0):
-        return None
-    unknown_distance = ndi.distance_transform_edt(a >= 0) * info['resolution']
-    candidates = reachable & (unknown_distance >= .20) & (unknown_distance <= .55)
-    labels, n = ndi.label(candidates)
+    distance, indices = ndi.distance_transform_edt(~frontier, return_indices=True)
+    candidates = reachable & (distance*info['resolution'] <= .60)
+    labels = np.where(candidates, frontier_labels[tuple(indices)], 0)
     best = None
     for label, sl in enumerate(ndi.find_objects(labels), 1):
         if sl is None: continue
@@ -64,7 +84,11 @@ def frontier_goal(grid, info, pose, excluded=()):
             distance = math.hypot(x-pose[0], y-pose[1])
             if distance < .35 or any(math.hypot(x-ex, y-ey) < .65 for ex, ey in excluded): continue
             score = min(len(xs)*info['resolution'], 5)*.25 - distance
-            goal = (x, y, math.atan2(y-pose[1], x-pose[0]))
+            fy,fx = indices[:,int(ys[i]),int(xs[i])]
+            frontier_x,frontier_y = cell_to_world(int(fx),int(fy),info)
+            goal = (x, y, math.atan2(frontier_y-y,frontier_x-x))
             if best is None or score > best[0]: best = (score, goal)
             break
-    return best[1] if best else None
+    if best:
+        result.update(goal=best[1], reason='goal')
+    return result

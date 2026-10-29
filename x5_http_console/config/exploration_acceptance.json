@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-28",
+  "feature": "announced_frontier_mapping_with_automatic_save",
+  "tests": {
+    "command": "ROS_DOMAIN_ID=219 python3 -m unittest test_exploration test_console test_object_search test_greeting -q",
+    "passed": 78,
+    "result": "OK",
+    "duration_seconds": 9.504,
+    "actions_mocked": true,
+    "velocity_output": "/x5/test_cmd"
+  },
+  "deployment": {
+    "directory": "/home/wheeltec/x5_http_console",
+    "service": "x5-http-console.service",
+    "service_active": true,
+    "web_page_verified": true,
+    "status_field_verified": "exploration",
+    "idle_start_rejected": true,
+    "backup": "backups/exploration_20261028_172034/"
+  },
+  "physical_exploration_test": "not_run",
+  "completion_scope": "No new reachable frontiers on multiple stable map updates over at least 12 seconds; stop and recheck before save. Blocked or failed routes are not reported as complete."
+}
